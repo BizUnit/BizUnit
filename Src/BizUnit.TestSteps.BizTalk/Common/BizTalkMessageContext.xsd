@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="MessageInfo" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="MessageInfo" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ContextInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Property" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="Name" type="xs:string" />
+                  <xs:attribute name="Namespace" type="xs:string" />
+                  <xs:attribute name="Value" type="xs:string" />
+                  <xs:attribute name="Promoted" type="xs:boolean" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="ArrayProperty" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ArrayElement1" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="Value" type="xs:string" />
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="Name" type="xs:string" />
+                  <xs:attribute name="Namespace" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="PropertiesCount" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PartInfo">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MessagePart" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="ID" type="xs:string" />
+                  <xs:attribute name="Name" type="xs:string" />
+                  <xs:attribute name="FileName" type="xs:string" />
+                  <xs:attribute name="Charset" type="xs:string" />
+                  <xs:attribute name="ContentType" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="PartsCount" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

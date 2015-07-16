@@ -1,0 +1,31 @@
+﻿<TestCase testName="Test_TearDown">
+
+	<TestSetup>
+	</TestSetup>
+	
+	<TestExecution>
+		<!--<TestStep assemblyPath="" typeName="BizUnit.FileValidateStep">
+			<Timeout>0</Timeout>
+			<FilePath>..\..\..\Test\BizUnit.Tests\Rec_Setup\InDoc1.xml</FilePath>
+			
+			<ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
+				<XmlSchemaPath>..\..\..\Test\BizUnit.Tests\Data\PurchaseOrder.xsd</XmlSchemaPath>
+				<XmlSchemaNameSpace>http://SendMail.PurchaseOrder</XmlSchemaNameSpace>
+				<XPathList>
+					<XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
+				</XPathList>
+			</ValidationStep>			
+		</TestStep>
+			-->
+			<TestStep assemblyPath="" typeName="BizUnit.FileDeleteStep">
+				<FileToDeletePath>..\..\..\Test\BizUnit.Tests\Rec_Setup\InDoc1.xml</FileToDeletePath>
+		</TestStep>
+		
+	</TestExecution>
+
+	<!-- Test cleanup: test cases should always leave the system in the state they found it -->
+	<TestCleanup>
+	</TestCleanup>	
+	
+</TestCase>
+

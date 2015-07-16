@@ -1,0 +1,7 @@
+<MyServiceCallingContext 
+  xmlns="http://schemas.virgin-atlantic.com/Services/ServiceCallingContext/2009" 
+  xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <ApplicationName>App</ApplicationName>
+  <GUID>{3233-3213-3213-321</GUID>
+  <LocalTransactionStartTime>12:23:11.332</LocalTransactionStartTime>
+</MyServiceCallingContext>

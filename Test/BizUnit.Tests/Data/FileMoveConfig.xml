@@ -1,0 +1,10 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.FileMoveStep" failOnError="true" runConcurrently="false">
+<!--
+            <SourcePath>C:\Kevin\Code-Projects\BizUnit\BizUnit3.0\Src\BizUnit.Tests\Out\InDoc1.xml</SourcePath>
+            <DestinationPath>C:\Kevin\Code-Projects\BizUnit\BizUnit3.0\Src\BizUnit.Tests\Out\MovedDoc.xml</DestinationPath>
+
+-->
+  <SourcePath>..\..\..\Test\BizUnit.Tests\Out\InDoc1.xml</SourcePath>
+            <DestinationPath>..\..\..\Test\BizUnit.Tests\Out\MovedDoc.xml</DestinationPath>
+</TestStep>
+

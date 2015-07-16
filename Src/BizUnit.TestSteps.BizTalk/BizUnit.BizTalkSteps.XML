@@ -1,0 +1,837 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BizUnit.TestSteps.BizTalk</name>
+    </assembly>
+    <members>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfo">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfo.Items">
+            <remarks/>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Common.PersistMessageHelper.PersistMessage(Microsoft.BizTalk.Message.Interop.IBaseMessage,System.String)">
+            <summary>
+            Helper class to persist BizTalk message bodies
+            </summary>
+            <param name='message'>The BizTalk message to persist</param>
+            <param name='destination'>The destination directory to persist the file to</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceSeedLoadStep">
+            <summary>
+            The CrossReferenceSeedLoadStep 
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.CrossReferenceSeedLoadStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<SeedDataSetupFilePath>c:\SeedData\Setup.xml</SeedDataSetupFilePath> <!-- path relative to the testframework assembly setup file -->
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>SeedDataSetupFilePath</term>
+            		<description>The FILE path to the setup FILE</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceSeedLoadStep.Execute(System.Xml.XmlNode,BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='testConfig'>The Xml fragment containing the configuration for this test step</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep">
+             <summary>
+             The ExecuteMapStep can be used to execute a map and test the output from it
+             </summary>
+             
+             <remarks>
+             The following shows an example of the Xml representation of this test step.
+             
+             <code escaped="true">
+            	<TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.ExecuteMapStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            		<Map assemblyPath="BizUnit.BizTalkTestArtifacts" 
+                     typeName="MapSchema1ToSchema2"/>
+            		<Source>.\TestData\Schema1.xml</Source>
+            		<Destination>.\TestData\Schema2.actual.xml</Destination>
+            
+            		<!-- Note: ContextLoader Step could be any generic validation step -->	
+             	<ContextLoaderStep assemblyPath="" typeName="BizUnit.RegExContextLoader">
+            			<RegEx contextKey="HTTP_Url">/def:html/def:body/def:p[2]/def:form</RegEx>
+            			<RegEx contextKey="ActionID">/def:html/def:body/def:p[2]/def:form/def:input[3]</RegEx>
+            			<RegEx contextKey="ActionType">/def:html/def:body/def:p[2]/def:form/def:input[4]</RegEx>
+            			<RegEx contextKey="HoldEvent">/def:html/def:body/def:p[2]/def:form/def:input[2]</RegEx>
+            		</ContextLoaderStep>
+             
+            		<!-- Note: Validation step could be any generic validation step -->	
+            		<ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
+            			<XmlSchemaPath>.\TestData\PurchaseOrder.xsd</XmlSchemaPath>
+            			<XmlSchemaNameSpace>http://SendMail.PurchaseOrder</XmlSchemaNameSpace>
+            			<XPathList>
+            				<XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
+            			</XPathList>
+            		</ValidationStep>			
+            	</TestStep>
+            	</code>
+            	
+            	<list type="table">
+            		<listheader>
+            			<term>Map:assemblyPath</term>
+            			<description>The assembly containing the BizTalk map to execute.</description>
+            		</listheader>
+            		<item>
+            			<term>Map:typeName</term>
+            			<description>The typename of the BizTalk map to execute</description>
+            		</item>
+            		<item>
+            			<term>Source</term>
+            			<description>The relative file location of the input document to be mapped</description>
+            		</item>
+            		<item>
+            			<term>Destination</term>
+            			<description>The relative file location of the ouput document that has been mapped</description>
+            		</item>
+            		<item>
+            			<term>ContextLoaderStep</term>
+            			<description>The configuration for the context loader step used to load data into the BizUnit context which may be used by subsequent test steps<para>(optional)</para></description>
+            		</item>
+            		<item>
+            			<term>ValidationStep</term>
+            			<description>The configuration for the validation step used to validate the contents of the file, the validation step should implement IValidationTestStep<para>(optional)</para></description>
+            		</item>
+            	</list>
+            	</remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.Execute(BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.Validate(BizUnit.Context)">
+            <summary>
+            ITestStepOM.Validate() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.MapAssemblyPath">
+            <summary>
+             Gets and sets the assembly path for the .NET type of the map to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.MapTypeName">
+            <summary>
+             Gets and sets the type name for the .NET type of the map to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.Source">
+            <summary>
+             Gets and sets the relative file location of the input document to be mapped
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Map.ExecuteMapStep.Destination">
+            <summary>
+             Gets and sets the relative file location of the ouput document that has been mapped
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoContextInfo">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfo.Property">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfo.ArrayProperty">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfo.PropertiesCount">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty.Name">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty.Namespace">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty.Value">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty.Promoted">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoProperty.PromotedSpecified">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayProperty">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayProperty.ArrayElement1">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayProperty.Name">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayProperty.Namespace">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayPropertyArrayElement1">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoContextInfoArrayPropertyArrayElement1.Value">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoPartInfo">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfo.MessagePart">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfo.PartsCount">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart.ID">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart.Name">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart.FileName">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart.Charset">
+            <remarks/>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.MessageInfoPartInfoMessagePart.ContentType">
+            <remarks/>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceSeedClearStep">
+            <summary>
+            The CrossReferenceSeedClearStep 
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.CrossReferenceSeedClearStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<LoginId>sa</LoginId> 
+            	<password>password</password> 
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>LoginId</term>
+            		<description>The logon Id</description>
+            	</item>
+            	<item>
+            		<term>password</term>
+            		<description>The password for the log on id</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceSeedClearStep.Execute(System.Xml.XmlNode,BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='testConfig'>The Xml fragment containing the configuration for this test step</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Orchestration.OrchestrationConductorStep">
+            <summary>
+            The OrchestrationConductorStep may be used to stop/start an orchestration.
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.OrchestrationConductorStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<DelayForCompletion>5</DelayForCompletion> <!-- Optional, seconds to delay for this step to complete -->
+            	<AssemblyName>BizUnitTest.Process</AssemblyName>
+            	<OrchestrationName>BizUnitTest.Process.SubmitToLedger</OrchestrationName>
+            	<Action>Start</Action>
+            </TestStep>
+            </code>
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>DelayForCompletion</term>
+            		<description>The delay before executing the step <para>(optional)</para></description>
+            	</item>
+            	<item>
+            		<term>AssemblyName</term>
+            		<description>The name of the assembly containing the orchestration, e.g. BizUnitTest.Process</description>
+            	</item>
+            	<item>
+            		<term>OrchestrationName</term>
+            		<description>The name of the orchestration to start/stop</description>
+            	</item>
+            	<item>
+            		<term>Action</term>
+            		<description>Start|Stop</description>
+            	</item>
+            </list>
+            </remarks>	
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Orchestration.OrchestrationConductorStep.Execute(BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Host.HostConductorStep">
+            <summary>
+            The HostConductorStep test step maybe used to start or stop a BizTalk host
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.HostConductorStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<Action>start|stop</Action>
+            	<HostInstanceName>BizTalkServerApplication</HostInstanceName>
+            	<Server>RecvHost</Server>
+                <Logon>zeus\\administrator</Logon>
+                <PassWord>appollo*1</PassWord>
+                <GrantLogOnAsService>true</GrantLogOnAsService>
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>HostInstanceName</term>
+            		<description>The name of the host instance to start|stop</description>
+            	</item>
+            	<item>
+            		<term>Action</term>
+            		<description>A value of start or stop<para>(start|stop)</para></description>
+            	</item>
+            	<item>
+            		<term>Server</term>
+            		<description>The server(s) where the Biztalk host instance is running, a commer delimeted list of servers may be supplied (optional)</description>
+            	</item>
+            	<item>
+            		<term>Logon</term>
+            		<description>String containing the logon information used by the host instance (optional - unless Server is supplied)</description>
+            	</item>
+            	<item>
+            		<term>PassWord</term>
+            		<description>String containing the password for the host (optional - unless Logon is supplied)</description>
+            	</item>
+            	<item>
+            		<term>GrantLogOnAsService (optional - unless Logon is supplied)</term>
+            		<description>Boolean determining whether the 'Log On As Service' privilege should be automatically granted to the specified logon user or not. This flag only has effect when the HostType property is set to In-process</description>
+            	</item>
+            </list>
+            </remarks>	
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep">
+            <summary>
+            The ExecuteReceivePipelineStep can be used to execute a pipeline and test the output from it
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step. The step 
+            can perform a pipeline and output that to an output file
+            
+            <list type="table">
+            	<listheader>
+            		<term>Pipeline:assemblyPath</term>
+            		<description>The assembly containing the BizTalk pipeline to execute.</description>
+            	</listheader>
+            	<item>
+            		<term>Pipeline:typeName</term>
+            		<description>The typename of the BizTalk pipeline to execute</description>
+            	</item>
+            	<item>
+            		<term>DocSpecs:assembly</term>
+            		<description>The assembly containing the BizTalk docspec schema assembly path (multiple)</description>
+            	</item>
+            	<item>
+            		<term>DocSpecs:type</term>
+            		<description>The assembly containing the BizTalk docspec schema type name (multiple)</description>
+            	</item>
+            	<item>
+            		<term>SourceDir</term>
+            		<description>The directory path for the source input file(s) to execute in the pipeline</description>
+            	</item>
+            	<item>
+            		<term>SearchPattern</term>
+            		<description>The search pattern for the input files. E.g. input*.xml</description>
+            	</item>
+            	<item>
+            		<term>Destination</term>
+            		<description>The destination to write the pipeline output file</description>
+            	</item>
+            	<item>
+            		<term>InputContextDir</term>
+            		<description>The directory path for the source context file(s) (optional)</description>
+            	</item>
+            	<item>
+            		<term>InputContextSearchPattern</term>
+            		<description>The search pattern for the source context file(s) (optional)</description>
+            	</item>
+            	<item>
+            		<term>OutputContextFile</term>
+            		<description>The location to write the output message context file (optional)</description>
+            	</item>
+            	<item>
+            		<term>SourceEncoding</term>
+            		<description>The charset to be written on the pipeline input message (optional)</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.Execute(BizUnit.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.Validate(BizUnit.Context)">
+            <summary>
+            TestStepBase.Validate() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.PipelineAssemblyPath">
+            <summary>
+             Gets and sets the assembly path for the .NET type of the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.PipelineTypeName">
+            <summary>
+             Gets and sets the type name for the .NET type of the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.DocSpecs">
+            <summary>
+             Gets and sets the docspecs for the pipeline to be executed. Pairs of typeName, assemblyPath.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.InstanceConfigFile">
+            <summary>
+             Gets and sets the pipeline instance configuration for the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.SourceDir">
+            <summary>
+             Gets and sets the source file path for the input file to the pipeline
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.SourceEncoding">
+            <summary>
+             Gets and sets the source encoding
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.SearchPattern">
+            <summary>
+             Gets and sets the search pattern for the input file
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.Destination">
+            <summary>
+             Gets and sets the destination of the pipeline output
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.InputContextDir">
+            <summary>
+             Gets and sets the directory containing the message context file for the input message
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.InputContextSearchPattern">
+            <summary>
+             Gets and sets the message context search pattern for the input message
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteSendPipelineStep.OutputContextFile">
+            <summary>
+             Gets and sets the file name for the message context for the output message
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep">
+            <summary>
+            The ExecuteReceivePipelineStep can be used to execute a pipeline and test the output from it
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step. The step 
+            can perform a pipeline and output that to an output file
+            
+            <list type="table">
+            	<listheader>
+            		<term>Pipeline:assemblyPath</term>
+            		<description>The assembly containing the BizTalk pipeline to execute.</description>
+            	</listheader>
+            	<item>
+            		<term>Pipeline:typeName</term>
+            		<description>The typename of the BizTalk pipeline to execute</description>
+            	</item>
+            	<item>
+            		<term>DocSpecs:assembly</term>
+            		<description>The assembly containing the BizTalk docspec schema assembly path (multiple)</description>
+            	</item>
+            	<item>
+            		<term>DocSpecs:type</term>
+            		<description>The assembly containing the BizTalk docspec schema type name (multiple)</description>
+            	</item>
+            	<item>
+            		<term>Source</term>
+            		<description>The file path of the source input file to execute in the pipeline</description>
+            	</item>
+            	<item>
+            		<term>Source:Encoding</term>
+            		<description>The excoding type of the input file to execute in the pipeline</description>
+            	</item>
+            	<item>
+            		<term>DestinationDir</term>
+            		<description>The destination directory to write the pipeline output file(s)</description>
+            	</item>
+            	<item>
+            		<term>DestinationFileFormat</term>
+            		<description>The file format of the output file(s)</description>
+            	</item>
+            	<item>
+            		<term>ContextFileFormat</term>
+            		<description>The file format of the output message context file(s)</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.Execute(BizUnit.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.Validate(BizUnit.Context)">
+            <summary>
+            TestStepBase.Validate() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.PipelineAssemblyPath">
+            <summary>
+             Gets and sets the assembly path for the .NET type of the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.PipelineTypeName">
+            <summary>
+             Gets and sets the type name for the .NET type of the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.DocSpecs">
+            <summary>
+             Gets and sets the docspecs for the pipeline to be executed. Pairs of typeName, assemblyPath.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.InstanceConfigFile">
+            <summary>
+             Gets and sets the pipeline instance configuration for the pipeline to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.Source">
+            <summary>
+             Gets and sets the source file path for the input file to the pipeline
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.SourceEncoding">
+            <summary>
+             Gets and sets the source encoding
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.DestinationDir">
+            <summary>
+             Gets and sets the destination of the pipeline output
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.DestinationFileFormat">
+            <summary>
+             Gets and sets the destination file format 
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.InputContextFile">
+            <summary>
+             Gets and sets the message context for the input message
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.BizTalk.Pipeline.ExecuteReceivePipelineStep.OutputContextFileFormat">
+            <summary>
+             Gets and sets the message context file format for the output message
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Port.ReceiveLocationEnabledStep">
+            <summary>
+            The ReceiveLocationEnabledStep test step checks to determine whether a specific receive location is enabled or disabled.
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.ReceiveLocationEnabledStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<ReceiveLocationName>GovenorIn</ReceiveLocationName>
+            	<IsDisabled>true</IsDisabled>
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>ReceiveLocationName</term>
+            		<description>The name of the receive location to check</description>
+            	</item>
+            	<item>
+            		<term>IsDisabled</term>
+            		<description>If true is specified then the test step will check to see that the receive location is disabled, if false, the step will check it is enabled</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Port.ReceiveLocationEnabledStep.Execute(System.Xml.XmlNode,BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='testConfig'>The Xml fragment containing the configuration for this test step</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Port.ReceivePortConductorStep">
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.ReceivePortConductorStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<DelayForCompletion>5</DelayForCompletion> <!-- Optional, seconds to delay for this step to complete -->
+            	<ReceivePortName></ReceivePortName>
+            	<ReceiveLocationName></ReceiveLocationName>
+            	<Action>Enable</Action>
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>DelayForCompletion</term>
+            		<description>The number of seconds to deplay for this step to complete</description>
+            	</item>
+            	<item>
+            		<term>ReceivePortName</term>
+            		<description>The name of the receive port to containing the receive location to enable/dissable</description>
+            	</item>
+            	<item>
+            		<term>ReceiveLocationName</term>
+            		<description>The name of the receive location to enable/dissable</description>
+            	</item>
+            	<item>
+            		<term>Action</term>
+            		<description>Enable|Disable</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Port.ReceivePortConductorStep.Execute(System.Xml.XmlNode,BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='testConfig'>The Xml fragment containing the configuration for this test step</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Bre.FactBasedRuleEngineStep">
+             <summary>
+             Summary description for FactBasedRuleEngineStep.
+             </summary>
+             
+             <remarks>
+             The following shows an example of the Xml representation of this test step.
+            
+             <code escaped="true">
+            	<TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.FactBasedRuleEngineStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            		<RuleStoreName>C:\Program Files\Microsoft BizTalk Server 2004\SDK\Utilities\TestFramework\SDK\SampleSolution\Test\BiztalkFunctionalTests\RulesTestCases\LoanProcessing.xml</RuleStoreName>
+                 <RuleSetInfoCollectionName>LoanProcessing</RuleSetInfoCollectionName>
+                 <DebugTracking>C:\Program Files\Microsoft BizTalk Server 2004\SDK\Utilities\TestFramework\SDK\SampleSolution\Test\BiztalkFunctionalTests\RulesTestCases\outputtraceforLoanPocessing.txt</DebugTracking>
+                 <ResultFilePath>C:\Program Files\Microsoft BizTalk Server 2004\SDK\Utilities\TestFramework\SDK\SampleSolution\Test\BiztalkFunctionalTests\RulesTestCases</ResultFilePath>
+                 <Facts>
+                    <Fact type="document" schemaType="LoanProcessing" instanceDocument="C:\Program Files\Microsoft BizTalk Server 2004\SDK\Utilities\TestFramework\SDK\SampleSolution\Test\BiztalkFunctionalTests\RulesTestCases\SampleLoan.xml"/>
+                    <Fact type="object" assemblyPath="C:\Program Files\Microsoft Biztalk Server\SDK\Samples\Business Rules\Business Rules Hello World1\MySampleLibrary\bin\Debug\MySampleLibrary.dll" typeName="Microsoft.Samples.BizTalk.BusinessRulesHelloWorld1.MySampleLibrary.MySampleBusinessObject"/>
+                    <Fact type="dataConnection" connectionString="" dataset="" tableName=""/>
+                    <Fact type="dataTable" connectionString="" command="" dataset="" tableName=""/>
+                    <Fact type="dataRow" connectionString="" command="" dataset="" tableName=""/>
+                 </Facts>
+             
+            		<!-- Note: Validation step could be any generic validation step -->	
+            		<ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
+            			<XmlSchemaPath>.\TestData\PurchaseOrder.xsd</XmlSchemaPath>
+            			<XmlSchemaNameSpace>http://SendMail.PurchaseOrder</XmlSchemaNameSpace>
+            			<XPathList>
+            				<XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
+            			</XPathList>
+            		</ValidationStep>			
+             
+            	</TestStep>
+            	</code>
+            	
+            	<list type="table">
+            		<listheader>
+            			<term>Tag</term>
+            			<description>Description</description>
+            		</listheader>
+            		<item>
+            			<term>RuleStoreName</term>
+            			<description>The location of the rule store</description>
+            		</item>
+            		<item>
+            			<term>RuleSetInfoCollectionName</term>
+            			<description>The name of the rule set collection</description>
+            		</item>
+            		<item>
+            			<term>DebugTracking</term>
+            			<description>Location of the debug tracking</description>
+            		</item>
+            		<item>
+            			<term>ResultFilePath</term>
+            			<description>The path used to write updated fact documents to</description>
+            		</item>
+            		<item>
+            			<term>Facts</term>
+            			<description>Facts to pass to rules engine prior to ruleset execution</description>
+            		</item>	
+            	</list>
+            	</remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Bre.FactBasedRuleEngineStep.Execute(BizUnit.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Map.BizTalkMapTester">
+            <summary>
+            Helper class to execute BizTalk maps
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Map.BizTalkMapTester.#ctor(System.Type)">
+            <summary>
+            Constructor for helper class to execute BizTalk maps
+            </summary>
+            <param name='mapType'>The type of the BizTalk map to execute</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Map.BizTalkMapTester.Execute(System.String,System.String)">
+            <summary>
+            Execute the map
+            </summary>
+            <param name='source'>The input Xml instance to map</param>
+            <param name='destination'>The ouput Xml instance produced by the map</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceDataVerificationStep">
+            <summary>
+            The CrossReferenceDataVerificationStep reads email from a POP3 server.
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.CrossReferenceDataVerificationStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+            	<VerifyId appInstance="application1" idXRef="Customer">25</VerifyId> 
+            	<VerifyValue appType="application2" idXRef="Customer">12LK</VerifyValue> 
+            </TestStep>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>VerifyId</term>
+            		<description>The Id to varify</description>
+            	</item>
+            	<item>
+            		<term>VerifyValue</term>
+            		<description>The expected value</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.CrossReference.CrossReferenceDataVerificationStep.Execute(System.Xml.XmlNode,BizUnit.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='testConfig'>The Xml fragment containing the configuration for this test step</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.BizTalk.Bam.Deploy">
+            <summary>
+            The Deploy deloys a BAM definition.
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>DelayForCompletion</term>
+            		<description>The delay for this step to complete in seconds, -1 to delay until BAM deployment has finished<para>(optional)</para></description>
+            	</item>
+            	<item>
+            		<term>TrackingFolderPath</term>
+            		<description>The Tracking directory for BizTalk Server</description>
+            	</item>
+            	<item>
+            		<term>BAMDefinitionXmlFilePath</term>
+            		<description>The path to the BAM definition file</description>
+            	</item>
+            	<item>
+            		<term>Action</term>
+            		<description>Deploy|Undeploy</description>
+            	</item>
+            </list>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.TestSteps.BizTalk.Bam.Deploy.Execute(BizUnit.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+    </members>
+</doc>

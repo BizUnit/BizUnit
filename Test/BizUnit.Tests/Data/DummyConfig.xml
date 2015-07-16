@@ -1,0 +1,23 @@
+﻿<TestCase testName="ConcurrentCtxTest002">
+
+	<TestSetup>
+	</TestSetup>
+
+	<TestExecution>
+		<TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.HostConductorStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+			<Action>start</Action>
+			<HostInstanceName>BizTalkServerApplication</HostInstanceName>
+			<Server>RecvHost</Server>
+			<Logon>Newkydog007\\Kevin</Logon>
+			<PassWord>21!Intension21</PassWord>
+			<GrantLogOnAsService>true</GrantLogOnAsService>
+		</TestStep>
+	</TestExecution>
+
+	<!-- Test cleanup: test cases should always leave the system in the state they found it -->
+	<TestCleanup>
+
+	</TestCleanup>
+
+</TestCase>
+

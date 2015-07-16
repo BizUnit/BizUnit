@@ -1,0 +1,18 @@
+﻿<TestCase testName="Test_Setup">
+
+	<TestSetup>
+	</TestSetup>
+	
+	<TestExecution>
+		<TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+			<SourcePath>..\..\..\Test\BizUnit.Tests\Data\InDoc1.xml</SourcePath>
+			<CreationPath>..\..\..\Test\BizUnit.Tests\Rec_Setup\InDoc1.xml</CreationPath> 
+		</TestStep>
+	</TestExecution>
+
+	<!-- Test cleanup: test cases should always leave the system in the state they found it -->
+	<TestCleanup>
+	</TestCleanup>	
+	
+</TestCase>
+

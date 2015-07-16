@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--This file represents the results of running a test suite-->
+<test-results name="C:\Kevin\OpenSource\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Release\BizUnit.TestSteps.Tests.dll" total="17" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2015-07-13" time="18:34:45">
+  <environment nunit-version="2.6.4.14350" clr-version="2.0.50727.8009" os-version="Microsoft Windows NT 6.2.9200.0" platform="Win32NT" cwd="C:\Kevin\OpenSource\BizUnit\packages\NUnit.Runners.2.6.4\tools" machine-name="NEWKYDOG008" user="Kevin" user-domain="NEWKYDOG008" />
+  <culture-info current-culture="en-GB" current-uiculture="en-US" />
+  <test-suite type="Assembly" name="C:\Kevin\OpenSource\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Release\BizUnit.TestSteps.Tests.dll" executed="True" result="Success" success="True" time="3.456" asserts="0">
+    <results>
+      <test-suite type="Namespace" name="BizUnit" executed="True" result="Success" success="True" time="3.447" asserts="0">
+        <results>
+          <test-suite type="Namespace" name="TestSteps" executed="True" result="Success" success="True" time="3.446" asserts="0">
+            <results>
+              <test-suite type="Namespace" name="Tests" executed="True" result="Success" success="True" time="3.446" asserts="0">
+                <results>
+                  <test-suite type="TestFixture" name="BizUnitCoreTests" executed="True" result="Success" success="True" time="0.689" asserts="0">
+                    <results>
+                      <test-case name="BizUnit.TestSteps.Tests.BizUnitCoreTests.ExecuteTestCase" executed="True" result="Success" success="True" time="0.216" asserts="0" />
+                      <test-case name="BizUnit.TestSteps.Tests.BizUnitCoreTests.SerializationV4TestStepsOnly" executed="True" result="Success" success="True" time="0.460" asserts="0" />
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="File" executed="True" result="Success" success="True" time="0.519" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="CreateTests" executed="True" result="Success" success="True" time="0.467" asserts="0">
+                        <results>
+                          <test-case name="BizUnit.TestSteps.Tests.File.CreateTests.CreateFileTest" executed="True" result="Success" success="True" time="0.466" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="DeleteTests" executed="True" result="Success" success="True" time="0.032" asserts="0">
+                        <results>
+                          <test-case name="BizUnit.TestSteps.Tests.File.DeleteTests.DeleteFileByWildCardTest" executed="True" result="Success" success="True" time="0.009" asserts="0" />
+                          <test-case name="BizUnit.TestSteps.Tests.File.DeleteTests.DeleteFileTest" executed="True" result="Success" success="True" time="0.004" asserts="0" />
+                          <test-case name="BizUnit.TestSteps.Tests.File.DeleteTests.TestCaseValidationTest" executed="True" result="Success" success="True" time="0.017" asserts="0" />
+                        </results>
+                      </test-suite>
+                      <test-suite type="TestFixture" name="MoveTests" executed="True" result="Success" success="True" time="0.017" asserts="0">
+                        <results>
+                          <test-case name="BizUnit.TestSteps.Tests.File.MoveTests.MoveFileTest" executed="True" result="Success" success="True" time="0.010" asserts="1" />
+                          <test-case name="BizUnit.TestSteps.Tests.File.MoveTests.MoveFileTest_Negative" executed="True" result="Success" success="True" time="0.005" asserts="3" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="ImportTestCase" executed="True" result="Success" success="True" time="0.142" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="ImportTestCaseTest" executed="True" result="Success" success="True" time="0.142" asserts="0">
+                        <results>
+                          <test-case name="BizUnit.TestSteps.Tests.ImportTestCase.ImportTestCaseTest.ImportSingleTestCaseTest" executed="True" result="Success" success="True" time="0.141" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="Namespace" name="Time" executed="True" result="Success" success="True" time="2.059" asserts="0">
+                    <results>
+                      <test-suite type="TestFixture" name="DelayTests" executed="True" result="Success" success="True" time="2.058" asserts="0">
+                        <results>
+                          <test-case name="BizUnit.TestSteps.Tests.Time.DelayTests.DelaySampleTest" executed="True" result="Success" success="True" time="0.505" asserts="0" />
+                          <test-case name="BizUnit.TestSteps.Tests.Time.DelayTests.DelayTest" executed="True" result="Success" success="True" time="0.518" asserts="2" />
+                          <test-case name="BizUnit.TestSteps.Tests.Time.DelayTests.DelayTestCaseTest" executed="True" result="Success" success="True" time="0.516" asserts="2" />
+                          <test-case name="BizUnit.TestSteps.Tests.Time.DelayTests.LoadSampleTest" executed="True" result="Success" success="True" time="0.513" asserts="0" />
+                        </results>
+                      </test-suite>
+                    </results>
+                  </test-suite>
+                  <test-suite type="TestFixture" name="XmlValidationStepTests" executed="True" result="Success" success="True" time="0.027" asserts="0">
+                    <results>
+                      <test-case name="BizUnit.TestSteps.Tests.XmlValidationStepTests.XmlValidationStepTest" executed="True" result="Success" success="True" time="0.001" asserts="0" />
+                      <test-case name="BizUnit.TestSteps.Tests.XmlValidationStepTests.XmlValidationStepTest_InvalidXPath" executed="True" result="Success" success="True" time="0.004" asserts="1" />
+                      <test-case name="BizUnit.TestSteps.Tests.XmlValidationStepTests.XmlValidationStepTest_SchemaValidationFail" executed="True" result="Success" success="True" time="0.007" asserts="1" />
+                      <test-case name="BizUnit.TestSteps.Tests.XmlValidationStepTests.XmlValidationStepTest_SchemaValidationFailMissingElem" executed="True" result="Success" success="True" time="0.010" asserts="1" />
+                    </results>
+                  </test-suite>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

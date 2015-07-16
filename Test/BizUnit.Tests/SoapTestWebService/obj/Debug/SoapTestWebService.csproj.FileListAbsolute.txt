@@ -1,0 +1,6 @@
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\bin\SoapTestWebService.dll.config
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\bin\SoapTestWebService.dll
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\bin\SoapTestWebService.pdb
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Debug\SoapTestWebService.csprojResolveAssemblyReference.cache
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Debug\SoapTestWebService.dll
+C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Debug\SoapTestWebService.pdb

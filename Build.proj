@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="BuildAndTest" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\packages\MSBuildTasks.1.4.0.88\tools</MSBuildCommunityTasksPath>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
+  <UsingTask AssemblyFile="$(MSBuildStartupDirectory)\packages\MSBuildTasks.1.4.0.88\tools\MSBuild.Community.Tasks.dll" TaskName="NUnit"/>
+
+  <!-- Version Number -->
+  <PropertyGroup Condition=" '$(BUILD_NUMBER)' == '' ">
+    <Version>1.0.0.0</Version>
+    <FileVersion>1.0.0.0</FileVersion>
+    <InformationalVersion>1.0.0.0</InformationalVersion>
+	<NUnitPath>$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.4\tools</NUnitPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(BUILD_NUMBER)' != '' ">
+    <!-- Build Server Number -->
+    <Version>1.0.0.0</Version>
+    <FileVersion>$(BUILD_NUMBER)</FileVersion>
+    <InformationalVersion>$(BUILD_NUMBER)</InformationalVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(BuildConfiguration)' == '' ">
+    <BuildConfiguration>Release</BuildConfiguration>
+  </PropertyGroup>
+
+  <Target Name="Clean">
+    <DeleteTree Directories="**\obj\**;**\bin\**" />
+  </Target>
+
+  <Target Name="Compile" DependsOnTargets="Version">
+    <MSBuild Projects="@(ProjectFiles)" />
+  </Target>
+
+  <Target Name="RunUnitTests" DependsOnTargets="Build">
+    <Exec Command="nunit-console.exe %(TestAssembly.FullPath)"
+        WorkingDirectory="$(MSBuildProjectDirectory)\packages\NUnit.Runners.2.6.4\tools" />
+  </Target>
+
+  <Target Name="Version">
+    <Time>
+      <Output TaskParameter="Year" PropertyName="Year" />
+    </Time>
+
+    <Message Text="Version: $(Version)"/>
+
+    <Attrib Files="$(MSBuildProjectDirectory)\GlobalAssemblyInfo.cs" ReadOnly="False" />
+
+    <AssemblyInfo CodeLanguage="CS"
+                  OutputFile="$(MSBuildProjectDirectory)\GlobalAssemblyInfo.cs"
+                  GenerateClass="true"
+                  AssemblyCopyright="Copyright © $(Year). All rights reserved."
+                  AssemblyConfiguration="$(BuildConfiguration)"
+                  AssemblyVersion="$(Version)"
+                  AssemblyFileVersion="$(FileVersion)"
+                  AssemblyInformationalVersion="$(InformationalVersion)" />
+  </Target>
+
+  <!-- Projects to Build -->
+  <ItemGroup>
+    <ProjectFiles Include="$(MSBuildProjectDirectory)\**\*.sln">
+      <Properties>Configuration=$(BuildConfiguration)</Properties>
+    </ProjectFiles>
+  </ItemGroup>
+
+  <ItemGroup>
+	<TestAssembly Include="$(MSBuildProjectDirectory)\Test\BizUnit.TestSteps.Tests\bin\Release\BizUnit.TestSteps.Tests.dll" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <CallTarget Targets="Compile" />
+  </Target>
+
+  <Target Name="BuildAndTest" DependsOnTargets="Build;RunUnitTests" />
+  
+</Project>

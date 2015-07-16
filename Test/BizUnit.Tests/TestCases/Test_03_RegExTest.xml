@@ -1,0 +1,38 @@
+<TestCase testName="Test_03_RegExTest">
+
+	<TestSetup>
+	</TestSetup>
+	
+	<TestExecution>
+		<TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+			<SourcePath>..\..\..\Test\BizUnit.Tests\Data\RegExTestData.txt</SourcePath>
+			<CreationPath>..\..\..\Test\BizUnit.Tests\Rec_01\RegExTestData.txt</CreationPath>
+		</TestStep>
+						
+		<TestStep assemblyPath="" typeName="BizUnit.FileValidateStep">
+			<Timeout>0</Timeout>
+			<Directory>..\..\..\Test\BizUnit.Tests\Rec_01\</Directory>
+			<SearchPattern>RegExTestData.txt</SearchPattern>
+			<DeleteFile>true</DeleteFile>
+				
+			<ContextLoaderStep assemblyPath="" typeName="BizUnit.RegExContextLoader">
+				<RegEx contextKey="ContextVal1">http\:\/\/[a-zA-Z0-9\/\.]*</RegEx>
+			</ContextLoaderStep>
+						
+			<ValidationStep assemblyPath="" typeName="BizUnit.ContextValidationStep">
+				<Context keyName="ContextVal1">http://www.microsoft.com/biztalk</Context>
+			</ValidationStep>
+		</TestStep>
+
+		<TestStep assemblyPath="" typeName="BizUnit.FileDeleteStep">
+			<FileToDeletePath>..\..\..\Test\BizUnit.Tests\Rec_01\RegExTestData.txt</FileToDeletePath>
+		</TestStep>
+						
+	</TestExecution>
+
+	<!-- Test cleanup: test cases should always leave the system in the state they found it -->
+	<TestCleanup>
+	</TestCleanup>	
+	
+</TestCase>
+

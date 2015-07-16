@@ -1,0 +1,48 @@
+﻿<TestCase testName="BizUnitEventTest001">
+
+  <TestSetup>
+  </TestSetup>
+
+  <TestExecution>
+    <TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+      <SourcePath>..\..\..\Test\BizUnit.Tests\TestData\InDoc1.xml</SourcePath>
+      <CreationPath>..\..\..\Test\BizUnit.Tests\Rec_03\TransactionId_%Guid%.xml</CreationPath>
+    </TestStep>
+
+    <TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+      <SourcePath>..\..\..\Test\BizUnit.Tests\TestData\InDoc1.xml</SourcePath>
+      <CreationPath>..\..\..\Test\BizUnit.Tests\Rec_03\TransactionId_%Guid%.xml</CreationPath>
+    </TestStep>
+
+    <TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+      <SourcePath>..\..\..\Test\BizUnit.Tests\TestData\InDoc1.xml</SourcePath>
+      <CreationPath>..\..\..\Test\BizUnit.Tests\Rec_03\TransactionId_%Guid%.xml</CreationPath>
+    </TestStep>
+
+    <TestStep assemblyPath="" typeName="BizUnit.FileValidateStep">
+      <Timeout>3000</Timeout>
+      <Directory>..\..\..\Test\BizUnit.Tests\Rec_03\</Directory>
+      <SearchPattern>TransactionId_*.xml</SearchPattern>
+      <DeleteFile>true</DeleteFile>
+
+      <ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
+        <XmlSchemaPath>..\..\..\Test\BizUnit.Tests\TestData\PurchaseOrder.xsd</XmlSchemaPath>
+        <XmlSchemaNameSpace>http://SendMail.PurchaseOrder</XmlSchemaNameSpace>
+        <XPathList>
+          <XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
+        </XPathList>
+      </ValidationStep>
+    </TestStep>
+
+  </TestExecution>
+
+  <!-- Test cleanup: test cases should always leave the system in the state they found it -->
+  <TestCleanup>
+    <TestStep assemblyPath="" typeName="BizUnit.FileDeleteStep">
+      <FileToDeletePath>..\..\..\Test\BizUnit.Tests\Rec_03\InDoc1.xml</FileToDeletePath>
+      <FileToDeletePath>..\..\..\Test\BizUnit.Tests\Rec_03\InDoc2.xml</FileToDeletePath>
+    </TestStep>
+  </TestCleanup>
+
+</TestCase>
+

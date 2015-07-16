@@ -1,0 +1,5 @@
+﻿<n1:GetProductTermsAndConditions_RQ xsi:schemaLocation="http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/GetProductTermsAndConditions/2009 GetProductTermsAndConditions_RQ.xsd" xmlns:n1="http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/GetProductTermsAndConditions/2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Message messageId="1">
+    <Product productId="1"/>
+  </Message>
+</n1:GetProductTermsAndConditions_RQ>

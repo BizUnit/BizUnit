@@ -1,0 +1,4 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.HostConductorStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
+	<Action>Stop</Action>
+	<HostInstanceName>BizTalkServerApplication</HostInstanceName>
+</TestStep>

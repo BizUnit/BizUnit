@@ -1,0 +1,34 @@
+﻿<TestCase testName="Test_02_FILECopyWithBinaryValidation">
+
+	<TestSetup>
+	</TestSetup>
+	
+	<TestExecution>
+		<TestStep assemblyPath="" typeName="BizUnit.FileCreateStep">
+			<SourcePath>..\..\..\Test\BizUnit.Tests\Data\InDoc1.xml</SourcePath>
+			<CreationPath>..\..\..\Test\BizUnit.Tests\Rec_03\InDoc1.xml</CreationPath>
+		</TestStep>
+		
+		<TestStep assemblyPath="" typeName="BizUnit.FileValidateStep">
+			<Timeout>3000</Timeout>
+			<Directory>..\..\..\Test\BizUnit.Tests\Rec_03\</Directory>
+			<SearchPattern>InDoc1.xml</SearchPattern>
+			<DeleteFile>true</DeleteFile>
+			
+			<ValidationStep assemblyPath="" typeName="BizUnit.BinaryValidationStep">
+				<ComparisonDataPath>..\..\..\Test\BizUnit.Tests\Data\ResultDoc1.xml</ComparisonDataPath>
+				<CompareAsUTF8>true</CompareAsUTF8>
+			</ValidationStep>
+			
+		</TestStep>
+	</TestExecution>
+
+	<!-- Test cleanup: test cases should always leave the system in the state they found it -->
+	<TestCleanup>
+		<TestStep assemblyPath="" typeName="BizUnit.FileDeleteStep">
+			<FileToDeletePath>..\..\..\Test\BizUnit.Tests\Rec_03\InDoc1.xml</FileToDeletePath>
+		</TestStep>
+	</TestCleanup>	
+	
+</TestCase>
+

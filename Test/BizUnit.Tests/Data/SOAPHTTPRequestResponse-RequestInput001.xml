@@ -1,0 +1,4 @@
+﻿<Operation_1StockQuote xmlns="http://StockQuoteService.StockQuote">
+	<Symbol xmlns="">MSFT</Symbol>
+	<LastPrice xmlns=""></LastPrice>
+</Operation_1StockQuote>

@@ -1,0 +1,8 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.DotNetObjectInvokerStep">
+	<TypeName>BizUnit.Tests.Data.ClassForInvokation, BizUnit.Tests</TypeName>
+	<AssemblyPath></AssemblyPath>
+	<MethodToInvoke>DoStuff</MethodToInvoke>
+
+	<!-- no paramters and no return value -->
+	
+</TestStep>

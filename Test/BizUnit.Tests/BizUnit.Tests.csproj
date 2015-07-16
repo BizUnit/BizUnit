@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E9043F89-6AA8-4030-A374-CFDE8CB70E88}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BizUnit.Tests</RootNamespace>
+    <AssemblyName>BizUnit.Tests</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>BizUnit.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BizUnit.BizTalkSteps, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bins\BizUnit.BizTalkSteps.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BizUnit.MQSeriesSteps, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bins\BizUnit.MQSeriesSteps.dll</HintPath>
+    </Reference>
+    <Reference Include="BizUnit.OutlookReadStep, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\bins\BizUnit.OutlookReadStep.dll</HintPath>
+    </Reference>
+    <Reference Include="LoadGen, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferencedAssemblies\LoadGen.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Rhino.Mocks, Version=3.3.0.906, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\ReferencedAssemblies\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BizUnitTests.cs" />
+    <Compile Include="ObjectModelTests\EventLogCheckStepTests.cs" />
+    <Compile Include="XmlTestCaseTests.cs" />
+    <Compile Include="BizUnitTestUtils.cs" />
+    <Compile Include="ContextDisposableTests.cs" />
+    <Compile Include="ContextLoaderStepBuilderTests.cs" />
+    <Compile Include="Data\ClassForInvokation.cs" />
+    <Compile Include="FileHelper.cs" />
+    <Compile Include="ILoggerTests.cs" />
+    <Compile Include="ObjectModelTests\ObjectModelExecutionTests.cs" />
+    <Compile Include="ObjectModelTests\DBExecuteNonQueryStepTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ConcurrentCtxTests.cs" />
+    <Compile Include="ResourceLoaderHelper.cs" />
+    <Compile Include="TestStep.Tests\ContextManipulatorStepTests.cs" />
+    <Compile Include="TestStep.Tests\DotNetObjectInvokerStepTests.cs" />
+    <Compile Include="TestStep.Tests\HostConductorStepTests..cs" />
+    <Compile Include="TestStep.Tests\LoadGenExecuteStepTests.cs" />
+    <Compile Include="TestStep.Tests\SOAPHTTPRequestResponseStepTests.cs" />
+    <Compile Include="TestStep.Tests\XmlContextLoaderTests.cs" />
+    <Compile Include="ObjectModelTests\TestStepBuilderTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AuthoringTests.txt" />
+    <Content Include="Data\BizUnitEventTest001.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ConcurrentCtxTest001.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Data\ConcurrentCtxTest002.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Data\ContextManipulatorStep-Test001.xml" />
+    <EmbeddedResource Include="Data\LoadGenExecuteStep-Test001.xml" />
+    <EmbeddedResource Include="Data\LoadGenScript001.xml" />
+    <EmbeddedResource Include="Data\FileMoveConfig.xml" />
+    <EmbeddedResource Include="Data\PurchaseOrder001.xml" />
+    <Content Include="Data\SOAPHTTPRequestResponse-RequestInput001.xml" />
+    <Content Include="Rec_01\Placeholder.txt" />
+    <Content Include="Rec_02\Placeholder.txt" />
+    <Content Include="Rec_03\Placeholder.txt" />
+    <Content Include="TestCases\Test_01_FILECopyWithXmlValidation.xml" />
+    <Content Include="TestCases\Test_02_FILECopyWithBinaryValidation.xml" />
+    <Content Include="TestCases\Test_03_RegExTest.xml" />
+    <Content Include="TestCases\Test_04_NegativeTest.xml" />
+    <Content Include="TestCases\Test_Setup.xml" />
+    <Content Include="TestCases\Test_TearDown.xml" />
+    <Content Include="TestData\InDoc1.xml" />
+    <EmbeddedResource Include="Data\SOAPHTTPRequestResponseStep-Test002.xml" />
+    <EmbeddedResource Include="Data\SOAPHTTPRequestResponseStep-Test001.xml" />
+    <EmbeddedResource Include="Data\DotNetObjectInvokerStep-Test004.xml" />
+    <EmbeddedResource Include="Data\DotNetObjectInvokerStep-Test003.xml" />
+    <EmbeddedResource Include="Data\DotNetObjectInvokerStep-Test002.xml" />
+    <EmbeddedResource Include="Data\DotNetObjectInvokerStep-Test001.xml" />
+    <EmbeddedResource Include="Data\XmlContextLoader-InputData.xml" />
+    <EmbeddedResource Include="Data\XmlContextLoader-LoadContext.xml" />
+    <EmbeddedResource Include="Data\HostConductorStep-StopNoCreds.xml" />
+    <EmbeddedResource Include="Data\HostConductorStep-StopUsingCreds.xml" />
+    <EmbeddedResource Include="Data\HostConductorStep-StartNoCreds.xml" />
+    <EmbeddedResource Include="Data\DummyConfig.xml" />
+    <EmbeddedResource Include="Data\HostConductorStep-StartUsingCreds.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\PurchaseOrder.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BizUnit.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Src\BizTalkSteps\BizTalkSteps.csproj">
+      <Project>{772A474B-0D95-4002-BF5B-910986D1326B}</Project>
+      <Name>BizTalkSteps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\BizUnit\BizUnit.csproj">
+      <Project>{7C85248A-15D4-4A17-A496-AECF789E0F10}</Project>
+      <Name>BizUnit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\BizUnitCoreSteps\BizUnitCoreSteps.csproj">
+      <Project>{B336B2AF-BAEB-424F-9463-CA3034EADC2D}</Project>
+      <Name>BizUnitCoreSteps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\LoadGenSteps\LoadGenSteps.csproj">
+      <Project>{348DDB68-8608-483A-B837-16C14AC9A64F}</Project>
+      <Name>LoadGenSteps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\MQSeriesSteps\MQSeriesSteps.csproj">
+      <Project>{91790EE8-448A-4C68-8555-5BC7FEA9D325}</Project>
+      <Name>MQSeriesSteps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\OutlookReadStep\OutlookReadStep.csproj">
+      <Project>{B56266E3-8D6A-4502-B197-D8E0AD54990C}</Project>
+      <Name>OutlookReadStep</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+</Project>

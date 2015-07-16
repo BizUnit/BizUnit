@@ -1,0 +1,16 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.SOAPHTTPRequestResponseStep">
+
+	<WebServiceWSDLURL>http://localhost/StockQuoteService_Proxy/StockQuoteService_QuoteService_Port_1.asmx?wsdl</WebServiceWSDLURL>
+	<ServiceName>StockQuoteService_QuoteService_Port_1</ServiceName>
+	<WebMethod>Operation_1</WebMethod>
+	<InputMessageTypeName>Operation_1StockQuote</InputMessageTypeName>
+	<MessagePayload>..\..\..\Test\BizUnit.Tests\Data\SOAPHTTPRequestResponse-RequestInput001.xml</MessagePayload>
+
+	<ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
+		<XPathList>
+			<XPathValidation query="/Operation_1ResponseStockQuote/Symbol">MSFT</XPathValidation>
+			<XPathValidation query="/Operation_1ResponseStockQuote/LastPrice">29.29</XPathValidation>
+		</XPathList>
+	</ValidationStep>
+
+</TestStep>

@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Font Name="Segoe UI" Size="9" />
+  <Class Name="BizUnit.BizUnitOM.BizUnitTestCase">
+    <Position X="2.75" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\BizUnitTestCase.cs</FileName>
+      <HashCode>AAAAAEAAgABAIAAQACAAAAQAAAAEAAAAAACAQAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizUnit.BizUnit" Collapsed="true">
+    <Position X="2.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>BizUnit.cs</FileName>
+      <HashCode>AYACEAAACIAAAARSASIEBAQCAABhAAAAQQACIRAJAFA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizUnit.Context" Collapsed="true">
+    <Position X="4.75" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>Context.cs</FileName>
+      <HashCode>YgJCBAAAIDAAIQQSIACiAAACYAAKAQEAAAEAAAIRAAE=</HashCode>
+    </TypeIdentifier>
+    <NestedTypes>
+      <Enum Name="BizUnit.Context.LogLevel" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Context.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+  </Class>
+  <Class Name="BizUnit.BizUnitOM.ContextLoaderStepBuilder">
+    <Position X="5.75" Y="5.75" Width="2.75" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\ContextLoaderStepBuilder.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizUnit.BizUnitOM.TestStepBuilderBase">
+    <Position X="4.75" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\TestStepBuilderBase.cs</FileName>
+      <HashCode>AQQAAAUAAAAAAECAAAAAEAQAAAEAAAAAAAAAAAiAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizUnit.BizUnitOM.TestStepBuilder">
+    <Position X="2.75" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\TestStepBuilder.cs</FileName>
+      <HashCode>EAAAABAAAAAQAAAAEAAAAAAAAAEAAIAAAEAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+    <InheritanceLine Type="BizUnit.BizUnitOM.TestStepBuilderBase" FixedToPoint="true">
+      <Path>
+        <Point X="5.875" Y="5.238" />
+        <Point X="5.875" Y="5.45" />
+        <Point X="4" Y="5.45" />
+        <Point X="4" Y="5.75" />
+      </Path>
+    </InheritanceLine>
+  </Class>
+  <Class Name="BizUnit.BizUnitOM.ValidationStepBuilder">
+    <Position X="8.75" Y="5.75" Width="2.5" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\ValidationStepBuilder.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizUnit.BizUnitOM.BizUnitParameterFormatterAttribute">
+    <Position X="13.25" Y="1.5" Width="3.25" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\BizUnitParameterFormatterAttribute.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAABAAQAAQAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="BizUnit.BizUnitOM.IValidationStepOM">
+    <Position X="9" Y="3" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\IValidationStepOM.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BizUnit.BizUnitOM.ITestStepOM">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\ITestStepOM.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BizUnit.ITestStep">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <FileName>ITestStep.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BizUnit.IValidationStep">
+    <Position X="9" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <FileName>IValidationStep.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BizUnit.IContextLoaderStep">
+    <Position X="11" Y="1.5" Width="2" />
+    <TypeIdentifier>
+      <FileName>IContextLoaderStep.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="BizUnit.BizUnitOM.IContextLoaderStepOM">
+    <Position X="11" Y="3" Width="2" />
+    <TypeIdentifier>
+      <FileName>BizUnitOM\IContextLoaderStepOM.cs</FileName>
+      <HashCode>AAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Interface>
+</ClassDiagram>

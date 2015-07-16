@@ -1,0 +1,22 @@
+﻿<ns0:CBRInputRecord xmlns:ns0="http://CBR.CBRInputSchema">
+	<Identity>
+		<UserID>123</UserID>
+		<LastName>Doe</LastName>
+		<FirstName>John</FirstName>
+		<Initial>X</Initial>
+	</Identity>
+	<Address>
+		<AddressLine1>One Microsoft Way</AddressLine1>
+		<AddressLine2>156th Ave. NE</AddressLine2>
+		<City>Redmond</City>
+		<State>WA</State>
+		<ZipCode>98052</ZipCode>
+		<Country>USA</Country>
+		<CountryCode>100</CountryCode>
+	</Address>
+	<ContactInfo>
+		<HomePhone>425-123-4567</HomePhone>
+		<WorkPhone>425-234-5678</WorkPhone>
+		<CellPhone>206-123-4567</CellPhone>
+	</ContactInfo>
+</ns0:CBRInputRecord>

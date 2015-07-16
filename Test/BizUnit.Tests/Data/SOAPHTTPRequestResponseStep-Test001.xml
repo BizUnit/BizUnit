@@ -1,0 +1,7 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.SOAPHTTPRequestResponseStep">
+
+	<WebServiceWSDLURL>http://localhost/StockQuoteService/StockQuoteService.asmx?wsdl</WebServiceWSDLURL>
+	<ServiceName>StockQuoteService</ServiceName>
+	<WebMethod>VoidMethod</WebMethod>
+
+</TestStep>

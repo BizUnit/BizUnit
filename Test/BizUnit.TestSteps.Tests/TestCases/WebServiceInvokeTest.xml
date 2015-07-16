@@ -1,0 +1,63 @@
+﻿<TestCase
+  Name="Serialization Test"
+  Description="Test to blah blah blah, yeah really!"
+  Category="{assembly:Null}"
+  Purpose="{assembly:Null}"
+  Reference="{assembly:Null}"
+  Preconditions="{assembly:Null}"
+  ExpectedResults="{assembly:Null}"
+  BizUnitVersion="4.0.0.1" xmlns="clr-namespace:BizUnit;assembly=BizUnit" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:bucts="clr-namespace:BizUnitCoreTestSteps;assembly=BizUnitCoreTestSteps" xmlns:buctsc="clr-namespace:BizUnitCoreTestSteps.Common;assembly=BizUnitCoreTestSteps" xmlns:but="clr-namespace:BizUnit.TestSteps.Tests;assembly=BizUnit.TestSteps.Tests">
+  <TestCase.ExecutionSteps>
+    <bucts:WebServiceStep
+      ServiceUrl="http://localhost/AncillarySalesBook/AncillarySalesBook.svc"
+      Action="http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/2009/IAncillarySalesBook/GetProductTermsAndConditions"
+      Username="newkydog001\kevinsmi"
+      Password="{assembly:Null}"
+      RunConcurrently="False"
+      FailOnError="True">
+      <bucts:WebServiceStep.RequestBody>
+        <bucts:FileDataLoader
+          FilePath="..\..\..\Test\BizUnit.TestSteps.Tests\TestData\GetProductTermsAndConditions_RQ.xml" />
+      </bucts:WebServiceStep.RequestBody>
+      <bucts:WebServiceStep.SubSteps>
+        <bucts:XmlValidationStep>
+          <bucts:XmlValidationStep.XmlSchemas>
+            <bucts:SchemaDefinition
+              XmlSchemaPath="C:\Affinus\Depot\ASS\Main\Dev\Src\VAA.ASS.Schemas\VAACommon\Result_Type.xsd"
+              XmlSchemaNameSpace="http://schemas.virgin-atlantic.com/Common/2009" />
+            <bucts:SchemaDefinition
+              XmlSchemaPath="C:\Affinus\Depot\ASS\Main\Dev\Src\VAA.ASS.Schemas\Book\GetProductTermsAndConditions_RS.xsd"
+              XmlSchemaNameSpace="http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/GetProductTermsAndConditions/2009" />
+          </bucts:XmlValidationStep.XmlSchemas>
+          <bucts:XmlValidationStep.XPathValidations>
+            <buctsc:XPathDefinition
+              Description="{assembly:Null}"
+              XPath="/*[local-name()='GetProductTermsAndConditions_RS' and namespace-uri()='http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/GetProductTermsAndConditions/2009']/*[local-name()='Message' and namespace-uri()='']/*[local-name()='TermsAndConditions' and namespace-uri()='']/@*[local-name()='productId' and namespace-uri()='']"
+              Value="1"
+              ContextKey="{assembly:Null}" />
+            <buctsc:XPathDefinition
+              Description="{assembly:Null}"
+              XPath="/*[local-name()='GetProductTermsAndConditions_RS' and namespace-uri()='http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/GetProductTermsAndConditions/2009']/*[local-name()='Message' and namespace-uri()='']/*[local-name()='TermsAndConditions' and namespace-uri()='']/*[local-name()='Content' and namespace-uri()='']"
+              Value="Terms and Conditions: this product is non-refundable...."
+              ContextKey="{assembly:Null}" />
+          </bucts:XmlValidationStep.XPathValidations>
+        </bucts:XmlValidationStep>
+      </bucts:WebServiceStep.SubSteps>
+      <bucts:WebServiceStep.SoapHeaders>
+        <bucts:SoapHeader
+          HeaderName="ServiceCallingContext"
+          HeaderNameSpace="http://schemas.virgin-atlantic.com/Services/ServiceCallingContext/2009">
+          <bucts:SoapHeader.HeaderInstance>
+            <but:ServiceCallingContext
+              ApplicationName="BVT Tests"
+              GUid="{}{1705141E-F530-4657-BA2F-23F0F4A8BCB0}"
+              UTCTransactionStartDate="2010-07-29T07:15:44.2094395Z"
+              UTCTransactionStartTime="07:15:44.209"
+              RequestId="{}{59ACDBB4-3FAF-4056-9459-49D43C4128F9}"
+              UserId="kevin" />
+          </bucts:SoapHeader.HeaderInstance>
+        </bucts:SoapHeader>
+      </bucts:WebServiceStep.SoapHeaders>
+    </bucts:WebServiceStep>
+  </TestCase.ExecutionSteps>
+</TestCase>

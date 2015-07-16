@@ -1,0 +1,4 @@
+﻿<ContextLoaderStep assemblyPath="" typeName="BizUnit.XmlContextLoader">
+	<XPath contextKey="FirstName">/*[local-name()='CBRInputRecord' and namespace-uri()='http://CBR.CBRInputSchema']/*[local-name()='Identity']/*[local-name()='FirstName']</XPath>
+	<XPath contextKey="LastName">/*[local-name()='CBRInputRecord' and namespace-uri()='http://CBR.CBRInputSchema']/*[local-name()='Identity']/*[local-name()='LastName']</XPath>
+</ContextLoaderStep>

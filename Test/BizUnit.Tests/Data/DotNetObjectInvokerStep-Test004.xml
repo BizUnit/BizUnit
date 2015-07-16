@@ -1,0 +1,12 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.DotNetObjectInvokerStep">
+	<TypeName>BizUnit.Tests.Data.ClassForInvokation, BizUnit.Tests</TypeName>
+	<AssemblyPath></AssemblyPath>
+	<MethodToInvoke>FormatString</MethodToInvoke>
+	<Parameter>
+		<string>The number is: {0}</string>
+	</Parameter>
+	<Parameter takeFromCtx="NumberToPrint" />
+	<ReturnParameter>
+		<string>The number is: 2</string>
+	</ReturnParameter>
+</TestStep>

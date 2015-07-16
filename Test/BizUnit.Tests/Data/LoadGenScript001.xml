@@ -1,0 +1,47 @@
+﻿<LoadGenFramework>
+	<CommonSection>
+		<LoadGenVersion>2</LoadGenVersion>
+		<OptimizeLimitFileSize>204800</OptimizeLimitFileSize>
+		<NumThreadsPerSection>5</NumThreadsPerSection>
+		<SleepInterval>200</SleepInterval>
+		<LotSizePerInterval>25</LotSizePerInterval>
+		<RetryInterval>10000</RetryInterval>
+
+		<StopMode Mode="Files">
+
+			<NumFiles>50</NumFiles>
+			<TotalTime>3600</TotalTime>
+		</StopMode>
+
+		<Transport Name="FILE">
+
+			<Assembly>FileTransport.dll/FileTransport.FileTransport</Assembly>
+
+		</Transport>
+
+		<ThrottleController Mode="Custom">
+
+
+			<Monitor Name="File">
+				<Assembly>FileMonitor.dll/DropLocationFileMonitor.DropLocationFileMonitor</Assembly>
+				<ThresholdRange>1000-2000</ThresholdRange>
+				<SleepInterval>1000</SleepInterval>
+				<Parameters>C:\Scenarios\FileToFile\Receive</Parameters>
+			</Monitor>
+
+
+			<ThrottleCondition>File</ThrottleCondition>
+		</ThrottleController>
+
+	</CommonSection>
+
+	<Section Name="FileSection">
+		<SrcFilePath>C:\LoadGen\ConfigFiles\ConsoleConfigFiles\FileToFileLG.xml</SrcFilePath>
+		<DstLocation>
+			<Parameters>
+				<DstFilePath>C:\Scenarios\FileToFile\Receive</DstFilePath>
+			</Parameters>
+		</DstLocation>
+	</Section>
+
+</LoadGenFramework>

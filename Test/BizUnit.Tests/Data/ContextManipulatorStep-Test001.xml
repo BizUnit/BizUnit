@@ -1,0 +1,11 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.ContextManipulatorStep">
+	<ContextItem contextKey="OrderItem">
+		<ItemTest>holdEvent=</ItemTest>
+		<ItemTest takeFromCtx="HoldEvent"></ItemTest>
+		<ItemTest>; actionId=</ItemTest>
+		<ItemTest takeFromCtx="ActionId"></ItemTest>
+		<ItemTest>; actionType=</ItemTest>
+		<ItemTest takeFromCtx="ActionType"></ItemTest>
+		<ItemTest>;</ItemTest>
+	</ContextItem>
+</TestStep>

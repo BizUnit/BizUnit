@@ -1,0 +1,14 @@
+﻿<TestStep assemblyPath="" typeName="BizUnit.DotNetObjectInvokerStep">
+	<TypeName>BizUnit.Tests.Data.ClassForInvokation, BizUnit.Tests</TypeName>
+	<AssemblyPath></AssemblyPath>
+	<MethodToInvoke>AddNumbers</MethodToInvoke>
+	<Parameter>
+		<int>40</int>
+	</Parameter>
+	<Parameter>
+		<int>2</int>
+	</Parameter>
+	<ReturnParameter>
+		<int>42</int>
+	</ReturnParameter>
+</TestStep>

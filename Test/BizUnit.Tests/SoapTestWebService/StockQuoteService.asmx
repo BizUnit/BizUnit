@@ -1,0 +1,1 @@
+<%@ WebService Language="C#" CodeBehind="StockQuoteService.asmx.cs" Class="SoapTestWebService.StockQuoteService" %>
