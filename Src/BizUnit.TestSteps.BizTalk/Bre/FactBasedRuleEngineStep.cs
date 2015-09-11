@@ -145,7 +145,7 @@ namespace BizUnit.TestSteps.BizTalk.Bre
 
             foreach (var currentFact in _factsList)
             {
-                switch (currentFact.GetType().ToString())
+                switch (currentFact.GetFactType)
                 {
                     case "ObjectFact":
                         {

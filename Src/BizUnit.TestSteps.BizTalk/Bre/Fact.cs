@@ -1,7 +1,11 @@
 ﻿
 namespace BizUnit.TestSteps.BizTalk.Bre
 {
-    public class Fact
+    public abstract class Fact
     {
+        public abstract string GetFactType
+        {
+            get;
+        }
     }
 }
