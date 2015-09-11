@@ -5,5 +5,9 @@ namespace BizUnit.TestSteps.BizTalk.Bre
     {
         public string InstanceDocument { get; set; }
         public string SchemaType { get; set; }
+        public override string GetFactType
+        {
+            get { return "DocumentFact"; }
+        }
     }
 }
