@@ -16,6 +16,7 @@ using System;
 using System.IO;
 using BizUnit.Common;
 using BizUnit.Xaml;
+using System.Diagnostics;
 
 namespace BizUnit.TestSteps.File
 {
@@ -46,21 +47,32 @@ namespace BizUnit.TestSteps.File
 
         public override void Execute(Context context)
         {
-            var now = DateTime.Now;
             string[] filelist = null;
 
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             do
             {
                 // Get the list of files in the directory
                 filelist = Directory.GetFiles(DirectoryPath, SearchPattern);
 
-                if (filelist.Length != ExpectedNoOfFiles)
+                if (filelist.Length == this.ExpectedNoOfFiles)
                 {
                     // Expecting more than one file 
-                    throw new ApplicationException(String.Format("Directory does not contain the correct number of files!\n Found: {0} files matching the pattern {1}.", filelist.Length, SearchPattern));
+                    break;
                 }
+            }
+            while (stopwatch.ElapsedMilliseconds <= this.Timeout);
+            stopwatch.Stop();
 
-            } while (now.AddMilliseconds(Timeout) <= DateTime.Now);
+            if (filelist.Length != ExpectedNoOfFiles)
+            {
+                throw new ApplicationException(
+                    String.Format(
+                        "Directory does not contain the correct number of files!\n Found: {0} files matching the pattern {1}.",
+                        filelist.Length,
+                        SearchPattern));
+            }
 
             context.LogInfo("FilesExistStep found: \"{0}\" files", filelist.Length);
         }
