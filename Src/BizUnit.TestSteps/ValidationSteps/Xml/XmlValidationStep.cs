@@ -4,7 +4,7 @@
 // Summary: 
 //
 //---------------------------------------------------------------------
-// Copyright (c) 2004-2015, Kevin B. Smith. All rights reserved.
+// Copyright (c) 2004-2017, Kevin B. Smith. All rights reserved.
 //
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
 // KIND, WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -19,10 +19,10 @@ using System.Xml.Schema;
 using System.Xml.XPath;
 using System.Collections.ObjectModel;
 using BizUnit.Common;
-using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
+using BizUnit.TestBuilderteps.Common;
+using BizUnit.TestBuilder;
 
-namespace BizUnit.TestSteps.ValidationSteps.Xml
+namespace BizUnit.TestBuilderteps.ValidationSteps.Xml
 {
     /// <summary>
     /// The XmlValidationStep validates an Xml document, it may validate against a given schema, and also evaluate XPath queries.

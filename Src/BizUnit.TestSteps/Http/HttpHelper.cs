@@ -6,7 +6,7 @@
 // Author: Kevin B. Smith
 //
 //---------------------------------------------------------------------
-// Copyright (c) 2004-2015, Kevin B. Smith. All rights reserved.
+// Copyright (c) 2004-2017, Kevin B. Smith. All rights reserved.
 //
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
 // KIND, WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -14,16 +14,17 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
-namespace BizUnit.TestSteps.Http
+namespace BizUnit.TestBuilderteps.Http
 {
-	using System;
-	using System.IO;
-	using System.Net;
+    using System;
+    using System.IO;
+    using System.Net;
+    using TestBuilder;
 
-	/// <summary>
-	/// Helper class for HTTP
-	/// </summary>
-	public class HttpHelper
+    /// <summary>
+    /// Helper class for HTTP
+    /// </summary>
+    public class HttpHelper
 	{
 		/// <summary>
 		/// Helper method to execute an HTTP request-response

@@ -1,10 +1,10 @@
 ﻿
 using System;
-using BizUnit.TestSteps.File;
-using BizUnit.Xaml;
+using BizUnit.TestBuilderteps.File;
+using BizUnit.TestBuilder;
 using NUnit.Framework;
 
-namespace BizUnit.TestSteps.Tests.File
+namespace BizUnit.TestBuilderteps.Tests.File
 {
     using System.IO;
     using DataLoaders.File;
@@ -19,20 +19,21 @@ namespace BizUnit.TestSteps.Tests.File
         public void DeleteFileTest()
         {
             var step = new CreateStep();
-            step.CreationPath = @"..\..\TestData\DeleteTest_FileToBeDeleted.xml";
+            step.CreationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted.xml");
             var dl = new FileDataLoader();
-            dl.FilePath = @"..\..\TestData\PurchaseOrder001.xml";
+            dl.FilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml");
             step.DataSource = dl;
             step.Execute(new Context());
 
             var deleteStep = new DeleteStep();
-            deleteStep.FilePathsToDelete.Add(@"..\..\TestData\DeleteTest_FileToBeDeleted.xml");
+            deleteStep.FilePathsToDelete.Add(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted.xml"));
             deleteStep.Execute(new Context());
 
             try
             {
-                var deletedFile = System.IO.File.Open(@"..\..\TestData\DeleteTest_FileToBeDeleted.xml", FileMode.Open,
-                                    FileAccess.Read);
+                var deletedFile = System.IO.File.Open(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted.xml"), 
+                    FileMode.Open,
+                    FileAccess.Read);
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -44,23 +45,24 @@ namespace BizUnit.TestSteps.Tests.File
         public void DeleteFileByWildCardTest()
         {
             var step = new CreateStep();
-            step.CreationPath = @"..\..\TestData\DeleteTest_FileToBeDeleted1.wildCardTestxml";
+            step.CreationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted1.wildCardTestxml");
             var dl = new FileDataLoader();
-            dl.FilePath = @"..\..\TestData\PurchaseOrder001.xml";
+            dl.FilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml");
             step.DataSource = dl;
             step.Execute(new Context());
 
-            step.CreationPath = @"..\..\TestData\DeleteTest_FileToBeDeleted2.wildCardTestxml";
+            step.CreationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted2.wildCardTestxml");
             step.Execute(new Context());
 
             var deleteStep = new DeleteStep();
-            deleteStep.FilePathsToDelete.Add(@"..\..\TestData\*.wildCardTestxml");
+            deleteStep.FilePathsToDelete.Add(Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestData\*.wildCardTestxml"));
             deleteStep.Execute(new Context());
 
             try
             {
-                var deletedFile = System.IO.File.Open(@"..\..\TestData\DeleteTest_FileToBeDeleted.wildCardTestxml", FileMode.Open,
-                                    FileAccess.Read);
+                var deletedFile = System.IO.File.Open(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\DeleteTest_FileToBeDeleted.wildCardTestxml"), 
+                    FileMode.Open,
+                    FileAccess.Read);
             }
             catch (System.IO.FileNotFoundException)
             {
@@ -68,15 +70,13 @@ namespace BizUnit.TestSteps.Tests.File
             }
         }
 
-        [ExpectedException(typeof(ArgumentNullException))]
         [Test]
         public void TestCaseValidationTest()
         {
             var step = new CreateStep();
             var tc = new TestCase();
             tc.ExecutionSteps.Add(step);
-            var bu = new BizUnit(tc);
-            bu.RunTest();
+            Assert.Throws<ArgumentNullException>(() => { var bu = new TestRunner(tc); });            
         }
     }
 }

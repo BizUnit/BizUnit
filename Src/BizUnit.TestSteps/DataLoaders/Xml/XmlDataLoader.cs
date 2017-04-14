@@ -4,7 +4,7 @@
 // Summary: 
 //
 //---------------------------------------------------------------------
-// Copyright (c) 2004-2015, Kevin B. Smith. All rights reserved.
+// Copyright (c) 2004-2017, Kevin B. Smith. All rights reserved.
 //
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
 // KIND, WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -18,10 +18,10 @@ using System.IO;
 using System.Xml.XPath;
 using System.Collections.ObjectModel;
 using BizUnit.Common;
-using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
+using BizUnit.TestBuilderteps.Common;
+using BizUnit.TestBuilder;
 
-namespace BizUnit.TestSteps.DataLoaders.Xml
+namespace BizUnit.TestBuilderteps.DataLoaders.Xml
 {
     /// <summary>
     /// The XmlDataLoader maybe used to load a file from disc and passed to a test 

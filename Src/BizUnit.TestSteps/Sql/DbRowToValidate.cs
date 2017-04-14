@@ -1,5 +1,5 @@
 ﻿
-namespace BizUnit.TestSteps.Sql 
+namespace BizUnit.TestBuilderteps.Sql 
 {
     using System.Collections.ObjectModel;
 

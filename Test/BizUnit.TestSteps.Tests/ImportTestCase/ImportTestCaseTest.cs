@@ -1,12 +1,13 @@
 ﻿
-using BizUnit.TestSteps.Common;
-using BizUnit.TestSteps.DataLoaders.File;
-using BizUnit.TestSteps.File;
-using BizUnit.TestSteps.ValidationSteps.Xml;
-using BizUnit.Xaml;
+using BizUnit.TestBuilderteps.Common;
+using BizUnit.TestBuilderteps.DataLoaders.File;
+using BizUnit.TestBuilderteps.File;
+using BizUnit.TestBuilderteps.ValidationSteps.Xml;
+using BizUnit.TestBuilder;
 using NUnit.Framework;
+using System.IO;
 
-namespace BizUnit.TestSteps.Tests.ImportTestCase
+namespace BizUnit.TestBuilderteps.Tests.ImportTestCase
 {
     [TestFixture]
     public class ImportTestCaseTest
@@ -14,7 +15,7 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
         [Test]
         public void ImportSingleTestCaseTest()
         {
-            TestHelper.DeleteFile("ImportSingleTestCaseTest.xml");
+            TestHelper.DeleteFile(Path.Combine(TestContext.CurrentContext.TestDirectory, "ImportSingleTestCaseTest.xml"));
 
             // Create the first test case i a helper method...
             var testCase1 = BuildFirstTestCase();
@@ -22,10 +23,10 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
             // Create the second test case and import the first test case into it...
             var testCase2 = new TestCase {Name = "Copy First File Test"};
 
-            var createFileStep = new CreateStep {CreationPath = @"File2.xml"};
+            var createFileStep = new CreateStep {CreationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"File2.xml") };
             var dl = new FileDataLoader
                          {
-                             FilePath = @"..\..\TestData\PurchaseOrder001.xml"
+                             FilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml"))
                          };
             createFileStep.DataSource = dl;
 
@@ -37,7 +38,7 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
             // Create a validating read step...
             var validatingFileReadStep = new FileReadMultipleStep
                                {
-                                   DirectoryPath = @".",
+                                   DirectoryPath = TestContext.CurrentContext.TestDirectory,
                                    SearchPattern = "File*.xml",
                                    ExpectedNumberOfFiles = 2
                                };
@@ -45,10 +46,8 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
             var validation = new XmlValidationStep();
             var schemaPurchaseOrder = new SchemaDefinition
             {
-                XmlSchemaPath =
-                    @"..\..\TestData\PurchaseOrder.xsd",
-                XmlSchemaNameSpace =
-                    "http://SendMail.PurchaseOrder"
+                XmlSchemaPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder.xsd"),
+                XmlSchemaNameSpace = "http://SendMail.PurchaseOrder"
             };
             validation.XmlSchemas.Add(schemaPurchaseOrder);
 
@@ -64,10 +63,10 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
             testCase2.ExecutionSteps.Add(validatingFileReadStep);
 
             // Run the second test case...
-            var bizUnit = new BizUnit(testCase2);
-            bizUnit.RunTest();
+            var bizUnit = new TestRunner(testCase2);
+            bizUnit.Run();
 
-            TestCase.SaveToFile(testCase2, "ImportSingleTestCaseTest.xml");
+            TestCase.SaveToFile(testCase2, Path.Combine(TestContext.CurrentContext.TestDirectory, "ImportSingleTestCaseTest.xml"));
         }
 
         private TestCase BuildFirstTestCase()
@@ -75,9 +74,9 @@ namespace BizUnit.TestSteps.Tests.ImportTestCase
             var testCase1 = new TestCase {Name = "Copy First File Test"};
 
             var step = new CreateStep();
-            step.CreationPath = @"File1.xml";
+            step.CreationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, "File1.xml");
             var dl = new FileDataLoader();
-            dl.FilePath = @"..\..\TestData\PurchaseOrder001.xml";
+            dl.FilePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml");
             step.DataSource = dl;
             step.Execute(new Context());
 

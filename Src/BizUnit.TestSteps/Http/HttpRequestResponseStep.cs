@@ -3,10 +3,10 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using BizUnit.Common;
-using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
+using BizUnit.TestBuilderteps.Common;
+using BizUnit.TestBuilder;
 
-namespace BizUnit.TestSteps.Http
+namespace BizUnit.TestBuilderteps.Http
 {
     ///<summary>
     /// The HttpRequestResponseStep is used to post a two way HTTP request-response.

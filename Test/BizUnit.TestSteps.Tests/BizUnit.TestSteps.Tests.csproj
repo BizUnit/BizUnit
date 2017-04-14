@@ -48,7 +48,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -59,7 +59,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
-	<TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net45|AnyCPU'">
     <OutputPath>bin\Release-Net45\</OutputPath>
@@ -69,7 +69,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-	<TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net46|AnyCPU'">
     <OutputPath>bin\Release-Net46\</OutputPath>
@@ -79,11 +80,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-	<TargetFrameworkVersion>v4.6</TargetFrameworkVersion>	
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NUnit.3.6.1\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -106,7 +108,6 @@
     <Compile Include="ImportTestCase\ImportTestCaseTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BizUnitCoreTests.cs" />
-    <Compile Include="ServiceCallingContext.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="Time\DelayTests.cs" />
     <Compile Include="XmlValidationStepTests.cs" />
@@ -117,30 +118,43 @@
       <Name>BizUnit.TestSteps</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Src\BizUnit\BizUnit.csproj">
-      <Project>{7C85248A-15D4-4A17-A496-AECF789E0F10}</Project>
+      <Project>{7c85248a-15d4-4a17-a496-aecf789e0f10}</Project>
       <Name>BizUnit</Name>
-      <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TestData\GetProductTermsAndConditions_RQ.xml" />
+    <Content Include="TestData\GetProductTermsAndConditions_RQ.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EmbeddedResource Include="TestData\PurchaseOrder.xsd">
+    <Content Include="TestData\PurchaseOrder.xsd">
       <SubType>
       </SubType>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestData\PurchaseOrder001.xml" />
-    <Content Include="TestData\PurchaseOrder002_BadXPath.xml" />
-    <Content Include="TestData\PurchaseOrder003_SchemaValidationFail.xml" />
-    <Content Include="TestData\PurchaseOrder004_SchemaValidationFailMissingElem.xml" />
-    <Content Include="TestData\ServiceCallingContext.xml" />
-    <Content Include="TestData\ServiceCallingContext_Header.xml" />
-    <Content Include="TestCases\WebServiceInvokeTest.xml" />
+    <Content Include="TestData\PurchaseOrder001.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\PurchaseOrder002_BadXPath.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\PurchaseOrder003_SchemaValidationFail.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\PurchaseOrder004_SchemaValidationFailMissingElem.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\ServiceCallingContext.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\ServiceCallingContext_Header.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">

@@ -1,10 +1,11 @@
 ﻿
 using System.IO;
 using System;
-using BizUnit.TestSteps.File;
+using BizUnit.TestBuilderteps.File;
 using NUnit.Framework;
+using BizUnit.TestBuilder;
 
-namespace BizUnit.TestSteps.Tests.File
+namespace BizUnit.TestBuilderteps.Tests.File
 {
     /// <summary>
     /// Summary description for FileCreateTests
@@ -15,33 +16,35 @@ namespace BizUnit.TestSteps.Tests.File
         [Test]
         public void MoveFileTest()
         {
-            TestHelper.DeleteFile(@"..\..\TestData\PurchaseOrder001.testdel2xml");
-            TestHelper.DeleteFile(@"..\..\TestData\PurchaseOrder001.testdel1xml");
+            TestHelper.DeleteFile(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel2xml"));
+            TestHelper.DeleteFile(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml"));
 
-            System.IO.File.Copy(@"..\..\TestData\PurchaseOrder001.xml",
-                @"..\..\TestData\PurchaseOrder001.testdel1xml");
+            System.IO.File.Copy(
+                Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml"),
+                Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml"));
 
             var step = new MoveStep();
-            step.SourcePath = @"..\..\TestData\PurchaseOrder001.testdel1xml";
-            step.DestinationPath = @"..\..\TestData\PurchaseOrder001.testdel2xml";
+            step.SourcePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml");
+            step.DestinationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel2xml");
 
             step.Execute(new Context());
 
-            Assert.IsTrue(System.IO.File.Exists(@"..\..\TestData\PurchaseOrder001.testdel2xml"));
+            Assert.IsTrue(System.IO.File.Exists(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel2xml")));
         }
 
         [Test]
         public void MoveFileTest_Negative()
         {
-            TestHelper.DeleteFile(@"..\..\..\TestData\PurchaseOrder001.testdel2xml");
-            TestHelper.DeleteFile(@"..\..\..\TestData\PurchaseOrder001.testdel1xml");
+            TestHelper.DeleteFile(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel2xml"));
+            TestHelper.DeleteFile(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml"));
 
-            System.IO.File.Copy(@"..\..\TestData\PurchaseOrder001.xml",
-                @"..\..\TestData\PurchaseOrder001.testdel1xml");
+            System.IO.File.Copy(
+                Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml"),
+                Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml"));
 
             var step = new MoveStep();
             step.SourcePath = string.Empty;
-            step.DestinationPath = @"..\..\..\TestData\PurchaseOrder001.testdel2xml";
+            step.DestinationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel2xml");
 
             try
             {
@@ -54,7 +57,7 @@ namespace BizUnit.TestSteps.Tests.File
             }
 
 
-            step.SourcePath = @"..\..\..\TestData\PurchaseOrder001.testdel1xml";
+            step.SourcePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xml");
             step.DestinationPath = string.Empty;
 
             try
@@ -68,8 +71,8 @@ namespace BizUnit.TestSteps.Tests.File
             }
 
 
-            step.SourcePath = @"..\..\..\TestData\PurchaseOrder001.testdel1xmlerror";
-            step.DestinationPath = @"..\..\..\TestData\PurchaseOrder001.testdel1xmlerror";
+            step.SourcePath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xmlerror");
+            step.DestinationPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.testdel1xmlerror");
 
             try
             {

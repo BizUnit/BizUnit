@@ -1,9 +1,9 @@
 ﻿
-namespace BizUnit.TestSteps.Sql
+namespace BizUnit.TestBuilderteps.Sql
 {
     using System;
     using System.Collections.ObjectModel;
-    using BizUnitOM;
+    using TestBuilder;
 
     ///<summary>
     /// Database query definition
@@ -42,7 +42,7 @@ namespace BizUnit.TestSteps.Sql
 
                 foreach (var obj in QueryParameters)
                 {
-                    object objValue = obj.GetType() == typeof(ContextProperty) ? ((ContextProperty)obj).GetPropertyValue(context) : obj;
+                    object objValue = obj;
 
                     if (objValue.GetType() == typeof(DateTime))
                     {

@@ -1,10 +1,12 @@
 ﻿
 using System;
-using BizUnit.TestSteps.ValidationSteps.Xml;
-using BizUnit.TestSteps.Common;
+using BizUnit.TestBuilderteps.ValidationSteps.Xml;
+using BizUnit.TestBuilderteps.Common;
 using NUnit.Framework;
+using System.IO;
+using BizUnit.TestBuilder;
 
-namespace BizUnit.TestSteps.Tests
+namespace BizUnit.TestBuilderteps.Tests
 {
     /// <summary>
     /// Summary description for XmlValidationStepTests
@@ -18,10 +20,8 @@ namespace BizUnit.TestSteps.Tests
             var validation = new XmlValidationStep();
             var schemaPurchaseOrder = new SchemaDefinition
             {
-                XmlSchemaPath =
-                    @"..\..\TestData\PurchaseOrder.xsd",
-                XmlSchemaNameSpace =
-                    "http://SendMail.PurchaseOrder"
+                XmlSchemaPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestData\PurchaseOrder.xsd"),
+                XmlSchemaNameSpace = "http://SendMail.PurchaseOrder"
             };
             validation.XmlSchemas.Add(schemaPurchaseOrder);
 
@@ -32,7 +32,7 @@ namespace BizUnit.TestSteps.Tests
             validation.XPathValidations.Add(xpathProductId);
 
             var ctx = new Context();
-            var data = StreamHelper.LoadFileToStream(@"..\..\TestData\PurchaseOrder001.xml");
+            var data = StreamHelper.LoadFileToStream(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder001.xml"));
             validation.Execute(data, ctx);
         }
 
@@ -42,10 +42,8 @@ namespace BizUnit.TestSteps.Tests
             var validation = new XmlValidationStep();
             var schemaPurchaseOrder = new SchemaDefinition
             {
-                XmlSchemaPath =
-                    @"..\..\TestData\PurchaseOrder.xsd",
-                XmlSchemaNameSpace =
-                    "http://SendMail.PurchaseOrder"
+                XmlSchemaPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder.xsd"),
+                XmlSchemaNameSpace = "http://SendMail.PurchaseOrder"
             };
             validation.XmlSchemas.Add(schemaPurchaseOrder);
 
@@ -56,7 +54,7 @@ namespace BizUnit.TestSteps.Tests
             validation.XPathValidations.Add(xpathProductId);
 
             var ctx = new Context();
-            var data = StreamHelper.LoadFileToStream(@"..\..\TestData\PurchaseOrder002_BadXPath.xml");
+            var data = StreamHelper.LoadFileToStream(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder002_BadXPath.xml"));
             try
             {
                 Assert.Throws<ApplicationException>(() => validation.Execute(data, ctx));
@@ -75,10 +73,8 @@ namespace BizUnit.TestSteps.Tests
             var validation = new XmlValidationStep();
             var schemaPurchaseOrder = new SchemaDefinition
             {
-                XmlSchemaPath =
-                    @"..\..\TestData\PurchaseOrder.xsd",
-                XmlSchemaNameSpace =
-                    "http://SendMail.PurchaseOrder"
+                XmlSchemaPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"..\..\TestData\PurchaseOrder.xsd"),
+                XmlSchemaNameSpace = "http://SendMail.PurchaseOrder"
             };
             validation.XmlSchemas.Add(schemaPurchaseOrder);
 
@@ -89,7 +85,7 @@ namespace BizUnit.TestSteps.Tests
             validation.XPathValidations.Add(xpathProductId);
 
             var ctx = new Context();
-            var data = StreamHelper.LoadFileToStream(@"..\..\TestData\PurchaseOrder003_SchemaValidationFail.xml");
+            var data = StreamHelper.LoadFileToStream(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder003_SchemaValidationFail.xml"));
             try
             {
                 Assert.Throws<ValidationStepExecutionException>(() => validation.Execute(data, ctx));
@@ -109,10 +105,8 @@ namespace BizUnit.TestSteps.Tests
             var validation = new XmlValidationStep();
             var schemaPurchaseOrder = new SchemaDefinition
             {
-                XmlSchemaPath =
-                    @"..\..\TestData\PurchaseOrder.xsd",
-                XmlSchemaNameSpace =
-                    "http://SendMail.PurchaseOrder"
+                XmlSchemaPath = Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder.xsd"),
+                XmlSchemaNameSpace = "http://SendMail.PurchaseOrder"
             };
             validation.XmlSchemas.Add(schemaPurchaseOrder);
 
@@ -123,7 +117,7 @@ namespace BizUnit.TestSteps.Tests
             validation.XPathValidations.Add(xpathProductId);
 
             var ctx = new Context();
-            var data = StreamHelper.LoadFileToStream(@"..\..\TestData\PurchaseOrder004_SchemaValidationFailMissingElem.xml");
+            var data = StreamHelper.LoadFileToStream(Path.Combine(TestContext.CurrentContext.TestDirectory, @"TestData\PurchaseOrder004_SchemaValidationFailMissingElem.xml"));
             try
             {
                 Assert.Throws<ValidationStepExecutionException>(() => validation.Execute(data, ctx));

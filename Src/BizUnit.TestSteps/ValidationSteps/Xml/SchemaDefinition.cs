@@ -1,5 +1,5 @@
 ﻿
-namespace BizUnit.TestSteps.ValidationSteps.Xml
+namespace BizUnit.TestBuilderteps.ValidationSteps.Xml
 {
     public class SchemaDefinition
     {

@@ -1,8 +1,8 @@
 ﻿
-namespace BizUnit.TestSteps.Tests
-{
-    using System.IO;
+using System.IO;
 
+namespace BizUnit.TestBuilderteps.Tests
+{
     internal static class TestHelper
     {
         /// <summary>

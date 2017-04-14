@@ -6,7 +6,7 @@
 // Author: Kevin B. Smith
 //
 //---------------------------------------------------------------------
-// Copyright (c) 2004-2015, Kevin B. Smith. All rights reserved.
+// Copyright (c) 2004-2017, Kevin B. Smith. All rights reserved.
 //
 // THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
 // KIND, WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
@@ -14,17 +14,18 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
-namespace BizUnit.TestSteps.Common
+namespace BizUnit.TestBuilderteps.Common
 {
-	using System;
-	using System.Xml;
-	using System.Text;
-	using System.IO;
+    using System;
+    using System.Xml;
+    using System.Text;
+    using System.IO;
+    using TestBuilder;
 
-	/// <summary>
-	/// Helper class for stream opperations
-	/// </summary>
-	public class StreamHelper
+    /// <summary>
+    /// Helper class for stream opperations
+    /// </summary>
+    public class StreamHelper
 	{
 		/// <summary>
 		/// Performs a binary comparison between two streams
