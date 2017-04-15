@@ -42,7 +42,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Release-Net45\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net46|AnyCPU'">
     <OutputPath>Lib\Release-Net46\</OutputPath>
@@ -55,7 +54,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Release-Net46\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="StackExchange.Redis, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">

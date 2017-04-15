@@ -49,7 +49,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\kevin\AppData\Local\Temp\vs4EB7.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -61,7 +61,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\kevin\AppData\Local\Temp\vs4EB7.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net45|AnyCPU'">
     <OutputPath>bin\Release-Net45\</OutputPath>
@@ -73,7 +73,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release-Net45\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\kevin\AppData\Local\Temp\vs4EB7.tmp\Release-Net45\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net46|AnyCPU'">
     <OutputPath>bin\Release-Net46\</OutputPath>
@@ -85,7 +85,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Prefer32Bit>false</Prefer32Bit>
-    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release-Net46\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\kevin\AppData\Local\Temp\vs4EB7.tmp\Release-Net46\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
