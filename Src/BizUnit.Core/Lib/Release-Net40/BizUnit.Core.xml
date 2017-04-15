@@ -1,0 +1,1337 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BizUnit.Core</name>
+    </assembly>
+    <members>
+        <member name="T:BizUnit.Core.TestBuilder.SubStepException">
+            <summary>
+            SubStepException maybe thrown by BizUnit sub steps to indicate a failure of the sub step.
+            </summary>
+            <remarks>SubStepException maybe thrown by BizUnit sub steps to indicate a failure of the sub step.</remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.SubStepException.#ctor(System.String,BizUnit.Core.TestBuilder.SubStepBase)">
+            <summary>
+            TestStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="subStep">The name of the BizUnit test step being validated.</param>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.SubStepException.#ctor(System.String,BizUnit.Core.TestBuilder.SubStepBase,System.Object[])">
+            <summary>
+            TestStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="subStep">The name of the BizUnit test step being validated.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.SubStepException.SubStepName">
+            <summary>
+            The name of the test step
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.StepValidationException">
+            <summary>
+            TestStepExecutionException is thrown by BizUnit to indicate a validation step failed.
+            </summary>
+            <remarks>The ValidationStepExecutionException is thrown by BizUnit when a validation step fails, the 
+            framework automatically wraps the exception thrown by the validaiton step with an 
+            TestStepExecutionException</remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.StepValidationException.#ctor(System.String,BizUnit.Core.TestBuilder.TestStepBase)">
+            <summary>
+            TestStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="testStep">The name of the BizUnit test step being validated.</param>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.StepValidationException.TestStepName">
+            <summary>
+            The name of the test step
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.TestCase">
+            <summary>
+             TestCase maybe used to create a test case programatically. Test steps 
+             should be added to the appropriate stage for subsequent execution.
+             The TestCase is executed via BizUnit.
+             A TestCase maybe serialised into Xaml using TestCase.SaveToFile() or
+             loaded from a Xaml file using TestCase.LoadFromFile().
+            </summary>
+             
+             <remarks>
+             The exmaple below illustrates loading and running a Xaml TestCase:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteXamlTestCase()
+            		{
+                     // Load the Xaml test case...
+                     var bu = new TestRunner(TestCase.LoadFromFile("DelayTestCaseTest.xaml"));
+                     
+                     // Run the test...
+                     bu.Run();
+            		}
+            	}		
+            	</code>
+            	
+             The exmaple below illustrates programtically creating a TestCase and subsequently running it:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteProgramaticallyCreatedTestCase()
+            		{
+                     int stepDelayDuration = 500;
+                     var step = new DelayStep();
+                     step.DelayMilliSeconds = stepDelayDuration;
+            
+                     var sw = new Stopwatch();
+                     sw.Start();
+            
+                     var tc = new TestCase();
+                     tc.ExecutionSteps.Add(step);
+                     
+                     // If we wanted to serialise the test case:
+                     // TestCase.SaveToFile(tc, "DelayTestCaseTest.xaml");
+             
+                     var bu = new TestRunner(tc));
+            
+                     sw = new Stopwatch().Start();
+            
+                     // Run the test case...
+                     bu.Run();
+            
+                     var actualDuration = sw.ElapsedMilliseconds;
+                     Console.WriteLine("Observed delay: {0}", actualDuration);
+                     Assert.AreEqual(actualDuration, stepDelayDuration, 20);
+            		}
+            	}		
+            	</code>
+             
+            	</remarks>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Name">
+            <summary>
+             The name of the test case
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Description">
+            <summary>
+             The description of what the test case does
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Category">
+            <summary>
+             The category of the test case, for example Build Varification 
+             Test (BVT), System Integration Test, User Acceptance Test, etc.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Purpose">
+            <summary>
+             The description of what the test case is designed to test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Reference">
+            <summary>
+             A reference for the test, e.g. Usecase 101
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.Preconditions">
+            <summary>
+             Details of any preconditions required prior to running the test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.ExpectedResults">
+            <summary>
+             The expected results from execution of the test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.BizUnitVersion">
+            <summary>
+             The version of BizUnit that was used to generate this test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.DisposeObjectsInContext">
+            <summary>
+             If true, the disposable objects stored in the context will be disposed
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.SetupSteps">
+            <summary>
+             The test steps to be executed in the Setup stage of the test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.ExecutionSteps">
+            <summary>
+             The test steps to be executed in the Execution stage of the test
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestCase.CleanupSteps">
+            <summary>
+             The test steps to be executed in the Cleanup stage of the test, 
+             these will always be executed even if the test fails
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Validates that the test has been correctly setup, this is called 
+             by BizUnit, though may also be called from user code if required.
+            </summary>
+            <param name="ctx"></param>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.SaveToFile(BizUnit.Core.TestBuilder.TestCase,System.String,System.Boolean)">
+            <summary>
+             Used to save a TestCase to disc in Xaml format
+            </summary>
+            <param name="testCase">The TestCase to be saved to disc</param>
+            <param name="filePath">The file path of the Xaml test case representaiton.</param>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.Save(BizUnit.Core.TestBuilder.TestCase)">
+            <summary>
+             Used to save a TestCase to a string in Xaml format
+            </summary>
+            <param name="testCase">The TestCase to be saved to disc</param>
+            <returns>The test case in Xaml format</returns>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.LoadFromFile(System.String)">
+            <summary>
+             Used to deserialise a Xaml test case stored on disc into a TestCase 
+            </summary>
+            <param name="filePath">The file path of the Xaml test case to deserialise.</param>
+            <returns>The TestCase object</returns>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestCase.LoadXaml(System.String)">
+            <summary>
+             Used to deserialise a Xaml test case into a TestCase 
+            </summary>
+            <param name="xamlTestCase">The Xaml test case</param>
+            <returns>The TestCase object</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.DataLoaderBase">
+            <summary>
+            Base class for dataloaders such as the FileDataLoader. 
+            Test steps may use data loaders in order to de-couple the loading of the
+            data they accept from the undelying transport, this gives the test step 
+            much grater flexibility around how its used.
+            </summary>
+            
+            <remarks>
+            The following example demonstrates how to create and use a FileDataLoader:
+            
+            <code escaped="true">
+            // The WebServiceStep allows a DataLoader to be used to set the RequestBody,
+            // this allows greater flexibility around how data is loaded by a test step.
+            
+            var ws = new WebServiceStep();
+            ws.Action = "http://schemas.affinus.com/finservices/tradeflow";
+            
+            // Create the dataloader and configure...
+            FileDataLoader dl = new FileDataLoader();
+            dl.FilePath = @"..\..\..\Tests\Affinus.TradeServices.BVTs\TradeFlow\BookTrade_RQ.xml";
+            
+            // Assign the dataloader to the RequestBody
+            ws.RequestBody = dl;
+            ws.ServiceUrl = "http://localhost/TradeServices/TradeFlow.svc";
+            ws.Username = @"domain\user";
+            </code>
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.DataLoaderBase.Load(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Called to load the specified data
+            </summary>
+            <param name="context">The test context being used in the current TestCase</param>
+            <returns>The data loaded</returns>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.DataLoaderBase.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Executes the test steps validation logic
+            </summary>
+            <param name="context">The test context being used in the current TestCase</param>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.ImportTestCaseStep">
+            <summary>
+             Used to import another test case into this test case. This is especially
+             useful when testing logic that builds on different scenarios. Each scenario
+             may have a test case, subsequent scenarios may import their dependant tests
+             to avoid having to duplicate test code.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.ImportTestCaseStep.TestCasePath">
+            <summary>
+             The file path of the test case to be imported. Either TestCase should be set or TestCasePath, but not both.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.ImportTestCaseStep.TestCase">
+            <summary>
+             The test case to be imported. Either TestCase should be set or TestCasePath, but not both.
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.SubStepBase">
+            <summary>
+             The base class for all test sub-steps. 
+             Sub-steps may be used for validation of data, loading data into 
+             the BizUnit context or other purposes that are appropriate.
+             For example an XmlValidationStep could be a sub-step of a 
+             FileReaderStep, the FileReaderStep would be responsible for 
+             reading a file and then validating its content using the 
+             XmlValidationStep thereby ensuring the content is valid Xml. By 
+             seperating out the concerns of the test step from the sub-step, a 
+             given test step may be used in a greater number of scenarios. For 
+             example, in the scenario above, the same FileReaderStep could also be 
+             used with a RegExValidationStep, thereby enabling the FileReaderStep
+             to process Xml and FlatFile format data.
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.SubStepBase.Execute(System.IO.Stream,BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Executes the logic in the sub-step
+            </summary>
+            <param name="data">The data to be processed by the sub-step</param>
+            <param name="context">The test context being used in the current TestCase</param>
+            <returns>The data stream ready to be consumbed, perhaps by another sub-step.</returns>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.SubStepBase.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Validation logic in the sub-step, will be called prior to the TestCase being executed
+            </summary>
+            <param name="context">The test context being used in the current TestCase</param>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.TestStepBase">
+            <summary>
+             The base class for all test steps. 
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepBase.RunConcurrently">
+            <summary>
+             Whether to execute this test step concurrently or sequentially with 
+             the other steps within the test case.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepBase.FailOnError">
+            <summary>
+             Indicates if the test step should cause the test case to fail 
+             if the step fails. This is often useful during the cleanup stage 
+             in order to have the best attempt at cleanup
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepBase.SubSteps">
+            <summary>
+             The list of sub-steps to be executed by the test step, there maybe 
+             zero or more sub-steps. Each sub-step is called, with the data being 
+             passed from one to the next typically.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepBase.ExecuteException">
+            <summary>
+             The exception details should execution fail
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestStepBase.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Executes the test steps logic
+            </summary>
+            <param name="context">The test context being used in the current TestCase</param>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestStepBase.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Executes the test steps validation logic
+            </summary>
+            <param name="context">The test context being used in the current TestCase</param>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestStepBase.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.Context">
+            <summary>
+            Represents a state object that is passed between BizUnit test steps.
+            </summary>
+            
+            <remarks>
+            The context is passed by BizUnit to each individual test step, state maybe written to or read from the context, note the following
+            wild cards are supported: %DateTime%, %DateTimeISO8601%, %ServerName% and %Guid%.
+            The context also provides helper methods for test steps to read their configuration, and to log information, warnings, errors 
+            and data in a consistent manner.
+            The context contains some standard information on the current test executing, such as BizUnitTestCaseName which contains the 
+            name of the current test case being executed and BizUnitTestCaseStartTime which contains the time the current test case started.
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.#ctor">
+            <summary>
+            Default Context constructor.
+            </summary>
+            
+            <remarks>
+            This may be used for scenarios where by the context object needs 
+            to be created and passed to BizUnit.
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.Add(System.String,System.Object)">
+            <summary>
+            Adds a new object to the context.
+            </summary>
+            <param name="key">The name of the key for the object added.</param>
+            <param name="newValue">The object to be added to the context.</param>
+            
+            <remarks>
+            The following example demonstrates how to add a new item to the context:
+            
+            <code escaped="true">
+            context.Add("FILE_NAME", fileName);
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.Add(System.String,System.Object,System.Boolean)">
+            <summary>
+            Adds a new object to the context.
+            </summary>
+            <param name="key">The name of the key for the object added.</param>
+            <param name="newValue">The object to be added to the context.</param>
+            <param name="updateIfExists">If the object already exists and this flag 
+            is set to true, its value will be updated, otherwise the method will 
+            throw an exception.</param>
+            
+            <remarks>
+            The following example demonstrates how to add a new item to the context:
+            
+            <code escaped="true">
+            context.Add("FILE_NAME", fileName);
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.Remove(System.String)">
+            <summary>
+            Removes an object from the context.
+            </summary>
+            <param name="key">The name of the key for the object to remove.</param>
+            
+            <remarks>
+            The following example demonstrates how to remove an item from the context:
+            
+            <code escaped="true">
+            context.Remove("FILE_NAME");
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.GetValue(System.String)">
+            <summary>
+            Gets a string previously saved on the context.
+            </summary>
+            <param name="key">The name of the key for the object to get.</param>
+            <returns>string value</returns>
+            
+            <remarks>
+            The following example demonstrates how to get a string value from the context:
+            
+            <code escaped="true">
+            string fileName = context.GetValue("FILE_NAME");
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.GetObject(System.String)">
+            <summary>
+            Gets an object previously saved to the context .
+            </summary>
+            <param name="key">The name of the key for the object to get.</param>
+            <returns>object</returns>
+            
+            <remarks>
+            The following example demonstrates how to get an object from the context:
+            
+            <code escaped="true">
+            object fileName = context.GetObject("FILE_NAME");
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogException(System.Exception)">
+            <summary>
+            Used by a test step to log an Exception caught by the test step, this will be logged in the test output.
+            </summary>
+            <param name="e">The Exception to be logged by BizUnit.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	try
+            	{
+            		...
+            	}
+            	catch(Exception ex)
+            	{
+            		context.LogException( ex );
+            	}
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogData(System.String,System.String)">
+            <summary>
+            Used by a test step to log test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The data to log.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogData(System.String,System.IO.Stream)">
+            <summary>
+            Used by a test step to log test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The stream containing the data to log.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogData(System.String,System.IO.Stream,System.Boolean)">
+            <summary>
+            Used by a test step to log test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The stream containing the data to log.</param>
+            <param name="seekStream">Seek the stream back to the beginning.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogXmlData(System.String,System.String)">
+            <summary>
+            Used by a test step to log Xml test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The data to log.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogXmlData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogXmlData(System.String,System.IO.Stream)">
+            <summary>
+            Used by a test step to log Xml test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The stream containing the data to log.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogXmlData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogXmlData(System.String,System.IO.Stream,System.Boolean)">
+            <summary>
+            Used by a test step to log Xml test Data, this will be logged in the test output.
+            </summary>
+            <param name="description">The description of what the data being logged is.</param>
+            <param name="data">The stream containing the data to log.</param>
+            <param name="seekStream">Seek the stream back to the beginning.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogData( "HTTP Response:", data );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogInfo(System.String)">
+            <summary>
+            Used by a test step to log test information, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            
+            <remarks>
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogInfo( "HTTP Response was successfully received" );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogInfo(System.String,System.Object[])">
+            <summary>
+            Used by a test step to log test information, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            <param name="args">Array of arguments to be formatted with the text.</param>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogInfo( "HTTP Response was successfully received by: {0}, at: {1}", clientName, DateTime.Now );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogWarning(System.String)">
+            <summary>
+            Used by a test step to log a test warnings, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogWarning( "The FILE was found, retrying..." );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogWarning(System.String,System.Object[])">
+            <summary>
+            Used by a test step to log a test warnings, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            <param name="args">Array of arguments to be formatted with the text.</param>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.LogWarning( "The FILE was found, poll nummber: {0}, number of retries remaining: {1}", count, retriesLeft );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogError(System.String)">
+            <summary>
+            Used by a test step to log a test error, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.Log(LogLevel.ERROR,  "The response data was invalid." );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.LogError(System.String,System.Object[])">
+            <summary>
+            Used by a test step to log a test error, this will be logged in the test output.
+            </summary>
+            <param name="text">The text to be written to the output.</param>
+            <param name="args">Array of arguments to be formatted with the text.</param>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	context.Log(LogLevel.ERROR,  "The request failed with the folowing error: {0}", requestErrorText );
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.Context.TestCaseStart">
+            <summary>
+            Used by a test step to get the time that the test case started.
+            </summary>
+            
+            <remarks> 
+            The following example demonstrates how to use the method:
+            
+            <code escaped="true">
+            public void Execute(XmlNode testConfig, Context context)
+            {
+            
+            	...
+            	DateTime testStart = context.TestCaseStart;
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.Context.SubstituteWildCards(System.String)">
+            <summary>
+            Used to substitute wild cards into strings.
+            </summary>
+            
+            <remarks> 
+            The following wild cards are suported:
+            
+            <code escaped="true">
+            %DateTime% - will replace the wild card with the current date time in the format HHmmss-ddMMyyyy
+            %ServerName% - will replace the wild card with the name of the server BizUnit is being executed on
+            %Guid% - will be replaced by a new Guid
+            </code>
+            
+            </remarks>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.TestStepExecutionException">
+            <summary>
+            TestStepExecutionException is thrown by BizUnit to indicate a validation step failed.
+            </summary>
+            <remarks>The ValidationStepExecutionException is thrown by BizUnit when a validation step fails, the 
+            framework automatically wraps the exception thrown by the validaiton step with an 
+            TestStepExecutionException</remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestStepExecutionException.#ctor(System.String,TestStage,System.String,System.String)">
+            <summary>
+            TestStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="testCaseName">The name of the BizUnit test case executing whilst the validation step failed.</param>
+            
+            <remarks>
+            The following example demonstrates how to create and call BizUnit using 
+            the BizUnit Test Case Object Model:
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.TestStepExecutionException.#ctor(System.String,System.Exception,TestStage,System.String,System.String)">
+            <summary>
+            TestStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="testCaseName">The name of the BizUnit test case executing whilst the validation step failed.</param>
+            
+            <remarks>
+            The following example demonstrates how to create and call BizUnit using 
+            the BizUnit Test Case Object Model:
+            </remarks>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepExecutionException.TestCaseName">
+            <summary>
+            The name of the test case
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepExecutionException.TestStepName">
+            <summary>
+            The name of the test step
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.TestStepExecutionException.Stage">
+            <summary>
+            The test stage being executed
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestBuilder.ValidationStepExecutionException">
+            <summary>
+            ValidationStepExecutionException is thrown by BizUnit to indicate a validation step failed.
+            </summary>
+            <remarks>The ValidationStepExecutionException is thrown by BizUnit when a validation step fails, the 
+            framework automatically wraps the exception thrown by the validaiton step with an 
+            ValidationStepExecutionException</remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.ValidationStepExecutionException.#ctor(System.String,System.String)">
+            <summary>
+            ValidationStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="testCaseName">The name of the BizUnit test case executing whilst the validation step failed.</param>
+            
+            <remarks>
+            The following example demonstrates how to create and call BizUnit using 
+            the BizUnit Test Case Object Model:
+            </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestBuilder.ValidationStepExecutionException.#ctor(System.String,System.Exception,System.String)">
+            <summary>
+            ValidationStepExecutionException constructor.
+            </summary>
+            <param name="message">The message associated with this exception.</param>
+            <param name="innerException">The exception thrown by the validation step.</param>
+            <param name="testCaseName">The name of the BizUnit test case executing whilst the validation step failed.</param>
+            
+            <remarks>
+            The following example demonstrates how to create and call BizUnit using 
+            the BizUnit Test Case Object Model:
+            </remarks>
+        </member>
+        <member name="P:BizUnit.Core.TestBuilder.ValidationStepExecutionException.TestCaseName">
+            <summary>
+            The name of the test case
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.TestRunner">
+             <summary>
+             BizUnit test framework for the rapid development of automated test cases. Test cases may be created as 'coded tests'
+             or in XAML. 
+             <para>
+            	Test cases have three stages:
+            	<para>1. TestSetup - used to setup the conditions ready to execute the test</para>
+            	<para>2. TestExecution - the main execution stage of the test</para>
+            	<para>3: TestCleanup - the final stage is always executed regardless of whether the test passes 
+            	or fails in order to leave the system in the state prior to executing the test</para>
+            	</para>
+             
+             </summary>
+             
+             <remarks>
+             The following example demonstrates how to create a BizUnit coded test and execute it:
+             
+             <code escaped="true">
+             namespace WoodgroveBank.BVTs
+            	{
+                 using System;
+                 using NUnit.Framework;
+                 using BizUnit;
+            
+                 // This is an example of calling BizUnit from NUnit...
+                 [TestFixture]
+                 public class SmokeTests
+                 {
+                     // Create the test case
+                     var testCase = new TestCase();
+                 
+                     // Create test steps...
+                     var delayStep = new DelayStep {DelayMilliSeconds = 500};
+                 
+                     // Add test steps to the required test stage
+                     testCase.ExecutionSteps.Add(delayStep);
+                 
+                     // Create a new instance of BizUnit and run the test
+                     var bizUnit = new TestRunner(testCase);
+                     bizUnit.Run();
+                 }
+             }		
+            	</code>
+             
+             <para>
+            	The following XML shows the XAML for the coded test case shown above: 
+             </para> 
+             <code escaped="true">
+             <TestCase 
+               Description="{x:Null}" 
+               ExpectedResults="{x:Null}" 
+               Name="{x:Null}" Preconditions="{x:Null}" 
+               Purpose="{x:Null}" Reference="{x:Null}" 
+               BizUnitVersion="4.0.133.0" 
+               xmlns="clr-namespace:BizUnit.Xaml;assembly=BizUnit" 
+               xmlns:btt="clr-namespace:BizUnit.TestSteps.Time;assembly=BizUnit.TestSteps" 
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+               <TestCase.ExecutionSteps>
+                 <btt:DelayStep 
+                   SubSteps="{x:Null}" 
+                   DelayMilliSeconds="500" 
+                   FailOnError="True" 
+                   RunConcurrently="False" />
+                 </TestCase.ExecutionSteps>
+               </TestCase>    
+             </code>
+             </remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestRunner.#ctor(BizUnit.Core.TestBuilder.TestCase)">
+             <summary>
+             BizUnit constructor, introduced in BizUnit 4.0 
+             </summary>
+             <param name="testCase">The BizUnit test case object model that has been built to represent the test to be executed.</param>
+             
+             <remarks>
+             From BizUnit 4.0 test case maybe programatically created by creating
+             test steps, configuring them and then adding them to a test case or 
+             by loading Xaml test cases. Test cases developed programatically 
+             maybe serialised to Xaml using TestCase.SaveToFile(), 
+             similarly Xaml test cases maybe deserialised into a 
+             TestCase using TestCase.LoadFromFile(). 
+             
+             The exmaple below illustrates loading and running a Xaml test case:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteXamlTestCase()
+            		{
+                     // Load the Xaml test case...
+                     var bu = new TestRunner(TestCase.LoadFromFile("DelayTestCaseTest.xaml"));
+                     
+                     // Run the test...
+                     bu.Run();
+            		}
+            	}		
+            	</code>
+            	
+             The exmaple below illustrates programtically creating a test case and subsequently running it:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteProgramaticallyCreatedTestCase()
+            		{
+                     int stepDelayDuration = 500;
+                     var step = new DelayStep();
+                     step.DelayMilliSeconds = stepDelayDuration;
+            
+                     var sw = new Stopwatch();
+                     sw.Start();
+            
+                     var tc = new TestCase();
+                     tc.ExecutionSteps.Add(step);
+                     
+                     // If we wanted to serialise the test case:
+                     // TestCase.SaveToFile(tc, "DelayTestCaseTest.xaml");
+             
+                     var bu = new TestRunner(tc));
+            
+                     sw = new Stopwatch().Start();
+            
+                     // Run the test case...
+                     bu.Run();
+            
+                     var actualDuration = sw.ElapsedMilliseconds;
+                     Console.WriteLine("Observed delay: {0}", actualDuration);
+                     Assert.AreEqual(actualDuration, stepDelayDuration, 20);
+            		}
+            	}		
+            	</code>
+             
+            	</remarks>
+        </member>
+        <member name="M:BizUnit.Core.TestRunner.#ctor(BizUnit.Core.TestBuilder.TestCase,BizUnit.Core.TestBuilder.Context)">
+             <summary>
+             BizUnit constructor, introduced in BizUnit 4.0 
+             </summary>
+             <param name="testCase">The BizUnit test case object model that has been built to represent the test to be executed.</param>
+             <param name="ctx">The BizUnit test context to be used. If this is not supplied a new contxt will created.</param>
+             
+             <remarks>
+             From BizUnit 4.0 test case maybe programatically created by creating
+             test steps, configuring them and then adding them to a test case or 
+             by loading Xaml test cases. Test cases developed programatically 
+             maybe serialised to Xaml using TestCase.SaveToFile(), 
+             similarly Xaml test cases maybe deserialised into a 
+             TestCase using TestCase.LoadFromFile(). 
+             
+             The exmaple below illustrates loading and running a Xaml test case:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteXamlTestCase()
+            		{
+                     // Load the Xaml test case...
+                     var bu = new TestRunner(TestCase.LoadFromFile("DelayTestCaseTest.xaml"));
+                     
+                     // Run the test...
+                     bu.Run();
+            		}
+            	}		
+            	</code>
+            	
+             The exmaple below illustrates programtically creating a test case and subsequently running it:
+             
+             <code escaped="true">
+            	namespace WoodgroveBank.BVTs
+            	{
+            	using System;
+            	using NUnit.Framework;
+            	using BizUnit;
+            
+            	[TestMethod]
+            	public class SampleTests
+            	{
+            		[Test]
+            		public void ExecuteProgramaticallyCreatedTestCase()
+            		{
+                     int stepDelayDuration = 500;
+                     var step = new DelayStep();
+                     step.DelayMilliSeconds = stepDelayDuration;
+            
+                     var sw = new Stopwatch();
+                     sw.Start();
+            
+                     var tc = new TestCase();
+                     tc.ExecutionSteps.Add(step);
+                     
+                     // If we wanted to serialise the test case:
+                     // TestCase.SaveToFile(tc, "DelayTestCaseTest.xaml");
+             
+                     var bu = new TestRunner(tc));
+            
+                     sw = new Stopwatch().Start();
+            
+                     // Run the test case...
+                     bu.Run();
+            
+                     var actualDuration = sw.ElapsedMilliseconds;
+                     Console.WriteLine("Observed delay: {0}", actualDuration);
+                     Assert.AreEqual(actualDuration, stepDelayDuration, 20);
+            		}
+            	}		
+            	</code>
+             
+            	</remarks>
+        </member>
+        <member name="T:BizUnit.Core.Utilites.ConcurrentTestStepWrapper">
+            <summary>
+            Summary description for ConcurrentTestStepWrapper.
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.Utilites.LogLevel">
+            <summary>
+            The LogLevel enum defines the level of logging. 
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.Utilites.ILogger">
+            <summary>
+            The ILogger interface is implemented by custom loggers. This enables the BizUnit log output 
+            to directed to custom syncs.
+            </summary>
+        </member>
+        <member name="P:BizUnit.Core.Utilites.ILogger.ConcurrentExecutionMode">
+            <summary>
+            Gets or set the concurrency mode, test steps that are executing concurrently will have 
+            their own instance of a _logger and will have this property set to true.
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestGroupStart(System.String,TestGroupPhase,System.DateTime,System.String)">
+            <summary>
+            TestGroupStart is called by the BizUnit framework if/when a Test Group is started. 
+            Note, test groups are optional.
+            </summary>
+            
+            <param name='testGroupName'>The name of the test group.</param>
+            <param name='testGroupPhase'>The phase of the test group, e.g. setup or tear down</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='userName'>The user name that BizUnit is running under</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestGroupEnd(TestGroupPhase,System.DateTime,System.Exception)">
+            <summary>
+            TestGroupEnd is called by the BizUnit framework if/when a Test Group phase ends. 
+            Note, test groups are optional.
+            </summary>
+            
+            <param name='testGroupPhase'>The phase of the test group, e.g. setup or tear down</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='executionException'>Will be null unless the phase exected with an error</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestStart(System.String,System.DateTime,System.String)">
+            <summary>
+            TestStart is called by the BizUnit framework at the start of a new test. 
+            </summary>
+            
+            <param name='testName'>The name of the test group.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='userName'>The user name that BizUnit is running under</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestEnd(System.String,System.DateTime,System.Exception)">
+            <summary>
+            TestEnd is called by the BizUnit framework at the end of a new test. 
+            </summary>
+            
+            <param name='testName'>The name of the test group.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='ex'>Will be null unless the test exected with an error</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestStageStart(TestStage,System.DateTime)">
+            <summary>
+            TestStageStart is called by the BizUnit framework at the start of a test stage. 
+            </summary>
+            
+            <param name='stage'>The stage type, for example setup, execution or clenaup.</param>
+            <param name='time'>The date time that this was invoked</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestStageEnd(TestStage,System.DateTime,System.Exception)">
+            <summary>
+            TestStageEnd is called by the BizUnit framework at the end of a given test stage. 
+            </summary>
+            
+            <param name='stage'>The stage type, for example setup, execution or clenaup.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='stageException'>Will be null unless the test stage exected with an error</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestStepStart(System.String,System.DateTime,System.Boolean,System.Boolean)">
+            <summary>
+            TestStepStart is called by the BizUnit framework at the start of a test step. 
+            </summary>
+            
+            <param name='testStepName'>The name of the test step being executed.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='runConcurrently'>Indicates whether the step is being executed in parallel to other steps</param>
+            <param name='failOnError'>Indicates whether the step is configured to fail if an error occurs</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.TestStepEnd(System.String,System.DateTime,System.Exception)">
+            <summary>
+            TestStepEnd is called by the BizUnit framework at the end of a test step. 
+            </summary>
+            
+            <param name='testStepName'>The name of the test step being executed.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='ex'>The exception that was thrown by the step</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.ValidateTestSteps(TestStage,System.String,System.Exception)">
+            <summary>
+            TestStepEnd is called by the BizUnit framework at the end of a test step. 
+            </summary>
+            
+            <param name='stage'>The test stage that the test step was added to.</param>
+            <param name='testStepName'>The name of the test step being executed.</param>
+            <param name='ex'>If failed the exception that was thrown.</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.ValidatorStart(System.String,System.DateTime)">
+            <summary>
+            ValidatorStart is called by the BizUnit framework at the start of a validator sub step. 
+            </summary>
+            
+            <param name='validatorName'>The name of the validator sub step.</param>
+            <param name='time'>The date time that this was invoked</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.ValidatorEnd(System.String,System.DateTime,System.Exception)">
+            <summary>
+            ValidatorEnd is called by the BizUnit framework at the end of a validator sub step. 
+            </summary>
+            
+            <param name='validatorName'>The name of the validator sub step.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='ex'>The exception that was thrown by the sub step</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.ContextLoaderStart(System.String,System.DateTime)">
+            <summary>
+            ContextLoaderStart is called by the BizUnit framework at the start of a context loader sub step. 
+            </summary>
+            
+            <param name='validatorName'>The name of the validator sub step.</param>
+            <param name='time'>The date time that this was invoked</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.ContextLoaderEnd(System.String,System.DateTime,System.Exception)">
+            <summary>
+            ContextLoaderEnd is called by the BizUnit framework at the end of a context loader sub step. 
+            </summary>
+            
+            <param name='validatorName'>The name of the validator sub step.</param>
+            <param name='time'>The date time that this was invoked</param>
+            <param name='ex'>The exception that was thrown by the sub step</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.Log(BizUnit.Core.Utilites.LogLevel,System.String)">
+            <summary>
+            Log is called by the BizUnit framework, by test steps or by sub steps in order to log information, warnings or errors. 
+            </summary>
+            
+            <param name='logLevel'>The level to log at.</param>
+            <param name='text'>The text to log</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.Log(BizUnit.Core.Utilites.LogLevel,System.String,System.Object[])">
+            <summary>
+            Log is called by the BizUnit framework, by test steps or by sub steps in order to log information, warnings or errors. 
+            </summary>
+            
+            <param name='logLevel'>The level to log at.</param>
+            <param name='text'>The text to log</param>
+            <param name='args'>Arguments to format into the text string</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.LogException(System.Exception)">
+            <summary>
+            LogException is called by the BizUnit framework, by test steps or by sub steps in order to log exceptions. 
+            </summary>
+            
+            <param name='e'>The exception to log.</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.LogData(System.String,System.String)">
+            <summary>
+            LogData is called by test steps or by sub steps in order to log data. 
+            </summary>
+            
+            <param name='description'>The description of the data being logged.</param>
+            <param name='data'>The data to log</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.LogXmlData(System.String,System.String)">
+            <summary>
+            LogData is called by test steps or by sub steps in order to log Xml data. 
+            </summary>
+            
+            <param name='description'>The description of the data being logged.</param>
+            <param name='data'>The data to log</param>
+        </member>
+        <member name="P:BizUnit.Core.Utilites.ILogger.BufferedText">
+            <summary>
+            Returns the log data that has been buffered whilst a test step has been executed concurrently. 
+            Test steps that are executing concurrently will have their own instance of a _logger and will have 
+            this property set to true.
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.LogBufferedText(BizUnit.Core.Utilites.ILogger)">
+            <summary>
+            LogBufferedText is called to log text that has been buffered whilst a test step is executed conrurrently. 
+            Test steps that are executing concurrently will have their own instance of a _logger and will have 
+            this property set to true.
+            </summary>
+            
+            <param name='bufferedLogger'>The instance of the ILogger holding the buffered log data.</param>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.Flush">
+            <summary>
+            Flush is used to flush the log data to the underlying storage, for eaxmple if the underlying 
+            storage is a stream, the stream would be flushed during the invokation of this method. 
+            </summary>
+        </member>
+        <member name="M:BizUnit.Core.Utilites.ILogger.Close">
+            <summary>
+            Close is called once the _logger is no longer used. 
+            </summary>
+        </member>
+        <member name="T:BizUnit.Core.Utilites.Logger">
+            <summary>
+            The BizUnit Logger is used to log data from BizUnit and test steps.
+            </summary>
+        </member>
+        <member name="T:TestGroupPhase">
+            <summary>The TestGroupPhase enumeration is used to specify the setup and teardown phases of a group of test cases. For example when using the NUnit attributes: [TestFixtureSetUp] or [TestFixtureTearDown].
+            </summary>
+        </member>
+        <member name="F:TestGroupPhase.TestGroupSetup">
+            <summary>The start of the test group setup</summary>
+        </member>
+        <member name="F:TestGroupPhase.TestGroupTearDown">
+            <summary>The end of the test group setup</summary>
+        </member>
+        <member name="F:TestGroupPhase.Unknown">
+            <summary>Undefined</summary>
+        </member>
+        <member name="T:TestStage">
+            <summary>The TestStage enumeration is used to specify the stage of a BizUnit 
+            test case, each instance of a test step must be assigned to a single stage.
+            </summary>
+        </member>
+        <member name="F:TestStage.Setup">
+            <summary>The setup stage of a test, typically used for initialising the 
+             conditions ready to run the test</summary>
+        </member>
+        <member name="F:TestStage.Execution">
+            <summary>The execution stage of a test. typically this stage of the test 
+             represents the actual scenario being tested</summary>
+        </member>
+        <member name="F:TestStage.Cleanup">
+            <summary>The cleanup stage is always executed, typically this stage should 
+             contain the neccessary steps to revert the platform to its state prior 
+             to the test runnning</summary>
+        </member>
+    </members>
+</doc>

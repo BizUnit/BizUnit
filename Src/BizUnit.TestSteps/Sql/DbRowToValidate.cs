@@ -1,8 +1,7 @@
-﻿
-namespace BizUnit.TestBuilderteps.Sql 
-{
-    using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
+namespace BizUnit.TestSteps.Sql 
+{
     ///<summary>
     /// Database row to be validated
     ///</summary>

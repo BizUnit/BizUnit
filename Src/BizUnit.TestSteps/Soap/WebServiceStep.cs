@@ -18,10 +18,10 @@ using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Xml;
 using System.Collections.ObjectModel;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilder;
+using BizUnit.TestSteps.Common;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.Soap
+namespace BizUnit.TestSteps.Soap
 {
     public class WebServiceStep : TestStepBase
     {
@@ -109,7 +109,6 @@ namespace BizUnit.TestBuilderteps.Soap
                 genericContract channel;
                 Message request;
                 Message response;
-                string responseString;
 
                 try
                 {

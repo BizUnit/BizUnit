@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BizUnit.TestSteps</name>
+    </assembly>
+    <members>
+        <member name="T:BizUnit.TestSteps.Common.StreamHelper">
+            <summary>
+            Helper class for stream opperations
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.CompareStreams(System.IO.Stream,System.IO.Stream)">
+            <summary>
+            Performs a binary comparison between two streams
+            </summary>
+            <param name="s1">The 1st stream to compare aginst the 2nd</param>
+            <param name="s2">The 2nd stream to compare aginst the 1st</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.LoadFileToStream(System.String,System.Double)">
+            <summary>
+            Helper method to load a disc FILE into a MemoryStream
+            </summary>
+            <param name="filePath">The path to the FILE containing the data</param>
+            <param name="timeout">The timeout afterwhich if the FILE is not found the method will fail</param>
+            <returns>MemoryStream containing the data in the FILE</returns>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.LoadFileToStream(System.String)">
+            <summary>
+            Helper method to load a disc FILE into a MemoryStream
+            </summary>
+            <param name="filePath">The path to the FILE containing the data</param>
+            <returns>MemoryStream containing the data in the FILE</returns>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.WriteStreamToConsole(System.String,System.IO.MemoryStream,BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Helper method to write the data in a stream to the console
+            </summary>
+            <param name="description">The description text that will be written before the stream data</param>
+            <param name="ms">Stream containing the data to write</param>
+            <param name="context">The BizUnit context object which holds state and is passed between test steps</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.LoadMemoryStream(System.IO.Stream)">
+            <summary>
+            Helper method to load a forward only stream into a seekable MemoryStream
+            </summary>
+            <param name="s">The forward only stream to read the data from</param>
+            <returns>MemoryStream containg the data as read from s</returns>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.LoadMemoryStream(System.String)">
+            <summary>
+            Helper method to load a string into a MemoryStream
+            </summary>
+            <param name="s">The string containing the data that will be loaded into the stream</param>
+            <returns>MemoryStream containg the data read from the string</returns>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.CompareXmlDocs(System.IO.Stream,System.IO.Stream,BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Helper method to compare two Xml documents from streams
+            </summary>
+            <param name="s1">Stream containing the 1st Xml document</param>
+            <param name="s2">Stream containing the 2nd Xml document</param>
+            <param name="context">The BizUnit context object which holds state and is passed between test steps</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.Common.StreamHelper.EncodeStream(System.IO.Stream,System.Text.Encoding)">
+            <summary>
+            Helper method to encode a stream
+            </summary>
+            <param name="rawData">Stream containing data to be encoded</param>
+            <param name="encoding">The encoding to be used for the data</param>
+            <returns>Encoded MemoryStream</returns>
+        </member>
+        <member name="T:BizUnit.TestSteps.Common.XPathDefinition">
+            <summary>
+             Defines an XPath expression to be executed with the expected result
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Common.XPathDefinition.Description">
+            <summary>
+             A textural desciption of the expected result
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Common.XPathDefinition.XPath">
+            <summary>
+             the XPath expression to be executed
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Common.XPathDefinition.Value">
+            <summary>
+             The expected result of the XPath
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Common.XPathDefinition.ContextKey">
+            <summary>
+             The name of the context key which maybe used as the expected result
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.DataLoaders.File.FileDataLoader">
+            <summary>
+            The FileDataLoader maybe used to load a file from disc and passed to a test 
+            step or sub-step which accepts a dataloader. Test steps which use data loaders 
+            benefit from increased flexibility around how they load data by de-coupling 
+            the test step from how it loads its data.
+            </summary>
+            
+            <remarks>
+            The following example demonstrates how to create and use a dataloader:
+            
+            <code escaped="true">
+            // The WebServiceStep allows a DataLoader to be used to set the RequestBody,
+            // this allows greater flexibility around how data is loaded by a test step.
+            
+            var ws = new WebServiceStep();
+            ws.Action = "http://schemas.affinus.com/finservices/tradeflow";
+            
+            // Create the dataloader and configure...
+            FileDataLoader dl = new FileDataLoader();
+            dl.FilePath = @"..\..\..\Tests\Affinus.TradeServices.BVTs\TradeFlow\BookTrade_RQ.xml";
+            
+            // Assign the dataloader to the RequestBody
+            ws.RequestBody = dl;
+            ws.ServiceUrl = "http://localhost/TradeServices/TradeFlow.svc";
+            ws.Username = @"domain\user";
+            </code>
+            </remarks>
+        </member>
+        <member name="P:BizUnit.TestSteps.DataLoaders.File.FileDataLoader.FilePath">
+            <summary>
+             The file path of the file to be loaded by the FileDataLoader
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.DataLoaders.Xml.XmlDataLoader">
+             <summary>
+             The XmlDataLoader maybe used to load a file from disc and passed to a test 
+             step or sub-step which accepts a dataloader. The XmlDataLoader enables the 
+             contents of the data to be modified, for example a node containing a reference 
+             number could be XPath'd and set to a value that was previously set in the 
+             context.  This gives greater flexibility around the data that is loaded into 
+             test steps.
+             <para>
+             An example usage of this might be as follows:
+             A test needs to be created to test a web service that fetches the status of a 
+             trade, however before this can be done a new trade needs to be created since 
+             a unique bookingReference is required. The test therefore is created in two 
+             parts, first it books a new trade using the bookTrade service, the 
+             bookingReference is set in the test context using the XmlValidationStep. 
+             Next the test calls the getTradeStatus web method, it loads the request 
+             body from disc using an XmlDataLoader which in turn sets the value in the body
+             of the request message to the value of bookingReference previously set in 
+             the test context.
+             </para>
+             </summary>
+             
+             <remarks>
+             The following example demonstrates how to create and use a dataloader:
+             
+             <code escaped="true">
+             // The WebServiceStep allows a DataLoader to be used to set the RequestBody,
+             // this allows greater flexibility around how data is loaded by a test step.
+             
+             var ws = new WebServiceStep();
+            	ws.Action = "http://schemas.affinus.com/finservices/tradeflow";
+             
+             // Create the dataloader and configure...
+             var xdl = new XmlDataLoader();
+             xdl.FilePath = @"..\..\..\Tests\Affinus.TradeServices.BVTs\TradeFlow\BookTrade_RQ.xml";
+             var xpd = new XPathDefinition();
+             xpd.Description = "Booking Reference";
+             
+             // Set the BookingReference node to the value in the context with the key "BookingReference"...
+             xpd.XPath = "/*[local-name()='ConfirmBooking_RQ' and namespace-uri()='http://schemas.affinus.com/finservices/tradeflow']/*[local-name()='Message' and namespace-uri()='http://schemas.affinus.com/finservices/tradeflow']/*[local-name()='Book' and namespace-uri()='http://schemas.affinus.com/finservices/tradeflow']/*[local-name()='AncillaryBookingReference' and namespace-uri()='http://schemas.virgin-atlantic.com/AncillarySales/Book/Services/ConfirmBooking/2009']/@*[local-name()='bookingReference' and namespace-uri()='']";
+             xpd.ContextKey = "BookingReference";
+             xdl.UpdateXml.Add(xpd);
+            
+             // Assign the dataloader to the RequestBody
+             ws.RequestBody = xdl;
+             ws.ServiceUrl = "http://localhost/TradeServices/TradeFlow.svc";
+             ws.Username = @"domain\user";
+            
+            	</code>
+             </remarks>
+        </member>
+        <member name="P:BizUnit.TestSteps.DataLoaders.Xml.XmlDataLoader.FilePath">
+            <summary>
+             The file path of the data to be loaded
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.DataLoaders.Xml.XmlDataLoader.UpdateXml">
+            <summary>
+             A collection of XPathDefinition's to be applied to the data fetched from FilePath
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.CopyStep.SourcePath">
+            <summary>
+            Gets or sets the source path.
+            </summary>
+            <value>The source path.</value>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.CopyStep.DestinationPath">
+            <summary>
+            Gets or sets the destination path.
+            </summary>
+            <value>The destination path.</value>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.CopyStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.DeleteStep">
+            <summary>
+             Given a file path, the step deletes the files
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.DeleteStep.FilePathsToDelete">
+            <summary>
+             Collection of file paths to delete. May be the full file path, or a directory path with a wild card to search for. e.g. C:\Temp\Foo.xml or C:\Temp\*.xml
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.DeleteStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.DeleteStep.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             TestStepBase.Validate() implementation
+            </summary>
+             <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.ExistsStep">
+            <summary>
+             Test step to check the existance of a file
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.ExistsStep.Timeout">
+            <summary>
+             The time to wait in milisecs for the file, after which the step will fail if the file is not found
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.ExistsStep.ExpectedNoOfFiles">
+            <summary>
+             The number of files to find
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.ExistsStep.DirectoryPath">
+            <summary>
+             The directory path to search
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.ExistsStep.SearchPattern">
+            <summary>
+             Filter to apply to directory path, e.g. "*.xml" or "MyFile*.txt"
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadStep.Timeout">
+            <summary>
+             The time to wait in milisecs for the file, after which the step will fail if the file is not found
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadStep.DirectoryPath">
+            <summary>
+             The directory path to search
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadStep.SearchPattern">
+            <summary>
+             Filter to apply to directory path, e.g. "*.xml" or "MyFile*.txt"
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadStep.DeleteFile">
+            <summary>
+             Flag to specify whether the files should be deleted upon completion of the test step
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.FileReadStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.CreateDirectoryStep">
+            <summary>
+            The CreateDirectory creates a new Directory.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.CreateDirectoryStep.DirectoryName">
+            <summary>
+             The name of the directory to create.
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.CreateDirectoryStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.CreateStep">
+            <summary>
+            The FileCreateStep creates a new FILE in the specified directory.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.CreateStep.DataSource">
+            <summary>
+             The dataloader to be used as the source for the FILE to be created
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.CreateStep.CreationPath">
+            <summary>
+             The file path of the file to be created
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.CreateStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.MoveStep">
+            <summary>
+            The FileMoveStep moves a file from one directory to another.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.MoveStep.SourcePath">
+            <summary>
+            Gets or sets the source path.
+            </summary>
+            <value>The source path.</value>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.MoveStep.DestinationPath">
+            <summary>
+            Gets or sets the destination path.
+            </summary>
+            <value>The destination path.</value>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.MoveStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.File.FileReadMultipleStep">
+            <summary>
+            The FileMultiValidateStep step checks a given directory for files matching the file masks and iterates around all of the specified validate steps
+            to validate the file.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadMultipleStep.Timeout">
+            <summary>
+             The time to wait in milisecs for the file, after which the step will fail if the file is not found
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadMultipleStep.DirectoryPath">
+            <summary>
+             The directory path to search
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadMultipleStep.SearchPattern">
+            <summary>
+             Filter to apply to directory path, e.g. "*.xml" or "MyFile*.txt"
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadMultipleStep.DeleteFiles">
+            <summary>
+             Flag to specify whether the files should be deleted upon completion of the test step
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.File.FileReadMultipleStep.ExpectedNumberOfFiles">
+            <summary>
+             The number of files expected to be found
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.File.FileReadMultipleStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.Http.HttpHelper">
+            <summary>
+            Helper class for HTTP
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Http.HttpHelper.SendRequestData(System.String,System.Byte[],System.Int32,BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Helper method to execute an HTTP request-response
+            </summary>
+            
+            <param name="url">The HTTP Url</param>
+            <param name="payload">Byte array conatining the request data</param>
+            <param name="requestTimeout">The request timeout value</param>
+            <param name="context">The BizUnit context object which holds state and is passed between test steps</param>
+            <returns>response MemoryStream</returns>
+        </member>
+        <member name="T:BizUnit.TestSteps.Http.HttpRequestResponseStep">
+            <summary>
+             The HttpRequestResponseStep is used to post a two way HTTP request-response.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Http.HttpRequestResponseStep.SourcePath">
+            <summary>
+             The location of the data to be posted over HTTP
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Http.HttpRequestResponseStep.DestinationUrl">
+            <summary>
+             The Url which the data will be posted to
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Http.HttpRequestResponseStep.RequestTimeout">
+            <summary>
+             The length of time to wait to the HTTP return code
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Http.HttpRequestResponseStep.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Http.HttpRequestResponseStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.Sql.DbCellToValidate">
+            <summary>
+             Database cell to be validated
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Sql.DbCellToValidate.ColumnName">
+            <summary>
+             The name of the cell to validate
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Sql.DbCellToValidate.ExpectedValue">
+            <summary>
+             the expected value of the cell to validate
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.Sql.DbRowToValidate">
+            <summary>
+             Database row to be validated
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Sql.DbRowToValidate.Cells">
+            <summary>
+             The cells to be validated
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Sql.DbRowToValidate.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.Sql.DbQueryStep">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Sql.DbQueryStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            Execute()
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.Sql.SqlQuery">
+            <summary>
+             Database query definition
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Sql.SqlQuery.RawSqlQuery">
+            <summary>
+             The raw Sql query to be executed, can be include formatting instructions which are replaced with the cref="QueryParameters". e.g. select * from dbo.MtTable where runTime > '{0}' AND SystemState = '{1}'
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.Sql.SqlQuery.QueryParameters">
+            <summary>
+             The parameters to substitute into the the cref="RawSqlQuery"
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Sql.SqlQuery.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Sql.SqlQuery.GetFormattedSqlQuery(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Formats the query string, replacing the formatting instructions in cref="RawSqlQuery" with the parameters in cref="QueryParameters"
+            </summary>
+             <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+            <returns></returns>
+        </member>
+        <member name="M:BizUnit.TestSteps.Sql.SqlQuery.Validate(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+             Validates the SqlQuery
+            </summary>
+             <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="T:BizUnit.TestSteps.Time.DelayStep">
+            <summary>
+            The DelayStep is used to perform a delay/sleep.
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.Time.DelayStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            TestStepBase.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.EventLog.EventLogCheckStep">
+            <summary>
+            The EventLogCheckStep test step looks for an event log entry. 
+            Note: this test step only looks for the event log entry during the time period of the test case.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.DelayBeforeCheck">
+            <summary>
+             The time period to wait before checking the event log
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.Machine">
+            <summary>
+             The machine name on which to check the event log
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.EventLog">
+            <summary>
+             The event log to check, e.g. Application, System etc.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.Source">
+            <summary>
+             The event log source, e.g. BizTalk Server 2010
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.EventId">
+            <summary>
+             The ID of the event to look for (optional)
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.FailIfFound">
+            <summary>
+             Flag to indicate whether the test step should fail if the event log entry is not present.
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.EntryType">
+            <summary>
+             The event type, e.g. Info, Warn, Error
+            </summary>
+        </member>
+        <member name="P:BizUnit.TestSteps.EventLog.EventLogCheckStep.ValidationRegExs">
+            <summary>
+             Regular expression used to check the event message.
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.EventLog.EventLogCheckStep.#ctor">
+            <summary>
+             Default constructor
+            </summary>
+        </member>
+        <member name="M:BizUnit.TestSteps.EventLog.EventLogCheckStep.Execute(BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+        <member name="T:BizUnit.TestSteps.Soap.WebServiceStep.genericContract">
+            <summary>
+            A dummy WCF interface that will be manipulated by the CallWebMethod above
+            </summary>
+        </member>
+        <member name="T:BizUnit.TestSteps.ValidationSteps.Xml.XmlValidationStep">
+            <summary>
+            The XmlValidationStep validates an Xml document, it may validate against a given schema, and also evaluate XPath queries.
+            The Xpath query is extended from XmlValidationStep to allow Xpath functions to be used which may not return a node set.
+            </summary>
+            
+            <remarks>
+            The following shows an example of the Xml representation of this test step.
+            
+            <code escaped="true">
+            <SubSteps assemblyPath="" typeName="BizUnit.XmlValidationStep">
+            	<XmlSchemaPath>.\TestData\PurchaseOrder.xsd</XmlSchemaPath>
+            	<XmlSchemaNameSpace>urn:bookstore-schema</XmlSchemaNameSpace>
+            	<XPathList>
+            		<XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
+            	</XPathList>
+            </SubSteps>
+            </code>
+            
+            <list type="table">
+            	<listheader>
+            		<term>Tag</term>
+            		<description>Description</description>
+            	</listheader>
+            	<item>
+            		<term>XmlSchemaPath</term>
+            		<description>The XSD schema to use to validate the XML data (optional)</description>
+            	</item>
+            	<item>
+            		<term>XmlSchemaNameSpace</term>
+            		<description>The XSD schema namespace to validate the XML data against (optional)</description>
+            	</item>
+            	<item>
+            		<term>XPathList/XPathValidation</term>
+            		<description>XPath expression to evaluate against the XML document (optional)(repeating).</description>
+            	</item>
+            </list>
+            </remarks>	
+        </member>
+        <member name="M:BizUnit.TestSteps.ValidationSteps.Xml.XmlValidationStep.Execute(System.IO.Stream,BizUnit.Core.TestBuilder.Context)">
+            <summary>
+            ITestStep.Execute() implementation
+            </summary>
+            <param name='data'>The stream cintaining the data to be validated.</param>
+            <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
+        </member>
+    </members>
+</doc>

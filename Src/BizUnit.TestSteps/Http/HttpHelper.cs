@@ -13,14 +13,13 @@
 // IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
 // PURPOSE.
 //---------------------------------------------------------------------
+using BizUnit.Core.TestBuilder;
+using System;
+using System.IO;
+using System.Net;
 
-namespace BizUnit.TestBuilderteps.Http
+namespace BizUnit.TestSteps.Http
 {
-    using System;
-    using System.IO;
-    using System.Net;
-    using TestBuilder;
-
     /// <summary>
     /// Helper class for HTTP
     /// </summary>
@@ -35,7 +34,11 @@ namespace BizUnit.TestBuilderteps.Http
 		/// <param name="requestTimeout">The request timeout value</param>
 		/// <param name="context">The BizUnit context object which holds state and is passed between test steps</param>
 		/// <returns>response MemoryStream</returns>
-		public static MemoryStream SendRequestData(String url, byte[] payload, int requestTimeout, Context context)
+		public static MemoryStream SendRequestData(
+            String url, 
+            byte[] payload, 
+            int requestTimeout, 
+            Context context)
 		{
 			WebResponse result = null;
 			var response = new MemoryStream();

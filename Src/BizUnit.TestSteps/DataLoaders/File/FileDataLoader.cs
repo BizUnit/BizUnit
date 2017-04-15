@@ -13,11 +13,11 @@
 //---------------------------------------------------------------------
 
 using System.IO;
-using BizUnit.Common;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.TestSteps.Common;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.DataLoaders.File
+namespace BizUnit.TestSteps.DataLoaders.File
 {
     /// <summary>
     /// The FileDataLoader maybe used to load a file from disc and passed to a test 

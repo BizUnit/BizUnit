@@ -1,5 +1,5 @@
 ﻿
-namespace BizUnit.TestBuilderteps.Common
+namespace BizUnit.TestSteps.Common
 {
     ///<summary>
     /// Defines an XPath expression to be executed with the expected result

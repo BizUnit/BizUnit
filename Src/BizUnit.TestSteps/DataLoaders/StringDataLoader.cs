@@ -1,7 +1,7 @@
 ﻿
-using BizUnit.Common;
-using BizUnit.ExtensionMethods;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.Core.ExtensionMethods;
+using BizUnit.Core.TestBuilder;
 using System.IO;
 
 namespace BizUnit.TestSteps.DataLoaders

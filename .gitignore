@@ -23,7 +23,6 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
-MyDeskWebsite_deploy/
 
 # Visual Studio 2015 cache/options directory
 .vs/
@@ -154,6 +153,7 @@ publish/
 !**/packages/build/
 # Uncomment if necessary however generally it will be regenerated when needed
 #!**/packages/repositories.config
+**/NuGet/*
 
 # Windows Azure Build Output
 csx/
@@ -233,6 +233,3 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-/MyDeskLibrary/obj
-/MyDeskProviders/obj
-/MyDeskDataProvider/obj

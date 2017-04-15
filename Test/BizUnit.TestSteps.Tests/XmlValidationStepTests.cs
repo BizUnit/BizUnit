@@ -1,12 +1,12 @@
 ﻿
 using System;
-using BizUnit.TestBuilderteps.ValidationSteps.Xml;
-using BizUnit.TestBuilderteps.Common;
+using BizUnit.TestSteps.ValidationSteps.Xml;
+using BizUnit.TestSteps.Common;
 using NUnit.Framework;
 using System.IO;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.Tests
+namespace BizUnit.TestSteps.Tests
 {
     /// <summary>
     /// Summary description for XmlValidationStepTests

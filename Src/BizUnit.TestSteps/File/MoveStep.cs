@@ -13,9 +13,9 @@
 //---------------------------------------------------------------------
 
 using System;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.File
+namespace BizUnit.TestSteps.File
 {
     /// <summary>
     /// The FileMoveStep moves a file from one directory to another.

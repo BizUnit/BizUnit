@@ -14,14 +14,14 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
-namespace BizUnit.TestBuilderteps.Common
-{
-    using System;
-    using System.Xml;
-    using System.Text;
-    using System.IO;
-    using TestBuilder;
+using System;
+using System.Xml;
+using System.Text;
+using System.IO;
+using BizUnit.Core.TestBuilder;
 
+namespace BizUnit.TestSteps.Common
+{
     /// <summary>
     /// Helper class for stream opperations
     /// </summary>
@@ -117,7 +117,7 @@ namespace BizUnit.TestBuilderteps.Common
 			try
 			{
 				// Get the match data...
-				fs = File.OpenRead(filePath);
+				fs = System.IO.File.OpenRead(filePath);
 				s = new MemoryStream();
 
 				var buff = new byte[1024];
@@ -149,7 +149,10 @@ namespace BizUnit.TestBuilderteps.Common
 		/// <param name="description">The description text that will be written before the stream data</param>
 		/// <param name="ms">Stream containing the data to write</param>
 		/// <param name="context">The BizUnit context object which holds state and is passed between test steps</param>
-		public static void WriteStreamToConsole(string description, MemoryStream ms, Context context)
+		public static void WriteStreamToConsole(
+            string description, 
+            MemoryStream ms, 
+            Context context)
 		{
 			ms.Seek(0, SeekOrigin.Begin);
 			var sr = new StreamReader(ms);

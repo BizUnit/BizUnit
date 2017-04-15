@@ -18,11 +18,11 @@ using System.Xml;
 using System.Xml.Schema;
 using System.Xml.XPath;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.TestSteps.Common;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.ValidationSteps.Xml
+namespace BizUnit.TestSteps.ValidationSteps.Xml
 {
     /// <summary>
     /// The XmlValidationStep validates an Xml document, it may validate against a given schema, and also evaluate XPath queries.

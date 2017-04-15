@@ -12,7 +12,7 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
-using BizUnit.Xaml;
+using BizUnit.Core.TestBuilder;
 using System;
 using System.Collections.ObjectModel;
 

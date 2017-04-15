@@ -1,13 +1,13 @@
 ﻿
-using BizUnit.TestBuilder;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilderteps.DataLoaders.File;
-using BizUnit.TestBuilderteps.File;
-using BizUnit.TestBuilderteps.ValidationSteps.Xml;
+using BizUnit.Core.TestBuilder;
+using BizUnit.TestSteps.Common;
+using BizUnit.TestSteps.DataLoaders.File;
+using BizUnit.TestSteps.File;
+using BizUnit.TestSteps.ValidationSteps.Xml;
 using NUnit.Framework;
 using System.IO;
 
-namespace BizUnit.TestBuilderteps.Tests.File
+namespace BizUnit.TestSteps.Tests.File
 {
     /// <summary>
     /// Summary description for FileCreateTests

@@ -1,7 +1,7 @@
 ﻿
-using BizUnit.Common;
-using BizUnit.TestBuilder;
-using BizUnit.TestBuilderteps.Common;
+using BizUnit.Core.Common;
+using BizUnit.Core.TestBuilder;
+using BizUnit.TestSteps.Common;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;

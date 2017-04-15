@@ -1,5 +1,5 @@
 ﻿
-namespace BizUnit.TestBuilderteps.Sql
+namespace BizUnit.TestSteps.Sql
 {
     ///<summary>
     /// Database cell to be validated

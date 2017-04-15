@@ -2,13 +2,15 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using BizUnit.TestBuilderteps.DataLoaders.File;
-using BizUnit.TestBuilderteps.File;
-using BizUnit.TestBuilderteps.Time;
-using BizUnit.TestBuilder;
+using BizUnit.TestSteps.DataLoaders.File;
+using BizUnit.TestSteps.File;
+using BizUnit.TestSteps.Time;
+using BizUnit.Core.TestBuilder;
 using NUnit.Framework;
+using BizUnit.Core.Utilites;
+using BizUnit.Core;
 
-namespace BizUnit.TestBuilderteps.Tests.Time
+namespace BizUnit.TestSteps.Tests.Time
 {
     /// <summary>
     /// Summary description for DelayTest

@@ -16,9 +16,9 @@ using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.EventLog
+namespace BizUnit.TestSteps.EventLog
 {
     /// <summary>
     /// The EventLogCheckStep test step looks for an event log entry. 

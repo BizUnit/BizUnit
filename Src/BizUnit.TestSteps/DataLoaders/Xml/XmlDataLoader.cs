@@ -17,11 +17,11 @@ using System.Xml;
 using System.IO;
 using System.Xml.XPath;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.TestSteps.Common;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.DataLoaders.Xml
+namespace BizUnit.TestSteps.DataLoaders.Xml
 {
     /// <summary>
     /// The XmlDataLoader maybe used to load a file from disc and passed to a test 

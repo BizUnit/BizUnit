@@ -15,9 +15,9 @@
 using System;
 using System.IO;
 using System.Collections.ObjectModel;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.File
+namespace BizUnit.TestSteps.File
 {
     ///<summary>
     /// Given a file path, the step deletes the files

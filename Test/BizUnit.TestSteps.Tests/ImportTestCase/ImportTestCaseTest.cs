@@ -1,13 +1,15 @@
 ﻿
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilderteps.DataLoaders.File;
-using BizUnit.TestBuilderteps.File;
-using BizUnit.TestBuilderteps.ValidationSteps.Xml;
-using BizUnit.TestBuilder;
+using BizUnit.TestSteps.Common;
+using BizUnit.TestSteps.DataLoaders.File;
+using BizUnit.TestSteps.File;
+using BizUnit.TestSteps.ValidationSteps.Xml;
+using BizUnit.Core.TestBuilder;
 using NUnit.Framework;
 using System.IO;
+using BizUnit.Core.Utilites;
+using BizUnit.Core;
 
-namespace BizUnit.TestBuilderteps.Tests.ImportTestCase
+namespace BizUnit.TestSteps.Tests.ImportTestCase
 {
     [TestFixture]
     public class ImportTestCaseTest

@@ -16,9 +16,9 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.ObjectModel;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.Sql
+namespace BizUnit.TestSteps.Sql
 {
     ///<summary>
     ///</summary>

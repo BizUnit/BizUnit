@@ -49,6 +49,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -60,6 +61,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net45|AnyCPU'">
     <OutputPath>bin\Release-Net45\</OutputPath>
@@ -71,6 +73,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <Prefer32Bit>false</Prefer32Bit>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release-Net45\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net46|AnyCPU'">
     <OutputPath>bin\Release-Net46\</OutputPath>
@@ -80,8 +83,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <Prefer32Bit>false</Prefer32Bit>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsEE02.tmp\Release-Net46\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=3.6.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
@@ -113,13 +117,13 @@
     <Compile Include="XmlValidationStepTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Src\BizUnit.TestSteps\BizUnit.TestSteps.csproj">
-      <Project>{5BFEF184-0834-4FBA-ADDB-AD798CE0B58D}</Project>
-      <Name>BizUnit.TestSteps</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Src\BizUnit\BizUnit.csproj">
+    <ProjectReference Include="..\..\Src\BizUnit.Core\BizUnit.Core.csproj">
       <Project>{7c85248a-15d4-4a17-a496-aecf789e0f10}</Project>
-      <Name>BizUnit</Name>
+      <Name>BizUnit.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Src\BizUnit.TestSteps\BizUnit.TestSteps.csproj">
+      <Project>{5bfef184-0834-4fba-addb-ad798ce0b58d}</Project>
+      <Name>BizUnit.TestSteps</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

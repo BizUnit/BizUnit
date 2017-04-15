@@ -1,10 +1,9 @@
-﻿
-namespace BizUnit.TestBuilderteps.Sql
-{
-    using System;
-    using System.Collections.ObjectModel;
-    using TestBuilder;
+﻿using System;
+using System.Collections.ObjectModel;
+using BizUnit.Core.TestBuilder;
 
+namespace BizUnit.TestSteps.Sql
+{
     ///<summary>
     /// Database query definition
     ///</summary>

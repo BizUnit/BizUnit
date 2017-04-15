@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>BizUnit.Core</id>
+    <version>5.0.3</version>
+	<title>BizUnit.Core</title>
+    <authors>Kevin B. Smith</authors>
+    <owners>Kevin B. Smith</owners>
+    <licenseUrl>https://github.com/BizUnit/BizUnit/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/BizUnit</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<description>Framework for automated testing of distributed systems</description>
+	<summary>Framework for automated testing of distributed systems</summary>
+	<copyright>Kevin B. Smith, 2017</copyright>
+    <tags>Test Testing Distributed Framework</tags>
+    <iconUrl>https://github.com/BizUnit/BizUnit/blob/master/Common/BizUnit.png</iconUrl>
+  </metadata>
+   <files>
+        <file src="Lib\Release-Net40\BizUnit.Core.dll" target="lib\net40\BizUnit.Core.dll" />
+        <file src="Lib\Release-Net40\BizUnit.Core.XML" target="lib\net40\BizUnit.Core.XML" />
+        <file src="Lib\Release-Net45\BizUnit.Core.dll" target="lib\net45\BizUnit.Core.dll" />
+        <file src="Lib\Release-Net45\BizUnit.Core.XML" target="lib\net45\BizUnit.Core.XML" />
+        <file src="Lib\Release-Net46\BizUnit.Core.dll" target="lib\net46\BizUnit.Core.dll" />
+        <file src="Lib\Release-Net46\BizUnit.Core.XML" target="lib\net46\BizUnit.Core.XML" />
+    </files>
+</package>

@@ -14,9 +14,9 @@
 
 using System;
 using System.IO;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.File
+namespace BizUnit.TestSteps.File
 {
     /// <summary>
     /// The FileCreateStep creates a new FILE in the specified directory.

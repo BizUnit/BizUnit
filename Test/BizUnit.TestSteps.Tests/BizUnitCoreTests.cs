@@ -1,9 +1,11 @@
 ﻿
-using BizUnit.TestBuilderteps.Time;
-using BizUnit.TestBuilder;
+using BizUnit.TestSteps.Time;
+using BizUnit.Core.TestBuilder;
 using NUnit.Framework;
+using BizUnit.Core.Utilites;
+using BizUnit.Core;
 
-namespace BizUnit.TestBuilderteps.Tests
+namespace BizUnit.TestSteps.Tests
 {
     /// <summary>
     /// Summary description for UnitTest1

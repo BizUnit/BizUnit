@@ -1,5 +1,0 @@
-C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\bin\SoapTestWebService.dll
-C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\bin\SoapTestWebService.pdb
-C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Release-Net45\SoapTestWebService.csprojResolveAssemblyReference.cache
-C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Release-Net45\SoapTestWebService.dll
-C:\Kevin\OpenSource\BizUnit\Test\BizUnit.Tests\SoapTestWebService\obj\Release-Net45\SoapTestWebService.pdb

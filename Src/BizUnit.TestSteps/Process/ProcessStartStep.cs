@@ -1,6 +1,6 @@
 ﻿
-using BizUnit.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.Core.TestBuilder;
 using System;
 using System.Diagnostics;
 using System.IO;

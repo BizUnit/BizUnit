@@ -1,11 +1,11 @@
 ﻿
 using System.IO;
 using System;
-using BizUnit.TestBuilderteps.File;
 using NUnit.Framework;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
+using BizUnit.TestSteps.File;
 
-namespace BizUnit.TestBuilderteps.Tests.File
+namespace BizUnit.TestSteps.Tests.File
 {
     /// <summary>
     /// Summary description for FileCreateTests

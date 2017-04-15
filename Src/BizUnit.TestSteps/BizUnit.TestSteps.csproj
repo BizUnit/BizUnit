@@ -49,18 +49,20 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Bin\Release-Net40\</OutputPath>
+    <OutputPath>Lib\Release-Net40\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <DocumentationFile>..\..\Bin\Release-Net40\BizUnit.TestSteps.XML</DocumentationFile>
+    <DocumentationFile>Lib\Release-Net40\BizUnit.TestSteps.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Release\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -69,9 +71,9 @@
     <AssemblyOriginatorKeyFile>BizUnit.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net45|AnyCPU'">
-    <OutputPath>..\..\Bin\Release-Net45\</OutputPath>
+    <OutputPath>Lib\Release-Net45\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>..\..\Bin\Release-Net45\BizUnit.TestSteps.XML</DocumentationFile>
+    <DocumentationFile>Lib\Release-Net45\BizUnit.TestSteps.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -79,11 +81,12 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Release-Net45\</IntermediateOutputPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net46|AnyCPU'">
-    <OutputPath>..\..\Bin\Release-Net46\</OutputPath>
+    <OutputPath>Lib\Release-Net46\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
-    <DocumentationFile>..\..\Bin\Release-Net46\BizUnit.TestSteps.XML</DocumentationFile>
+    <DocumentationFile>Lib\Release-Net46\BizUnit.TestSteps.XML</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -91,6 +94,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <IntermediateOutputPath>C:\Users\KEVIN~1.SMI\AppData\Local\Temp\vsED65.tmp\Release-Net46\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -167,11 +171,10 @@
   <ItemGroup>
     <None Include="BizUnit.snk" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\BizUnit\BizUnit.csproj">
+    <ProjectReference Include="..\BizUnit.Core\BizUnit.Core.csproj">
       <Project>{7c85248a-15d4-4a17-a496-aecf789e0f10}</Project>
-      <Name>BizUnit</Name>
+      <Name>BizUnit.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -186,4 +189,14 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
+  <Target Name="Package">
+    <!-- Ensure the Package directory exists for this project -->
+    <RemoveDir Directories="NuGet" />
+    <MakeDir Directories="NuGet" />
+    <!-- Package the project -->
+    <!--
+    <Exec WorkingDirectory="$(BuildDir)" Command="NuGet.exe pack -Verbosity detailed -Symbols -OutputDir &quot;NuGet&quot; -Version %(OutputAssemblyInfo.Version) -Properties &quot;Configuration=$(Configuration)&quot;" />
+	-->
+    <Exec WorkingDirectory="$(BuildDir)" Command="NuGet.exe pack -Verbosity detailed -OutputDir &quot;NuGet&quot; -Properties &quot;Configuration=$(Configuration)&quot;" />
+  </Target>
 </Project>

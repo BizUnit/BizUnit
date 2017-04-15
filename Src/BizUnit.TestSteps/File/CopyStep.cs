@@ -1,5 +1,5 @@
 ﻿
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 using System;
 
 namespace BizUnit.TestSteps.File

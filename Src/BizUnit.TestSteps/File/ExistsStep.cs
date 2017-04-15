@@ -14,11 +14,11 @@
 
 using System;
 using System.IO;
-using BizUnit.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.Core.TestBuilder;
 using System.Threading;
 
-namespace BizUnit.TestBuilderteps.File
+namespace BizUnit.TestSteps.File
 {
     ///<summary>
     /// Test step to check the existance of a file

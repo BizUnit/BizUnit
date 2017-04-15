@@ -1,7 +1,7 @@
 ﻿
 using System.IO;
 
-namespace BizUnit.TestBuilderteps.Tests
+namespace BizUnit.TestSteps.Tests
 {
     internal static class TestHelper
     {

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>BizUnit.TestSteps.Azure</id>
+    <version>1.0.1</version>
+	<title>BizUnit.TestSteps.Azure</title>
+    <authors>Kevin B. Smith</authors>
+    <owners>Kevin B. Smith</owners>
+    <licenseUrl>https://github.com/BizUnit/BizUnit/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/BizUnit</projectUrl>
+    <iconUrl>https://github.com/BizUnit/BizUnit/blob/master/Common/BizUnit.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+	<description>Azure Test Steps for BizUnit</description>
+	<summary>Azure Test Steps for BizUnit</summary>
+	<copyright>Kevin B. Smith, 2017</copyright>
+    <tags>Test Testing Distributed Framework</tags>
+	<dependencies>
+		<dependency id="BizUnit.Core" version="5.0.0" />
+		<dependency id="StackExchange.Redis" version="1.2.1" />
+	</dependencies>
+  </metadata>
+   <files>
+        <file src="Lib\Release-Net40\BizUnit.TestSteps.Azure.dll" target="lib\net40\BizUnit.TestSteps.Azure.dll" />
+        <file src="Lib\Release-Net40\BizUnit.TestSteps.Azure.XML" target="lib\net40\BizUnit.TestSteps.Azure.XML" />
+        <file src="Lib\Release-Net45\BizUnit.TestSteps.Azure.dll" target="lib\net45\BizUnit.TestSteps.Azure.dll" />
+        <file src="Lib\Release-Net45\BizUnit.TestSteps.Azure.XML" target="lib\net45\BizUnit.TestSteps.Azure.XML" />
+        <file src="Lib\Release-Net46\BizUnit.TestSteps.Azure.dll" target="lib\net46\BizUnit.TestSteps.Azure.dll" />
+        <file src="Lib\Release-Net46\BizUnit.TestSteps.Azure.XML" target="lib\net46\BizUnit.TestSteps.Azure.XML" />
+    </files>
+</package>

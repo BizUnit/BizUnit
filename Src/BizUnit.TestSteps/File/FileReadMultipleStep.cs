@@ -16,11 +16,11 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
-using BizUnit.TestBuilderteps.Common;
-using BizUnit.TestBuilder;
+using BizUnit.Core.Common;
+using BizUnit.TestSteps.Common;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.File
+namespace BizUnit.TestSteps.File
 {
 	internal class MultiUnknownException : Exception
     {

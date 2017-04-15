@@ -1,5 +1,5 @@
 ﻿
-namespace BizUnit.TestBuilderteps.Soap
+namespace BizUnit.TestSteps.Soap
 {
     public class SoapHeader
     {

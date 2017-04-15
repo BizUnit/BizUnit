@@ -1,13 +1,15 @@
 ﻿
 using System;
-using BizUnit.TestBuilderteps.File;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 using NUnit.Framework;
 
-namespace BizUnit.TestBuilderteps.Tests.File
+namespace BizUnit.TestSteps.Tests.File
 {
     using System.IO;
     using DataLoaders.File;
+    using BizUnit.TestSteps.File;
+    using BizUnit.Core.Utilites;
+    using BizUnit.Core;
 
     /// <summary>
     /// Summary description for DeleteTest

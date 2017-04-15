@@ -13,9 +13,9 @@
 //---------------------------------------------------------------------
 
 using System.Threading;
-using BizUnit.TestBuilder;
+using BizUnit.Core.TestBuilder;
 
-namespace BizUnit.TestBuilderteps.Time
+namespace BizUnit.TestSteps.Time
 {
 	/// <summary>
 	/// The DelayStep is used to perform a delay/sleep.
