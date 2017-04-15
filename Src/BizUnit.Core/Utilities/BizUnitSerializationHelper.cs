@@ -46,11 +46,14 @@ namespace BizUnit.Core.Utilites
             ms.Flush();
             ms.Seek(0, SeekOrigin.Begin);
 
-            var fileMode = FileMode.CreateNew;
             if (overwrite)
-                fileMode = FileMode.OpenOrCreate;
+            {
+                var fi = new FileInfo(filePath);
+                if (fi.Exists)
+                    fi.Delete();
+            }
 
-            using (var fs = File.Open(filePath, fileMode, FileAccess.ReadWrite))
+            using (var fs = File.Open(filePath, FileMode.CreateNew, FileAccess.ReadWrite))
             {
                 int read = ms.Read(buff, 0, buff.Length);
                 do

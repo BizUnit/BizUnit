@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
   <metadata>
     <id>BizUnit.Core</id>
-    <version>5.0.4</version>
+    <version>5.0.5</version>
 	<title>BizUnit.Core</title>
     <authors>Kevin B. Smith</authors>
     <owners>Kevin B. Smith</owners>

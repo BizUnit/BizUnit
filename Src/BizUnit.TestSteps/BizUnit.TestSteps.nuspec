@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>BizUnit.TestSteps</id>
-    <version>5.0.4</version>
+    <version>5.0.5</version>
 	<title>BizUnit.TestSteps</title>
     <authors>Kevin B. Smith</authors>
     <owners>Kevin B. Smith</owners>
@@ -15,7 +15,7 @@
 	<copyright>Kevin B. Smith, 2017</copyright>
     <tags>Test Testing Distributed Framework</tags>
 	<dependencies>
-		<dependency id="BizUnit.Core" version="5.0.4" />
+		<dependency id="BizUnit.Core" version="5.0.5" />
 	</dependencies>
   </metadata>
    <files>

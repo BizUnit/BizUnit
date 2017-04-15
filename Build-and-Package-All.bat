@@ -35,11 +35,11 @@ if %errorlevel% neq 0 exit /b %errorlevel%
 
 
 mkdir NuGet
-copy src\BizUnit.Core\NuGet\BizUnit.Core.5.0.4.nupkg .\NuGet\BizUnit.Core.5.0.4.nupkg /Y
+copy src\BizUnit.Core\NuGet\BizUnit.Core.5.0.5.nupkg .\NuGet\BizUnit.Core.5.0.5.nupkg /Y
 if %errorlevel% neq 0 exit /b %errorlevel%
-copy src\BizUnit.TestSteps\NuGet\BizUnit.TestSteps.5.0.4.nupkg .\NuGet\BizUnit.TestSteps.5.0.4.nupkg /Y
+copy src\BizUnit.TestSteps\NuGet\BizUnit.TestSteps.5.0.5.nupkg .\NuGet\BizUnit.TestSteps.5.0.5.nupkg /Y
 if %errorlevel% neq 0 exit /b %errorlevel%
-copy src\BizUnit.TestSteps.Azure\NuGet\BizUnit.TestSteps.Azure.1.0.2.nupkg .\NuGet\BizUnit.TestSteps.Azure.1.0.2.nupkg /Y
+copy src\BizUnit.TestSteps.Azure\NuGet\BizUnit.TestSteps.Azure.1.0.3.nupkg .\NuGet\BizUnit.TestSteps.Azure.1.0.3.nupkg /Y
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 echo      S u c c e s s

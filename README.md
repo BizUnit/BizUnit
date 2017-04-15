@@ -1,6 +1,12 @@
 # BizUnit
 **Framework for automated testing of distributed systems**
 
+**Version 5.0**
+Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML. 
+
+ 
+
+**Version 4 Help**
 More information avaiable in the *Getting Started Guide* installed with BizUnit or take a look at my blog: http://kevinsmi.wordpress.com.
 
 BizUnit is a framework and as such does not have any dependency on either NUnit of VS Unit Testing, either of these make a great way to drive BizUnit test cases, though equally you could write custom code to do the same.
