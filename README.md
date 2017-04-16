@@ -1,5 +1,5 @@
 # BizUnit
-## Framework for automated testing of distributed systems
+## Framework for Automated Testing of Distributed Systems
 ### Version 5.0
 
 Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML.
@@ -19,7 +19,7 @@ There's also a very early version of an Azure test step library, [BizUnit.TestSt
 Install-Package BizUnit.TestSteps.Azure
 ```
 
-#### Sample BizUnit Test Case (Using API's)
+## Sample BizUnit Test Case (Using API's)
 Below is a sample BizUnit test case that is built using the API and then run as an NUnit test:
 ```
 [Test]
@@ -69,7 +69,7 @@ public void SampleTestCase()
 }
 ```
 
-#### Serializing BizUnit Test Cases
+## Serializing BizUnit Test Cases
 Test cases can be serialised to XAML and saved using the following API:
 ```
 	TestCase.SaveToFile(
@@ -109,7 +109,7 @@ Here's the same test case that was defined above, but serialised as XAML:
 </TestCase>
 ```
 
-#### Running a XAML BizUnit Test Case
+## Running a XAML BizUnit Test Case
 A XAML test case may be run by loading it, and then running it as usual, for exmaple:
 
 ```
@@ -128,7 +128,7 @@ public void SampleXamlTestCase()
 }
 ```
 
-#### BizUnit Test Execution Output
+## BizUnit Test Execution Output
 The BizUnit framework outputs a detailed log of the test which is usefull for troubleshooting failed tests, or tests under development. For example:
 
 ```
@@ -190,7 +190,7 @@ Step: BizUnit.TestSteps.File.DeleteStep ended @ 20:39:34.202 16/04/2017
 Cleanup Stage: ended @ 20:39:34.202 16/04/2017
 ```
 
-### Version 4 Help
+## Version 4 Help
 The version 4 code base has been branched.
 
 More information avaiable in the *Getting Started Guide* installed with BizUnit or take a look at my blog: http://kevinsmi.wordpress.com.
