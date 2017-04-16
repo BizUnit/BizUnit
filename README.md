@@ -2,11 +2,182 @@
 **Framework for automated testing of distributed systems**
 
 **Version 5.0**
-Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML. 
+Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML.
 
+The NuGet package for the core BizUnit test framework can be installed as follows:
+Install-Package BizUnit.Core
+
+The NuGet packages for all test step libraries are independantly packaged, for example the core test step library may be installed as follows:
+Install-Package BizUnit.TestSteps
+
+There's also a very early version of an Azure test step library here, this maybe installed as follows:
+Install-Package BizUnit.TestSteps.Azure
+
+Here's a sample BizUnit test case run from NUnit:
+
+[Test]
+public void SampleTestCase()
+{
+	var sourceDirectory = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestData");
+	var sourceFilePath = Path.Combine(sourceDirectory, "PurchaseOrder001.xml");
+	var targetDirectory = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestArea");
+	var targetFilePath = Path.Combine(targetDirectory, "FileCreateStepTest.xml");
+
+	// Declare a File Delete Step, this will be used to clean up 
+	// before and after the test has run
+	var fds = new DeleteStep();
+	fds.FilePathsToDelete.Add(targetFilePath);
+
+	// Declare a Create File Step, this will simply create a file
+	var fcs = new CreateStep();
+	fcs.CreationPath = targetFilePath;
+	var dl = new FileDataLoader();
+	dl.FilePath = sourceFilePath;
+	fcs.DataSource = dl;
+
+	// Declare a File Read Step, this will validate that the file exists
+	// Of course, typically the distributed system would create the file,
+	// and this step would be used to validate that it has been correctly 
+	// created.
+	var frs = new FileReadStep();
+	frs.DirectoryPath = targetDirectory;
+	frs.SearchPattern = "*.xml";
+	frs.Timeout = 3000;
+	frs.DeleteFile = true;
+
+	// Declare a new test case, and add the steps. The setup stage is used
+	// typically to prepare the platform ready for the test, the execution
+	// stage is the actual test, and the clean up stage returns the platform
+	// to its pre-test state.
+	var tc = new TestCase();
+	tc.SetupSteps.Add(fds);
+	tc.ExecutionSteps.Add(fcs);
+	tc.ExecutionSteps.Add(frs);
+	tc.CleanupSteps.Add(fds);
+
+	// Declare the BizUnit test runner and run the test. If any step fails
+	// the test will throw / fail
+	var testRunner = new TestRunner(tc);
+	testRunner.Run();
+}
+
+		
+Test cases can be serialised and saved using the following API:
+
+	TestCase.SaveToFile(
+		tc,
+		Path.Combine(
+			TestContext.CurrentContext.TestDirectory, 
+			"TestCases", 
+			"SampleTest.xaml"),
+		true);
+			
+			
+Here's the same test case that was defined above, but serialised as XAML:
+
+<TestCase Category="{x:Null}" Description="{x:Null}" ExpectedResults="{x:Null}" Name="{x:Null}" Preconditions="{x:Null}" Purpose="{x:Null}" Reference="{x:Null}" BizUnitVersion="5.0.5.0" DisposeObjectsInContext="False" xmlns="clr-namespace:BizUnit.Core.TestBuilder;assembly=BizUnit.Core" xmlns:btdf="clr-namespace:BizUnit.TestSteps.DataLoaders.File;assembly=BizUnit.TestSteps" xmlns:btf="clr-namespace:BizUnit.TestSteps.File;assembly=BizUnit.TestSteps" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TestCase.CleanupSteps>
+    <x:Reference>__ReferenceID0</x:Reference>
+  </TestCase.CleanupSteps>
+  <TestCase.ExecutionSteps>
+    <btf:CreateStep SubSteps="{x:Null}" CreationPath="C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml" FailOnError="True" RunConcurrently="False">
+      <btf:CreateStep.DataSource>
+        <btdf:FileDataLoader FilePath="C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestData\PurchaseOrder001.xml" />
+      </btf:CreateStep.DataSource>
+    </btf:CreateStep>
+    <btf:FileReadStep DeleteFile="True" DirectoryPath="C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea" FailOnError="True" RunConcurrently="False" SearchPattern="*.xml" Timeout="3000">
+      <btf:FileReadStep.SubSteps>
+        <sco:Collection x:TypeArguments="SubStepBase" />
+      </btf:FileReadStep.SubSteps>
+    </btf:FileReadStep>
+  </TestCase.ExecutionSteps>
+  <TestCase.SetupSteps>
+    <btf:DeleteStep SubSteps="{x:Null}" x:Name="__ReferenceID0" FailOnError="True" RunConcurrently="False">
+      <btf:DeleteStep.FilePathsToDelete>
+        <x:String>C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml</x:String>
+      </btf:DeleteStep.FilePathsToDelete>
+    </btf:DeleteStep>
+  </TestCase.SetupSteps>
+</TestCase>
+
+
+[Test]
+public void SampleXamlTestCase()
+{
+	var xamlTestCase = Path.Combine(
+		TestContext.CurrentContext.TestDirectory, 
+		"TestCases", 
+		"SampleTest.xaml");
+
+	// Example running a test case from a XAML test case
+	var tc = TestCase.LoadFromFile(xamlTestCase);
+	var runner = new TestRunner(tc);
+	runner.Run();
+}
+
+The BizUnit framework outputs a detailed log of the test which is usefull for troubleshooting failed tests, or tests under development. For example:
+
+Test step validation for stage: Setup, step: BizUnit.TestSteps.File.DeleteStep was successful.
+Test step validation for stage: Execution, step: BizUnit.TestSteps.File.CreateStep was successful.
+Test step validation for stage: Execution, step: BizUnit.TestSteps.File.FileReadStep was successful.
+Test step validation for stage: Cleanup, step: BizUnit.TestSteps.File.DeleteStep was successful.
  
+-------------------------------------------------------------------------------
+                                   S T A R T
+ 
+Test:  started @ 20:39:34.106 16/04/2017 by GLOBAL\kevin.smith
+-------------------------------------------------------------------------------
+Info: Adding context property: BizUnitTestCaseStartTime, value: 16/04/2017 20:39:34
+ 
+Setup Stage: started @ 20:39:34.126 16/04/2017
+
+Step: BizUnit.TestSteps.File.DeleteStep started  @ 20:39:34.127 16/04/2017, failOnError = True
+Info: File.Delete has deleted file: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml
+Step: BizUnit.TestSteps.File.DeleteStep ended @ 20:39:34.129 16/04/2017
+ 
+Setup Stage: ended @ 20:39:34.130 16/04/2017
+ 
+Execute Stage: started @ 20:39:34.131 16/04/2017
+
+Step: BizUnit.TestSteps.File.CreateStep started  @ 20:39:34.131 16/04/2017, failOnError = True
+Info: FileCreateStep about to copy the data from datasource to: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml
+Info: Adding context property: FileCreateStep-CreationPath, value: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml
+Step: BizUnit.TestSteps.File.CreateStep ended @ 20:39:34.144 16/04/2017
+
+Step: BizUnit.TestSteps.File.FileReadStep started  @ 20:39:34.144 16/04/2017, failOnError = True
+Info: Searching directory: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea, search pattern: *.xml
+Info: Found file: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Data: file contents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+<ns0:PurchaseOrder xmlns:ns0="http://SendMail.PurchaseOrder">
+	<PONumber>12323</PONumber> 
+	<CustomerInfo>
+		<Name>Name_0</Name> 
+		<Email>Email_0</Email> 
+	</CustomerInfo>
+	<Description>
+		<Item>Item_0</Item> 
+		<Count>Count_0</Count> 
+	</Description>
+</ns0:PurchaseOrder>
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Step: BizUnit.TestSteps.File.FileReadStep ended @ 20:39:34.201 16/04/2017
+ 
+Execution Stage: ended @ 20:39:34.201 16/04/2017
+ 
+Cleanup Stage: started @ 20:39:34.201 16/04/2017
+
+Step: BizUnit.TestSteps.File.DeleteStep started  @ 20:39:34.202 16/04/2017, failOnError = True
+Info: File.Delete has deleted file: C:\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml
+Step: BizUnit.TestSteps.File.DeleteStep ended @ 20:39:34.202 16/04/2017
+ 
+Cleanup Stage: ended @ 20:39:34.202 16/04/2017
+
 
 **Version 4 Help**
+The version 4 code base has been branched.
+
 More information avaiable in the *Getting Started Guide* installed with BizUnit or take a look at my blog: http://kevinsmi.wordpress.com.
 
 BizUnit is a framework and as such does not have any dependency on either NUnit of VS Unit Testing, either of these make a great way to drive BizUnit test cases, though equally you could write custom code to do the same.

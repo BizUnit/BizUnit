@@ -1,0 +1,24 @@
+﻿<TestCase Category="{x:Null}" Description="{x:Null}" ExpectedResults="{x:Null}" Name="{x:Null}" Preconditions="{x:Null}" Purpose="{x:Null}" Reference="{x:Null}" BizUnitVersion="5.0.5.0" DisposeObjectsInContext="False" xmlns="clr-namespace:BizUnit.Core.TestBuilder;assembly=BizUnit.Core" xmlns:btdf="clr-namespace:BizUnit.TestSteps.DataLoaders.File;assembly=BizUnit.TestSteps" xmlns:btf="clr-namespace:BizUnit.TestSteps.File;assembly=BizUnit.TestSteps" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <TestCase.CleanupSteps>
+    <x:Reference>__ReferenceID0</x:Reference>
+  </TestCase.CleanupSteps>
+  <TestCase.ExecutionSteps>
+    <btf:CreateStep SubSteps="{x:Null}" CreationPath="Z:\Euromoney\Code\OpenSrc\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml" FailOnError="True" RunConcurrently="False">
+      <btf:CreateStep.DataSource>
+        <btdf:FileDataLoader FilePath="Z:\Euromoney\Code\OpenSrc\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestData\PurchaseOrder001.xml" />
+      </btf:CreateStep.DataSource>
+    </btf:CreateStep>
+    <btf:FileReadStep DeleteFile="True" DirectoryPath="Z:\Euromoney\Code\OpenSrc\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea" FailOnError="True" RunConcurrently="False" SearchPattern="*.xml" Timeout="3000">
+      <btf:FileReadStep.SubSteps>
+        <sco:Collection x:TypeArguments="SubStepBase" />
+      </btf:FileReadStep.SubSteps>
+    </btf:FileReadStep>
+  </TestCase.ExecutionSteps>
+  <TestCase.SetupSteps>
+    <btf:DeleteStep SubSteps="{x:Null}" x:Name="__ReferenceID0" FailOnError="True" RunConcurrently="False">
+      <btf:DeleteStep.FilePathsToDelete>
+        <x:String>Z:\Euromoney\Code\OpenSrc\BizUnit\Test\BizUnit.TestSteps.Tests\bin\Debug\TestArea\FileCreateStepTest.xml</x:String>
+      </btf:DeleteStep.FilePathsToDelete>
+    </btf:DeleteStep>
+  </TestCase.SetupSteps>
+</TestCase>
