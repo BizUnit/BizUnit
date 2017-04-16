@@ -2,6 +2,8 @@
 ## Framework for Automated Testing of Distributed Systems
 ### Version 5.0
 
+**Note, BizUnit help may also be found on [MSDN](https://msdn.microsoft.com/en-us/library/cc594538(v=bts.10).aspx).**
+
 Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML.
 
 The core BizUnit framework is now packaged in NuGet seperately as [BizUnit.Core](https://www.nuget.org/packages/BizUnit.Core), it may be installed as follows:
