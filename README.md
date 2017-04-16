@@ -192,7 +192,7 @@ Step: BizUnit.TestSteps.File.DeleteStep ended @ 20:39:34.202 16/04/2017
 Cleanup Stage: ended @ 20:39:34.202 16/04/2017
 ```
 
-## Version 4 Help
+## Version 4 Help (Legacy)
 The version 4 code base has been branched.
 
 More information avaiable in the *Getting Started Guide* installed with BizUnit or take a look at my blog: http://kevinsmi.wordpress.com.
