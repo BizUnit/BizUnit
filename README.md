@@ -11,7 +11,7 @@ The core BizUnit framework is now packaged in NuGet seperately as [BizUnit.Core]
 Install-Package BizUnit.Core
 ```
 
-The NuGet packages for all test step libraries are independantly packaged. The common BizUnit test steps previously packaged with BizUnit are now packaged seperately as [BizUnit.TestSteps](https://www.nuget.org/packages/BizUnit.TestSteps/), the NuGet package may be installed as follows:
+The NuGet packages for all test step libraries are now independantly packaged. The common BizUnit test steps previously packaged with BizUnit are now packaged seperately as [BizUnit.TestSteps](https://www.nuget.org/packages/BizUnit.TestSteps/), the NuGet package may be installed as follows:
 ```
 Install-Package BizUnit.TestSteps
 ```
