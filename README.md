@@ -14,7 +14,7 @@ The NuGet packages for all test step libraries are independantly packaged. The c
 Install-Package BizUnit.TestSteps
 ```
 
-There's also a very early version of an [Azure test step](https://www.nuget.org/packages/BizUnit.TestSteps.Azure/) library here, this maybe installed as follows:
+There's also a very early version of an Azure test step library, [BizUnit.TestSteps.Azure](https://www.nuget.org/packages/BizUnit.TestSteps.Azure/), this maybe installed as follows:
 ```
 Install-Package BizUnit.TestSteps.Azure
 ```
