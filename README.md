@@ -9,17 +9,18 @@ The NuGet package for the core [BizUnit](https://www.nuget.org/packages/BizUnit.
 Install-Package BizUnit.Core
 ```
 
-The NuGet packages for all test step libraries are independantly packaged, for example the core test step library may be installed as follows:
+The NuGet packages for all test step libraries are independantly packaged. The common BizUnit test steps previously packaged with BizUnit are now packaged seperately as [BizUnit.TestSteps](https://www.nuget.org/packages/BizUnit.TestSteps/), the NuGet package may be installed as follows:
 ```
 Install-Package BizUnit.TestSteps
 ```
 
-There's also a very early version of an Azure test step library here, this maybe installed as follows:
+There's also a very early version of an [Azure test step](https://www.nuget.org/packages/BizUnit.TestSteps.Azure/) library here, this maybe installed as follows:
 ```
 Install-Package BizUnit.TestSteps.Azure
 ```
 
-Here's a sample BizUnit test case run from NUnit:
+#### Sample BizUnit Test Case (Using API's)
+Below is a sample BizUnit test case that is built using the API and then run from NUnit:
 ```
 [Test]
 public void SampleTestCase()
@@ -67,8 +68,9 @@ public void SampleTestCase()
 	testRunner.Run();
 }
 ```
-		
-Test cases can be serialised and saved using the following API:
+
+#### Serializing BizUnit Test Cases
+Test cases can be serialised to XAML and saved using the following API:
 ```
 	TestCase.SaveToFile(
 		tc,
@@ -107,6 +109,7 @@ Here's the same test case that was defined above, but serialised as XAML:
 </TestCase>
 ```
 
+#### Running a XAML BizUnit Test Case
 A XAML test case may be run by loading it, and then running it as usual, for exmaple:
 
 ```
@@ -125,6 +128,7 @@ public void SampleXamlTestCase()
 }
 ```
 
+#### BizUnit Test Execution Output
 The BizUnit framework outputs a detailed log of the test which is usefull for troubleshooting failed tests, or tests under development. For example:
 
 ```
