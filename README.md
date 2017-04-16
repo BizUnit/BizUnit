@@ -4,7 +4,7 @@
 
 Version 5 no longer has the legacy XML test step format, instead all serialised tests use the XAML.
 
-The NuGet package for the core [BizUnit](https://www.nuget.org/packages/BizUnit.Core) test framework can be installed as follows:
+The core BizUnit framework is now packaged in NuGet seperately as [BizUnit.Core](https://www.nuget.org/packages/BizUnit.Core), it may be installed as follows:
 ```
 Install-Package BizUnit.Core
 ```
