@@ -20,7 +20,7 @@ Install-Package BizUnit.TestSteps.Azure
 ```
 
 #### Sample BizUnit Test Case (Using API's)
-Below is a sample BizUnit test case that is built using the API and then run from NUnit:
+Below is a sample BizUnit test case that is built using the API and then run as an NUnit test:
 ```
 [Test]
 public void SampleTestCase()
