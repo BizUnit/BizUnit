@@ -197,7 +197,7 @@ More information avaiable in the *Getting Started Guide* installed with BizUnit 
 
 BizUnit is a framework and as such does not have any dependency on either NUnit of VS Unit Testing, either of these make a great way to drive BizUnit test cases, though equally you could write custom code to do the same.
 
-## Test Case Format
+### Test Case Format
 A test case can be represented as an Xml document or using the BizUnit object model, it is made up of three stages, *_test setup_*, *_test execution_* and *_test cleanup_*, the cleanup stage is always executed (even if the main execution stage fails) and intended to leave the platform in the same state that it started.
 Each stage may consist of zero or more test steps, test steps are in general autonomous, state can be flowed between them if required using the ‘context’ object that is passed to each test step by the framework.
 BizUnit also has the notion of TestGroupSetup and TestGroupTearDown, these are test cases that are executed at the beginning and end of a suite of unit tests.
@@ -255,7 +255,7 @@ BizUnit enables state to be flowed between test steps using the Context object, 
     </TestStep>
 ```
 
-##### Wild Cards
+#### Wild Cards
 BizUnit supports wild card for reading configuration, the following wild cards are supported
  
 * *_%DateTime%_* - will replace the wild card with the current date time in the format HHmmss-ddMMyyyy 
