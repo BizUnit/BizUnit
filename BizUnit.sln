@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestStepLibraries", "TestStepLibraries", "{24EF14F4-1468-4D14-8DB3-ACB59601B161}"
 EndProject
@@ -38,6 +38,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizUnit.TestSteps.Azure.Tests", "Test\BizUnit.TestSteps.Azure.Tests\BizUnit.TestSteps.Azure.Tests.csproj", "{62182632-DAD3-4D08-A315-85E0158E55E6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizUnit.TestSteps.Ssis", "Src\BizUnit.TestSteps.Ssis\BizUnit.TestSteps.Ssis.csproj", "{B664CBA0-0D34-4328-AF3F-BBD0D13CC21A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BizUnit.TestSteps.BizTalk", "Src\BizUnit.TestSteps.BizTalk\BizUnit.TestSteps.BizTalk.csproj", "{772A474B-0D95-4002-BF5B-910986D1326B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -191,6 +193,30 @@ Global
 		{B664CBA0-0D34-4328-AF3F-BBD0D13CC21A}.Release-Net46|Mixed Platforms.Build.0 = Release-Net46|Any CPU
 		{B664CBA0-0D34-4328-AF3F-BBD0D13CC21A}.Release-Net46|x86.ActiveCfg = Release-Net46|Any CPU
 		{B664CBA0-0D34-4328-AF3F-BBD0D13CC21A}.Release-Net46|x86.Build.0 = Release-Net46|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Debug|x86.Build.0 = Debug|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|x86.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release|x86.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|Any CPU.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|Any CPU.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|Mixed Platforms.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|x86.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net45|x86.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|Any CPU.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|Any CPU.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|Mixed Platforms.Build.0 = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|x86.ActiveCfg = Release|Any CPU
+		{772A474B-0D95-4002-BF5B-910986D1326B}.Release-Net46|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -204,6 +230,7 @@ Global
 		{F4AAC2A2-E6B0-4F6F-BE10-E65BD02463EE} = {24EF14F4-1468-4D14-8DB3-ACB59601B161}
 		{62182632-DAD3-4D08-A315-85E0158E55E6} = {1080D171-00B5-472F-A97E-CE66080F898D}
 		{B664CBA0-0D34-4328-AF3F-BBD0D13CC21A} = {24EF14F4-1468-4D14-8DB3-ACB59601B161}
+		{772A474B-0D95-4002-BF5B-910986D1326B} = {24EF14F4-1468-4D14-8DB3-ACB59601B161}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = BizUnit.vsmdi

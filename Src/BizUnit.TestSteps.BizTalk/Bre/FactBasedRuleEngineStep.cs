@@ -19,8 +19,8 @@ using Microsoft.RuleEngine;
 using System.Data.SqlClient;
 using System.Data;
 using System.Collections.ObjectModel;
+using BizUnit.Core.TestBuilder;
 using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
 
 namespace BizUnit.TestSteps.BizTalk.Bre
 {

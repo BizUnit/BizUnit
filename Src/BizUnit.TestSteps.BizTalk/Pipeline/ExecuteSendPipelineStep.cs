@@ -17,9 +17,9 @@ using System.IO;
 using System.Collections.Generic;
 using Winterdom.BizTalk.PipelineTesting;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
 using BizUnit.TestSteps.BizTalk.Common;
-using BizUnit.Xaml;
+using BizUnit.Core.TestBuilder;
+using BizUnit.Core.Common;
 
 namespace BizUnit.TestSteps.BizTalk.Pipeline
 {
@@ -214,7 +214,8 @@ namespace BizUnit.TestSteps.BizTalk.Pipeline
             }
 
             context.LogInfo("Loading pipeline {0} from location {1}.", _pipelineTypeName, _pipelineAssemblyPath);
-            var pipelineType = ObjectCreator.GetType(_pipelineTypeName, _pipelineAssemblyPath);
+            // Note BJB: was var pipelineType = ObjectCreator.GetType(_pipelineTypeName, _pipelineAssemblyPath);
+            var pipelineType = Activator.CreateInstanceFrom(this.PipelineAssemblyPath, this.PipelineTypeName).GetType();
 
             var pipelineWrapper = PipelineFactory.CreateSendPipeline(pipelineType);
             if (!string.IsNullOrEmpty(_instanceConfigFile))

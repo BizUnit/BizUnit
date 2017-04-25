@@ -12,12 +12,12 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
-using BizUnit.Xaml;
 
 namespace BizUnit.TestSteps.BizTalk.Host
 {
-	using System;
-	using System.Management;
+    using Core.TestBuilder;
+    using System;
+    using System.Management;
 
     /// <summary>
 	/// The HostConductorStep test step maybe used to start or stop a BizTalk host

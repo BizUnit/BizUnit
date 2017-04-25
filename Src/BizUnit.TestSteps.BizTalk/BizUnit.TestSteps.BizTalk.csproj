@@ -115,6 +115,7 @@
     <Compile Include="Bre\ObjectFact.cs" />
     <Compile Include="Common\BizTalkMessageInfoFactory.cs" />
     <Compile Include="Common\MessageInfo.cs" />
+    <Compile Include="CrossReference\VerificationDefinition.cs" />
     <Compile Include="Map\BizTalkMapTester.cs" />
     <Compile Include="Common\BizTalkMessageContext.cs">
       <DependentUpon>BizTalkMessageContext.xsd</DependentUpon>
@@ -151,7 +152,7 @@
       <Project>{5BFEF184-0834-4FBA-ADDB-AD798CE0B58D}</Project>
       <Name>BizUnit.TestSteps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizUnit\BizUnit.csproj">
+    <ProjectReference Include="..\BizUnit.Core\BizUnit.Core.csproj">
       <Project>{7C85248A-15D4-4A17-A496-AECF789E0F10}</Project>
       <Name>BizUnit</Name>
     </ProjectReference>
