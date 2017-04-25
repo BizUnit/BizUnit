@@ -12,9 +12,9 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
+using BizUnit.Core.TestBuilder;
 using System;
 using System.Management;
-using BizUnit.Xaml;
 
 namespace BizUnit.TestSteps.BizTalk.Orchestration
 {
