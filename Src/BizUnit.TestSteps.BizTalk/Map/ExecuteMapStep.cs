@@ -15,9 +15,9 @@
 using System;
 using System.IO;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
 using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
+using BizUnit.Core.TestBuilder;
+using BizUnit.Core.Common;
 
 namespace BizUnit.TestSteps.BizTalk.Map
 {
@@ -136,7 +136,9 @@ namespace BizUnit.TestSteps.BizTalk.Map
         /// <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
         public override void Execute(Context context)
         {
-            var mapType = ObjectCreator.GetType(_mapTypeName, _mapAssemblyPath); 
+
+            // Note BJB: was ObjectCreator.GetType(_mapTypeName, _mapAssemblyPath);
+            var mapType = Activator.CreateInstanceFrom(this.MapAssemblyPath, this.MapTypeName).GetType();
 
             var destDir = Path.GetDirectoryName(_destination);
             if ((destDir.Length > 0) && !Directory.Exists(destDir))
@@ -176,7 +178,7 @@ namespace BizUnit.TestSteps.BizTalk.Map
 
             _destination = context.SubstituteWildCards(_destination);
 
-            foreach(var step in SubSteps)
+            foreach (var step in SubSteps)
             {
                 step.Validate(context);
             }
