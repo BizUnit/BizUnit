@@ -12,10 +12,10 @@
 // PURPOSE.
 //---------------------------------------------------------------------
 
+using BizUnit.Core.Common;
+using BizUnit.Core.TestBuilder;
 using System;
 using System.Management;
-using BizUnit.Common;
-using BizUnit.Xaml;
 
 namespace BizUnit.TestSteps.BizTalk.Port
 {
