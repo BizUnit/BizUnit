@@ -115,6 +115,7 @@
     <Compile Include="Bre\ObjectFact.cs" />
     <Compile Include="Common\BizTalkMessageInfoFactory.cs" />
     <Compile Include="Common\MessageInfo.cs" />
+    <Compile Include="CrossReference\VerificationDefinition.cs" />
     <Compile Include="Map\BizTalkMapTester.cs" />
     <Compile Include="Common\BizTalkMessageContext.cs">
       <DependentUpon>BizTalkMessageContext.xsd</DependentUpon>
