@@ -15,96 +15,41 @@
 using System;
 using System.IO;
 using System.Collections.ObjectModel;
-using BizUnit.Common;
 using BizUnit.TestSteps.Common;
-using BizUnit.Xaml;
+using BizUnit.Core.TestBuilder;
+using BizUnit.Core.Common;
 
 namespace BizUnit.TestSteps.BizTalk.Map
 {
     /// <summary>
     /// The ExecuteMapStep can be used to execute a map and test the output from it
     /// </summary>
-    /// 
-    /// <remarks>
-    /// The following shows an example of the Xml representation of this test step.
-    /// 
-    /// <code escaped="true">
-    ///	<TestStep assemblyPath="" typeName="BizUnit.BizTalkSteps.ExecuteMapStep, BizUnit.BizTalkSteps, Version=3.1.0.0, Culture=neutral, PublicKeyToken=7eb7d82981ae5162">
-    ///		<Map assemblyPath="BizUnit.BizTalkTestArtifacts" 
-    ///         typeName="MapSchema1ToSchema2"/>
-    ///		<Source>.\TestData\Schema1.xml</Source>
-    ///		<Destination>.\TestData\Schema2.actual.xml</Destination>
-    ///
-    ///		<!-- Note: ContextLoader Step could be any generic validation step -->	
-    /// 	<ContextLoaderStep assemblyPath="" typeName="BizUnit.RegExContextLoader">
-    ///			<RegEx contextKey="HTTP_Url">/def:html/def:body/def:p[2]/def:form</RegEx>
-    ///			<RegEx contextKey="ActionID">/def:html/def:body/def:p[2]/def:form/def:input[3]</RegEx>
-    ///			<RegEx contextKey="ActionType">/def:html/def:body/def:p[2]/def:form/def:input[4]</RegEx>
-    ///			<RegEx contextKey="HoldEvent">/def:html/def:body/def:p[2]/def:form/def:input[2]</RegEx>
-    ///		</ContextLoaderStep>
-    /// 
-    ///		<!-- Note: Validation step could be any generic validation step -->	
-    ///		<ValidationStep assemblyPath="" typeName="BizUnit.XmlValidationStep">
-    ///			<XmlSchemaPath>.\TestData\PurchaseOrder.xsd</XmlSchemaPath>
-    ///			<XmlSchemaNameSpace>http://SendMail.PurchaseOrder</XmlSchemaNameSpace>
-    ///			<XPathList>
-    ///				<XPathValidation query="/*[local-name()='PurchaseOrder' and namespace-uri()='http://SendMail.PurchaseOrder']/*[local-name()='PONumber' and namespace-uri()='']">PONumber_0</XPathValidation>
-    ///			</XPathList>
-    ///		</ValidationStep>			
-    ///	</TestStep>
-    ///	</code>
-    ///	
-    ///	<list type="table">
-    ///		<listheader>
-    ///			<term>Map:assemblyPath</term>
-    ///			<description>The assembly containing the BizTalk map to execute.</description>
-    ///		</listheader>
-    ///		<item>
-    ///			<term>Map:typeName</term>
-    ///			<description>The typename of the BizTalk map to execute</description>
-    ///		</item>
-    ///		<item>
-    ///			<term>Source</term>
-    ///			<description>The relative file location of the input document to be mapped</description>
-    ///		</item>
-    ///		<item>
-    ///			<term>Destination</term>
-    ///			<description>The relative file location of the ouput document that has been mapped</description>
-    ///		</item>
-    ///		<item>
-    ///			<term>ContextLoaderStep</term>
-    ///			<description>The configuration for the context loader step used to load data into the BizUnit context which may be used by subsequent test steps<para>(optional)</para></description>
-    ///		</item>
-    ///		<item>
-    ///			<term>ValidationStep</term>
-    ///			<description>The configuration for the validation step used to validate the contents of the file, the validation step should implement IValidationTestStep<para>(optional)</para></description>
-    ///		</item>
-    ///	</list>
-    ///	</remarks>
-
     public class ExecuteMapStep : TestStepBase
     {
-        private string _mapAssemblyPath;
+        private string _assemblyPath;
         private string _mapTypeName;
-        private string _source;
-        private string _destination;
+        private string _sourcePath;
+        private string _destinationPath;
 
+        /// <summary>
+        /// The ExecuteMapStep can be used to execute a map and test the output from it
+        /// </summary>
         public ExecuteMapStep()
         {
             SubSteps = new Collection<SubStepBase>();
         }
 
         ///<summary>
-        /// Gets and sets the assembly path for the .NET type of the map to be executed
+        /// The assembly path for the .NET type of the map to be executed
         ///</summary>
-        public string MapAssemblyPath
+        public string AssemblyPath
         {
-            get { return _mapAssemblyPath; }
-            set { _mapAssemblyPath = value; }
+            get { return _assemblyPath; }
+            set { _assemblyPath = value; }
         }
 
         ///<summary>
-        /// Gets and sets the type name for the .NET type of the map to be executed
+        /// The type name for the .NET type of the map to be executed
         ///</summary>
         public string MapTypeName
         {
@@ -113,42 +58,46 @@ namespace BizUnit.TestSteps.BizTalk.Map
         }
 
         ///<summary>
-        /// Gets and sets the relative file location of the input document to be mapped
+        /// The file location of the input document to be mapped
         ///</summary>
-        public string Source
+        public string SourcePath
         {
-            get { return _source; }
-            set { _source = value; }
+            get { return _sourcePath; }
+            set { _sourcePath = value; }
         }
 
         ///<summary>
-        /// Gets and sets the relative file location of the ouput document that has been mapped
+        /// File location of the ouput document that has been mapped
         ///</summary>
-        public string Destination
+        public string DestinationPath
         {
-            get { return _destination; }
-            set { _destination = value; }
+            get { return _destinationPath; }
+            set { _destinationPath = value; }
         }
 
         /// <summary>
-        /// ITestStep.Execute() implementation
+        /// Execute() implementation
         /// </summary>
         /// <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
         public override void Execute(Context context)
         {
-            var mapType = ObjectCreator.GetType(_mapTypeName, _mapAssemblyPath); 
+            if (context == null)
+                throw new ArgumentNullException("context");
 
-            var destDir = Path.GetDirectoryName(_destination);
+            var mapType = AssemblyHelper.LoadAssembly(this.AssemblyPath).GetType(this.MapTypeName, true, false);
+
+            var destDir = Path.GetDirectoryName(_destinationPath);
             if ((destDir.Length > 0) && !Directory.Exists(destDir))
             {
                 Directory.CreateDirectory(destDir);
             }
 
             var bmt = new BizTalkMapTester(mapType);
-            bmt.Execute(_source, _destination);
+            context.LogInfo("Executing map '{0}'...", this.MapTypeName);
+            bmt.Execute(_sourcePath, _destinationPath);
 
             Stream data;
-            using (var fs = new FileStream(_destination, FileMode.Open, FileAccess.Read))
+            using (var fs = new FileStream(_destinationPath, FileMode.Open, FileAccess.Read))
             {
                 data = StreamHelper.LoadMemoryStream(fs);
             }
@@ -161,20 +110,25 @@ namespace BizUnit.TestSteps.BizTalk.Map
         }
 
         /// <summary>
-        /// ITestStepOM.Validate() implementation
+        /// Validate initializer values.
         /// </summary>
         /// <param name='context'>The context for the test, this holds state that is passed beteen tests</param>
         public override void Validate(Context context)
         {
-            _source = context.SubstituteWildCards(_source);
-            if (!System.IO.File.Exists(_source))
+            if (context == null)
+                throw new ArgumentNullException("context");
+
+            ArgumentValidation.CheckForEmptyString(this.SourcePath, "SourcePath");
+            _sourcePath = context.SubstituteWildCards(_sourcePath);
+            if (!System.IO.File.Exists(_sourcePath))
             {
-                throw new ArgumentException("Source file does not exist.", _source);
+                throw new ArgumentException("Source file does not exist.", _sourcePath);
             }
 
             ArgumentValidation.CheckForEmptyString(_mapTypeName, "MapTypeName");
 
-            _destination = context.SubstituteWildCards(_destination);
+            ArgumentValidation.CheckForEmptyString(this.DestinationPath, "DestinationPath");
+            _destinationPath = context.SubstituteWildCards(_destinationPath);
 
             foreach(var step in SubSteps)
             {

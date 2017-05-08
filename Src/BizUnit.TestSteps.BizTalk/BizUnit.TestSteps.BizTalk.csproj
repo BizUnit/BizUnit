@@ -107,43 +107,11 @@
       <Link>AssemblyVersionInfo.cs</Link>
     </Compile>
     <Compile Include="AssemblyHelper.cs" />
-    <Compile Include="Bam\Deploy.cs" />
-    <Compile Include="Bre\DataConnectionFact.cs" />
-    <Compile Include="Bre\DataTableFact.cs" />
-    <Compile Include="Bre\DocumentFact.cs" />
-    <Compile Include="Bre\Fact.cs" />
-    <Compile Include="Bre\ObjectFact.cs" />
-    <Compile Include="Common\BizTalkMessageInfoFactory.cs" />
-    <Compile Include="Common\MessageInfo.cs" />
     <Compile Include="Map\BizTalkMapTester.cs" />
-    <Compile Include="Common\BizTalkMessageContext.cs">
-      <DependentUpon>BizTalkMessageContext.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="CrossReference\CrossReferenceDataVerificationStep.cs" />
-    <Compile Include="CrossReference\CrossReferenceSeedClearStep.cs" />
-    <Compile Include="CrossReference\CrossReferenceSeedLoadStep.cs" />
     <Compile Include="Map\ExecuteMapStep.cs" />
-    <Compile Include="Pipeline\DocSpecDefinition.cs" />
-    <Compile Include="Pipeline\ExecuteReceivePipelineStep.cs" />
-    <Compile Include="Pipeline\ExecuteSendPipelineStep.cs" />
-    <Compile Include="Bre\FactBasedRuleEngineStep.cs" />
-    <Compile Include="Host\HostConductorStep.cs" />
-    <Compile Include="Orchestration\OrchestrationConductorStep.cs" />
-    <Compile Include="Common\PersistMessageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Port\ReceiveLocationEnabledStep.cs" />
-    <Compile Include="Port\ReceivePortConductorStep.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Common\BizTalkMessageContext.xsc">
-      <DependentUpon>BizTalkMessageContext.xsd</DependentUpon>
-    </None>
-    <None Include="Common\BizTalkMessageContext.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Common\BizTalkMessageContext.xss">
-      <DependentUpon>BizTalkMessageContext.xsd</DependentUpon>
-    </None>
     <None Include="BizUnit.snk" />
   </ItemGroup>
   <ItemGroup>
@@ -151,7 +119,7 @@
       <Project>{5BFEF184-0834-4FBA-ADDB-AD798CE0B58D}</Project>
       <Name>BizUnit.TestSteps</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BizUnit\BizUnit.csproj">
+    <ProjectReference Include="..\BizUnit.Core\BizUnit.Core.csproj">
       <Project>{7C85248A-15D4-4A17-A496-AECF789E0F10}</Project>
       <Name>BizUnit</Name>
     </ProjectReference>
