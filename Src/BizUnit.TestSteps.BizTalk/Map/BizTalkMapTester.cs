@@ -18,7 +18,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 using Microsoft.XLANGs.BaseTypes;
-using BizUnit.Common;
+using BizUnit.Core.Common;
 
 namespace BizUnit.TestSteps.BizTalk.Map
 {
@@ -72,16 +72,12 @@ namespace BizUnit.TestSteps.BizTalk.Map
         {
             using (var inReader = new StreamReader(source))
             {
-                var xpathdoc = new XPathDocument(inReader);
-                using (var outReader = Map.Transform.Transform(xpathdoc, Map.TransformArgs))
+                using(FileStream fs = System.IO.File.OpenWrite(destination))
+                using (var xwOut = XmlWriter.Create(fs, WriterSettings))
                 {
-                    var xDoc = new XmlDocument();
-                    xDoc.Load(outReader);
-
-                    using (var writer = XmlWriter.Create(destination, BizTalkMapTester.WriterSettings))
-                    {
-                        xDoc.Save(writer);
-                    }
+                    var xpathdoc = new XPathDocument(inReader);
+                    Map.Transform.Transform(xpathdoc, Map.TransformArgs, xwOut);
+                    xwOut.Flush();
                 }
             }
         }

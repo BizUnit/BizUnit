@@ -17,6 +17,9 @@ namespace BizUnit.TestSteps.BizTalk
     using System.Reflection;
     using System.IO;
 
+    /// <summary>
+    /// Responsible for loading assemblies by file name.
+    /// </summary>
     public static class AssemblyHelper
     {
         public static Assembly LoadAssembly(string path)
