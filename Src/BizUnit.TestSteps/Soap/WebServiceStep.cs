@@ -120,7 +120,7 @@ namespace BizUnit.TestSteps.Soap
                     channel = cf.CreateChannel();
                     using (new OperationContextScope((IContextChannel)channel))
                     {
-                        XmlReader r = new XmlTextReader(requestData);
+                        XmlReader r = XmlReader.Create(requestData);
 
                         request = Message.CreateMessage(MessageVersion.Soap11, action, r);
 
